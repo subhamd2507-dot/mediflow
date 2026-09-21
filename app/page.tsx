@@ -56,7 +56,7 @@ export default function Home() {
 
           {/* Main heading */}
           <h2 className="text-5xl font-bold leading-tight tracking-tight md:text-6xl">
-            
+            Healthcare without...
             <span className="text-blue-600">
               {" "}unnecessary waiting.
             </span>
