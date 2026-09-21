@@ -5,72 +5,7 @@ export default function Home() {
       {/* =====================================================
           NAVIGATION
       ====================================================== */}
-      <nav className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--surface)]/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6">
-
-          {/* Logo */}
-          <a href="/" className="group">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary-soft)] text-lg">
-                🩺
-              </div>
-
-              <div>
-                <h1 className="text-xl font-bold tracking-tight text-[var(--foreground)]">
-                  MediFlow
-                </h1>
-
-                <p className="text-xs text-[var(--foreground-muted)]">
-                  Digital Healthcare Platform
-                </p>
-              </div>
-            </div>
-          </a>
-
-          {/* Desktop navigation */}
-          <div className="hidden items-center gap-7 md:flex">
-            <a
-              href="#features"
-              className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--primary)]"
-            >
-              Features
-            </a>
-
-            <a
-              href="#how-it-works"
-              className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--primary)]"
-            >
-              How It Works
-            </a>
-
-            <a
-              href="#for-users"
-              className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--primary)]"
-            >
-              For Patients & Doctors
-            </a>
-          </div>
-
-          {/* Navigation actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <a
-              href="/login"
-              className="rounded-xl px-3 py-2 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)] sm:px-4"
-            >
-              Login
-            </a>
-
-            <a
-              href="/register"
-              className="rounded-xl bg-[var(--foreground)] px-4 py-2.5 text-sm font-semibold text-[var(--background)] shadow-sm hover:opacity-90 sm:px-5"
-            >
-              Get Started
-            </a>
-          </div>
-
-        </div>
-      </nav>
-
+      
 
       {/* =====================================================
           HERO
