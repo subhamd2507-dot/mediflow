@@ -22,13 +22,19 @@ export default function Home() {
           {/* Navigation buttons */}
           <div className="flex items-center gap-3">
 
-            <button className="rounded-lg px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">
-              Login
-            </button>
+           <a
+  href="/login"
+  className="rounded-lg px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+>
+  Login
+</a>
 
-            <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
-              Get Started
-            </button>
+<a
+  href="/register"
+  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+>
+  Get Started
+</a>
 
           </div>
 
