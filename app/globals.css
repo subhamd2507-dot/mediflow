@@ -1,26 +1,224 @@
 @import "tailwindcss";
 
+/* =========================================================
+   MEDIFLOW GLOBAL DESIGN SYSTEM
+   ========================================================= */
+
+/* ---------- Light mode ---------- */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-soft: #f1f5f9;
+
+  --foreground: #0f172a;
+  --foreground-secondary: #334155;
+  --foreground-muted: #64748b;
+
+  --primary: #0f766e;
+  --primary-hover: #0d5f59;
+  --primary-soft: #ccfbf1;
+
+  --accent: #06b6d4;
+  --accent-soft: #cffafe;
+
+  --success: #16a34a;
+  --success-soft: #dcfce7;
+
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 18px 45px rgba(15, 23, 42, 0.12);
+
+  color-scheme: light;
 }
+
+/* ---------- Automatic dark mode ---------- */
+/* Used when the user has dark mode enabled on their device. */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b1220;
+    --surface: #111827;
+    --surface-soft: #1e293b;
+
+    --foreground: #f8fafc;
+    --foreground-secondary: #cbd5e1;
+    --foreground-muted: #94a3b8;
+
+    --primary: #2dd4bf;
+    --primary-hover: #5eead4;
+    --primary-soft: #134e4a;
+
+    --accent: #22d3ee;
+    --accent-soft: #164e63;
+
+    --success: #4ade80;
+    --success-soft: #14532d;
+
+    --warning: #fbbf24;
+    --warning-soft: #78350f;
+
+    --danger: #f87171;
+    --danger-soft: #7f1d1d;
+
+    --border: #334155;
+    --border-strong: #475569;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 18px 45px rgba(0, 0, 0, 0.35);
+
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Manual theme support ---------- */
+/* We will connect the theme toggle to these later. */
+
+html.light {
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-soft: #f1f5f9;
+
+  --foreground: #0f172a;
+  --foreground-secondary: #334155;
+  --foreground-muted: #64748b;
+
+  --primary: #0f766e;
+  --primary-hover: #0d5f59;
+  --primary-soft: #ccfbf1;
+
+  --accent: #06b6d4;
+  --accent-soft: #cffafe;
+
+  --success: #16a34a;
+  --success-soft: #dcfce7;
+
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  color-scheme: light;
+}
+
+html.dark {
+  --background: #0b1220;
+  --surface: #111827;
+  --surface-soft: #1e293b;
+
+  --foreground: #f8fafc;
+  --foreground-secondary: #cbd5e1;
+  --foreground-muted: #94a3b8;
+
+  --primary: #2dd4bf;
+  --primary-hover: #5eead4;
+  --primary-soft: #134e4a;
+
+  --accent: #22d3ee;
+  --accent-soft: #164e63;
+
+  --success: #4ade80;
+  --success-soft: #14532d;
+
+  --warning: #fbbf24;
+  --warning-soft: #78350f;
+
+  --danger: #f87171;
+  --danger-soft: #7f1d1d;
+
+  --border: #334155;
+  --border-strong: #475569;
+
+  color-scheme: dark;
+}
+
+/* ---------- Tailwind theme variables ---------- */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------- Global page styling ---------- */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* ---------- Better text rendering ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* ---------- Accessible focus ---------- */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Smooth controls ---------- */
+
+button,
+a {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* ---------- Cleaner scrollbar ---------- */
+
+html {
+  scrollbar-width: thin;
+}
+
+/* ---------- Selection ---------- */
+
+::selection {
+  background: var(--primary-soft);
+  color: var(--foreground);
 }
