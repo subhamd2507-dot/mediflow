@@ -72,13 +72,19 @@ export default function Home() {
           {/* Main buttons */}
           <div className="mt-8 flex flex-wrap gap-4">
 
-            <button className="rounded-xl bg-blue-600 px-7 py-3.5 font-semibold text-white shadow-sm transition hover:bg-blue-700">
-              Book OPD
-            </button>
+           <a
+  href="/book-opd"
+  className="rounded-xl bg-blue-600 px-7 py-3.5 font-semibold text-white"
+>
+  Book OPD
+</a>
 
-            <button className="rounded-xl border border-slate-300 bg-white px-7 py-3.5 font-semibold text-slate-700 transition hover:bg-slate-100">
-              Explore Specialists
-            </button>
+            <a
+  href="/book-opd"
+  className="rounded-xl border border-slate-300 bg-white px-7 py-3.5 font-semibold text-slate-700 hover:bg-slate-50"
+>
+  Explore Specialists
+</a>
 
           </div>
 
