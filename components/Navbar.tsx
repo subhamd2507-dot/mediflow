@@ -26,56 +26,7 @@ export default function Navbar() {
      LOAD LOGGED-IN USER
   ========================================================= */
 
-  useEffect(() => {
-    async function loadUser() {
-      setLoading(true);
-
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        setProfile(null);
-        setLoading(false);
-        return;
-      }
-
-      /* Check whether the user is a doctor */
-      const { data: doctor } = await supabase
-        .from("doctors")
-        .select("name")
-        .eq("auth_user_id", user.id)
-        .maybeSingle();
-
-      if (doctor) {
-        setProfile({
-          name: doctor.name,
-          role: "doctor",
-        });
-
-        setLoading(false);
-        return;
-      }
-
-      /* Otherwise check patient */
-      const { data: patient } = await supabase
-        .from("patients")
-        .select("full_name")
-        .eq("id", user.id)
-        .maybeSingle();
-
-      if (patient) {
-        setProfile({
-          name: patient.full_name || "Patient",
-          role: "patient",
-        });
-      }
-
-      setLoading(false);
-    }
-
-    loadUser();
-  }, []);
+  
 
   /* =========================================================
      LOAD SAVED THEME
