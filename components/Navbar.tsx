@@ -26,7 +26,94 @@ export default function Navbar() {
      LOAD LOGGED-IN USER
   ========================================================= */
 
-  
+  /* =========================================================
+   LOAD LOGGED-IN USER + LISTEN FOR AUTH CHANGES
+========================================================= */
+
+useEffect(() => {
+  async function loadUser(userId: string) {
+    setLoading(true);
+
+    /* Check whether the authenticated account is a doctor */
+    const { data: doctor, error: doctorError } = await supabase
+      .from("doctors")
+      .select("name")
+      .eq("auth_user_id", userId)
+      .maybeSingle();
+
+    if (doctorError) {
+      setProfile(null);
+      setLoading(false);
+      return;
+    }
+
+    if (doctor) {
+      setProfile({
+        name: doctor.name,
+        role: "doctor",
+      });
+
+      setLoading(false);
+      return;
+    }
+
+    /* Otherwise check whether the account is a patient */
+    const { data: patient, error: patientError } = await supabase
+      .from("patients")
+      .select("full_name")
+      .eq("id", userId)
+      .maybeSingle();
+
+    if (patientError) {
+      setProfile(null);
+      setLoading(false);
+      return;
+    }
+
+    if (patient) {
+      setProfile({
+        name: patient.full_name || "Patient",
+        role: "patient",
+      });
+    } else {
+      setProfile(null);
+    }
+
+    setLoading(false);
+  }
+
+  /*
+    Listen for login/logout/session changes.
+
+    Supabase sends an event when:
+    - the page first loads
+    - a user logs in
+    - a user logs out
+    - the session changes
+  */
+
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((_event, session) => {
+    if (!session?.user) {
+      setProfile(null);
+      setLoading(false);
+      return;
+    }
+
+    /*
+      Delay the database query slightly so we do not perform
+      Supabase database operations directly inside the auth callback.
+    */
+    setTimeout(() => {
+      void loadUser(session.user.id);
+    }, 0);
+  });
+
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
 
   /* =========================================================
      LOAD SAVED THEME
