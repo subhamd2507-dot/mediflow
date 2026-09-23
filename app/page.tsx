@@ -557,7 +557,7 @@ export default function Home() {
       ====================================================== */}
       <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
 
-        <div className="overflow-hidden rounded-[2rem] bg-[var(--foreground)] px-7 py-10 text-[var(--background)] sm:px-10 lg:px-14 lg:py-14">
+       <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] px-7 py-10 text-[var(--foreground)] shadow-[var(--shadow-lg)] sm:px-10 lg:px-14 lg:py-14">
 
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
 
