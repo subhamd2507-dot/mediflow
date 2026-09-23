@@ -563,7 +563,7 @@ export default function Home() {
 
             <div className="max-w-3xl">
 
-              <div className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em]">
+             <div className="inline-flex rounded-full border border-[var(--border)] bg-[var(--surface-soft)] px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-[var(--primary)]">
                 The next step for MediFlow
               </div>
 
