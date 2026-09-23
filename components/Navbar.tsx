@@ -576,7 +576,25 @@ const isPublicPage =
         </div>
          )}
 
-         
+         {isPublicPage && !profile && (
+  <div className="flex items-center gap-2">
+
+    <Link
+      href="/login"
+      className="rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--foreground-secondary)] transition hover:bg-[var(--surface-soft)] hover:text-[var(--foreground)]"
+    >
+      Login
+    </Link>
+
+    <Link
+      href="/register"
+      className="rounded-xl bg-[var(--primary)] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:opacity-95"
+    >
+      Get Started
+    </Link>
+
+  </div>
+)}
 
       </div>
 
