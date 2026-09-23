@@ -544,7 +544,7 @@ export default function Home() {
 
             <a
               href="/register"
-              className="rounded-xl bg-[var(--foreground)] px-6 py-3.5 text-sm font-bold text-[var(--background)] hover:opacity-90"
+              
             >
               Create Account
             </a>
