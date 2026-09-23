@@ -224,6 +224,8 @@ useEffect(() => {
       ? getInitials(profile.name)
       : "G";
 
+      
+
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--surface)]/95 backdrop-blur">
 
