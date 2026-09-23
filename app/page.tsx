@@ -105,7 +105,7 @@ export default function Home() {
             {/* Main orb zone */}
             <div className="pointer-events-none absolute inset-0">
 
-              <div className="absolute right-[-70px] top-1/2 h-[640px] w-[640px] -translate-y-1/2 lg:right-[-40px] lg:h-[700px] lg:w-[700px]">
+             <div className="absolute right-[-70px] top-1/2 h-[640px] w-[640px] -translate-y-1/2 opacity-[0.42] transition-all duration-700 ease-out group-hover:-translate-y-[53%] group-hover:scale-[1.025] group-hover:opacity-[0.82] lg:right-[-40px] lg:h-[700px] lg:w-[700px]">
 
                 <HealthcareOrb />
 
