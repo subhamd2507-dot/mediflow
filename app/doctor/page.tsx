@@ -23,24 +23,6 @@ type QueueItem = {
   appointment_time: string;
 };
 
-type PatientDetails = {
-  full_name: string;
-  phone: string | null;
-  date_of_birth: string | null;
-  gender: string | null;
-};
-
-type PatientHistory = {
-  id: string;
-  symptoms: string | null;
-  diagnosis: string | null;
-  notes: string | null;
-  tests_recommended: string | null;
-  advice: string | null;
-  follow_up_date: string | null;
-  created_at: string;
-};
-
 export default function DoctorDashboardPage() {
   const supabase = createClient();
   const router = useRouter();
@@ -48,55 +30,57 @@ export default function DoctorDashboardPage() {
   const [doctor, setDoctor] = useState<Doctor | null>(null);
   const [queue, setQueue] = useState<QueueItem[]>([]);
 
-  const [patientDetails, setPatientDetails] =
-    useState<PatientDetails | null>(null);
+ const [patientDetails, setPatientDetails] = useState<{
+  full_name: string;
+  phone: string | null;
+  date_of_birth: string | null;
+  gender: string | null;
+} | null>(null);
 
-  const [patientHistory, setPatientHistory] =
-    useState<PatientHistory[]>([]);
+const [patientHistory, setPatientHistory] = useState<
+  {
+    id: string;
+    symptoms: string | null;
+    diagnosis: string | null;
+    notes: string | null;
+    tests_recommended: string | null;
+    advice: string | null;
+    follow_up_date: string | null;
+    created_at: string;
+  }[]
+>([]);
 
   const [loading, setLoading] = useState(true);
   const [calling, setCalling] = useState(false);
   const [completing, setCompleting] = useState(false);
-  const [savingConsultation, setSavingConsultation] = useState(false);
 
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-
-  /* =========================================================
-     CONSULTATION FORM
-  ========================================================= */
-
   const [symptoms, setSymptoms] = useState("");
-  const [diagnosis, setDiagnosis] = useState("");
-  const [notes, setNotes] = useState("");
-  const [testsRecommended, setTestsRecommended] = useState("");
-  const [advice, setAdvice] = useState("");
-  const [followUpDate, setFollowUpDate] = useState("");
+const [diagnosis, setDiagnosis] = useState("");
+const [notes, setNotes] = useState("");
+const [testsRecommended, setTestsRecommended] = useState("");
+const [advice, setAdvice] = useState("");
+const [followUpDate, setFollowUpDate] = useState("");
 
-  /* =========================================================
-     PRESCRIPTION FORM
-  ========================================================= */
+const [medicineName, setMedicineName] = useState("");
+const [dosage, setDosage] = useState("");
+const [frequency, setFrequency] = useState("");
+const [duration, setDuration] = useState("");
+const [instructions, setInstructions] = useState("");
 
-  const [medicineName, setMedicineName] = useState("");
-  const [dosage, setDosage] = useState("");
-  const [frequency, setFrequency] = useState("");
-  const [duration, setDuration] = useState("");
-  const [instructions, setInstructions] = useState("");
+const [savingConsultation, setSavingConsultation] = useState(false);
 
   const today = new Date().toISOString().split("T")[0];
-
-  /* =========================================================
-     LOAD DASHBOARD
-  ========================================================= */
 
   async function loadDashboard() {
     try {
       setLoading(true);
       setError("");
 
-      /* -----------------------------------------------------
-         1. GET LOGGED-IN USER
-      ----------------------------------------------------- */
+      // -----------------------------------------
+      // 1. Get logged-in user
+      // -----------------------------------------
 
       const {
         data: { user },
@@ -112,9 +96,9 @@ export default function DoctorDashboardPage() {
         return;
       }
 
-      /* -----------------------------------------------------
-         2. FIND CONNECTED DOCTOR
-      ----------------------------------------------------- */
+      // -----------------------------------------
+      // 2. Find connected doctor
+      // -----------------------------------------
 
       const { data: doctorData, error: doctorError } =
         await supabase
@@ -137,16 +121,16 @@ export default function DoctorDashboardPage() {
 
       setDoctor(doctorData);
 
-      /* -----------------------------------------------------
-         3. LOAD TODAY'S QUEUE
-      ----------------------------------------------------- */
+      // -----------------------------------------
+      // 3. Load today's appointments
+      // -----------------------------------------
 
       const { data: queueData, error: queueError } =
         await supabase
           .from("appointments")
           .select(
-            "id, patient_id, token_number, status, appointment_date, appointment_time"
-          )
+  "id, patient_id, token_number, status, appointment_date, appointment_time"
+)
           .eq("doctor_id", doctorData.id)
           .eq("appointment_date", today)
           .order("token_number", {
@@ -159,62 +143,39 @@ export default function DoctorDashboardPage() {
 
       setQueue(queueData || []);
 
-      /* -----------------------------------------------------
-         4. FIND CURRENT PATIENT
-      ----------------------------------------------------- */
-
       const currentAppointment = (queueData || []).find(
-        (item) => item.status === "in_consultation"
-      );
+  (item) => item.status === "in_consultation"
+);
 
-      if (currentAppointment) {
-        /* -----------------------------------------------
-           Patient details
-        ------------------------------------------------ */
+if (currentAppointment) {
+  const { data: patientData, error: patientError } = await supabase
+    .from("patients")
+    .select("full_name, phone, date_of_birth, gender")
+    .eq("id", currentAppointment.patient_id)
+    .maybeSingle();
 
-        const {
-          data: patientData,
-          error: patientError,
-        } = await supabase
-          .from("patients")
-          .select(
-            "full_name, phone, date_of_birth, gender"
-          )
-          .eq("id", currentAppointment.patient_id)
-          .maybeSingle();
+  if (patientError) {
+    throw new Error(patientError.message);
+  }
 
-        if (patientError) {
-          throw new Error(patientError.message);
-        }
+  setPatientDetails(patientData);
+  const { data: historyData, error: historyError } = await supabase
+  .from("consultations")
+  .select(
+    "id, symptoms, diagnosis, notes, tests_recommended, advice, follow_up_date, created_at"
+  )
+  .eq("patient_id", currentAppointment.patient_id)
+  .order("created_at", { ascending: false });
 
-        setPatientDetails(patientData);
+if (historyError) {
+  throw new Error(historyError.message);
+}
 
-        /* -----------------------------------------------
-           Patient history
-        ------------------------------------------------ */
-
-        const {
-          data: historyData,
-          error: historyError,
-        } = await supabase
-          .from("consultations")
-          .select(
-            "id, symptoms, diagnosis, notes, tests_recommended, advice, follow_up_date, created_at"
-          )
-          .eq("patient_id", currentAppointment.patient_id)
-          .order("created_at", {
-            ascending: false,
-          });
-
-        if (historyError) {
-          throw new Error(historyError.message);
-        }
-
-        setPatientHistory(historyData || []);
-      } else {
-        setPatientDetails(null);
-        setPatientHistory([]);
-      }
+setPatientHistory(historyData || []);
+} else {
+  setPatientDetails(null);
+setPatientHistory([]);
+}
     } catch (err) {
       console.error(err);
 
@@ -228,422 +189,303 @@ export default function DoctorDashboardPage() {
     }
   }
 
-  /* =========================================================
-     CALL NEXT PATIENT
-  ========================================================= */
+  // ---------------------------------------------
+  // CALL NEXT PATIENT
+  // ---------------------------------------------
 
   async function callNextPatient() {
-    if (!doctor) {
-      return;
+  if (!doctor) {
+    return;
+  }
+
+  setCalling(true);
+  setError("");
+  setMessage("");
+
+  const { data, error: rpcError } = await supabase.rpc(
+    "call_next_patient",
+    {
+      p_doctor_id: doctor.id,
+      p_appointment_date: today,
     }
+  );
 
-    setCalling(true);
-    setError("");
-    setMessage("");
-
-    const { data, error: rpcError } =
-      await supabase.rpc("call_next_patient", {
-        p_doctor_id: doctor.id,
-        p_appointment_date: today,
-      });
-
-    if (rpcError) {
-      setError(rpcError.message);
-      setCalling(false);
-      return;
-    }
-
-    if (!data || data.length === 0) {
-      setMessage("There are no waiting patients.");
-      setCalling(false);
-      return;
-    }
-
-    setMessage(
-      `Token #${data[0].token_number} has been called.`
-    );
-
-    await loadDashboard();
-
+  if (rpcError) {
+    setError(rpcError.message);
     setCalling(false);
+    return;
   }
 
-  /* =========================================================
-     COMPLETE CONSULTATION
-  ========================================================= */
+  if (!data || data.length === 0) {
+    setMessage("There are no waiting patients.");
+    setCalling(false);
+    return;
+  }
 
-  async function completeConsultation() {
-    if (!currentPatient) {
-      return;
-    }
+  setMessage(
+    `Token #${data[0].token_number} has been called.`
+  );
 
-    const confirmed = window.confirm(
-      "Are you sure you want to complete this consultation?"
-    );
+  await loadDashboard();
 
-    if (!confirmed) {
-      return;
-    }
+  setCalling(false);
+}
 
-    setCompleting(true);
-    setError("");
-    setMessage("");
+async function completeConsultation() {
+  if (!currentPatient) {
+    return;
+  }
 
-    const {
-      data,
-      error: completeError,
-    } = await supabase.rpc("complete_consultation", {
+  setCompleting(true);
+  setError("");
+  setMessage("");
+
+  const { data, error: completeError } = await supabase.rpc(
+    "complete_consultation",
+    {
       p_appointment_id: currentPatient.id,
-    });
-
-    if (completeError) {
-      setError(completeError.message);
-      setCompleting(false);
-      return;
     }
+  );
 
-    if (!data || data.length === 0) {
-      setError(
-        "The consultation could not be completed."
-      );
-      setCompleting(false);
-      return;
-    }
-
-    setMessage(
-      `Consultation for Token #${data[0].token_number} completed successfully.`
-    );
-
-    await loadDashboard();
-
+  if (completeError) {
+    setError(completeError.message);
     setCompleting(false);
+    return;
   }
 
-  /* =========================================================
-     SAVE CONSULTATION
-  ========================================================= */
+  if (!data || data.length === 0) {
+    setError("The consultation could not be completed.");
+    setCompleting(false);
+    return;
+  }
 
-  async function saveConsultation() {
-    if (!currentPatient || !doctor) {
-      setError(
-        "No patient is currently in consultation."
-      );
-      return;
-    }
+  setMessage(
+    `Consultation for Token #${data[0].token_number} completed successfully.`
+  );
 
-    if (!symptoms.trim() && !diagnosis.trim()) {
-      setError(
-        "Please enter at least symptoms or diagnosis."
-      );
-      return;
-    }
+  await loadDashboard();
 
-    if (!medicineName.trim()) {
-      setError("Please enter a medicine name.");
-      return;
-    }
+  setCompleting(false);
+}
 
-    setSavingConsultation(true);
-    setError("");
-    setMessage("");
+async function saveConsultation() {
+  if (!currentPatient || !doctor) {
+    setError("No patient is currently in consultation.");
+    return;
+  } 
 
-    try {
-      /* -----------------------------------------------------
-         1. GET APPOINTMENT
-      ----------------------------------------------------- */
+  if (!symptoms.trim() && !diagnosis.trim()) {
+    setError("Please enter at least symptoms or diagnosis.");
+    return;
+  }
 
-      const {
-        data: appointment,
-        error: appointmentError,
-      } = await supabase
+  if (!medicineName.trim()) {
+    setError("Please enter a medicine name.");
+    return;
+  }
+
+  setSavingConsultation(true);
+  setError("");
+  setMessage("");
+
+  try {
+    // ------------------------------------------------------------
+    // 1. Get the appointment details
+    // ------------------------------------------------------------
+
+    const { data: appointment, error: appointmentError } =
+      await supabase
         .from("appointments")
         .select("id, patient_id, doctor_id")
         .eq("id", currentPatient.id)
         .single();
 
-      if (appointmentError) {
-        throw new Error(
-          appointmentError.message
-        );
-      }
+    if (appointmentError) {
+      throw new Error(appointmentError.message);
+    }
 
-      if (!appointment) {
-        throw new Error("Appointment not found.");
-      }
+    if (!appointment) {
+      throw new Error("Appointment not found.");
+    }
 
-      /* -----------------------------------------------------
-         2. FIND EXISTING CONSULTATION
-      ----------------------------------------------------- */
+    // ------------------------------------------------------------
+    // 2. Create consultation record
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    // 2. Find existing consultation or create a new one
+    // ------------------------------------------------------------
 
-      const {
-        data: existingConsultation,
-        error: existingConsultationError,
-      } = await supabase
+    const {
+      data: existingConsultation,
+      error: existingConsultationError,
+    } = await supabase
+      .from("consultations")
+      .select("id")
+      .eq("appointment_id", appointment.id)
+      .maybeSingle();
+
+    if (existingConsultationError) {
+      throw new Error(existingConsultationError.message);
+    }
+
+    let consultationId: string;
+
+    if (existingConsultation) {
+      // Consultation already exists — reuse it
+      consultationId = existingConsultation.id;
+
+      const { error: updateConsultationError } = await supabase
         .from("consultations")
-        .select("id")
-        .eq("appointment_id", appointment.id)
-        .maybeSingle();
+        .update({
+          symptoms: symptoms.trim() || null,
+          diagnosis: diagnosis.trim() || null,
+          notes: notes.trim() || null,
+          tests_recommended: testsRecommended.trim() || null,
+          advice: advice.trim() || null,
+          follow_up_date: followUpDate || null,
+        })
+        .eq("id", consultationId);
 
-      if (existingConsultationError) {
-        throw new Error(
-          existingConsultationError.message
-        );
+      if (updateConsultationError) {
+        throw new Error(updateConsultationError.message);
       }
-
-      let consultationId: string;
-
-      /* -----------------------------------------------------
-         UPDATE EXISTING CONSULTATION
-      ----------------------------------------------------- */
-
-      if (existingConsultation) {
-        consultationId =
-          existingConsultation.id;
-
-        const {
-          error: updateConsultationError,
-        } = await supabase
-          .from("consultations")
-          .update({
-            symptoms:
-              symptoms.trim() || null,
-            diagnosis:
-              diagnosis.trim() || null,
-            notes:
-              notes.trim() || null,
-            tests_recommended:
-              testsRecommended.trim() ||
-              null,
-            advice:
-              advice.trim() || null,
-            follow_up_date:
-              followUpDate || null,
-          })
-          .eq(
-            "id",
-            consultationId
-          );
-
-        if (updateConsultationError) {
-          throw new Error(
-            updateConsultationError.message
-          );
-        }
-      } else {
-        /* ---------------------------------------------------
-           CREATE NEW CONSULTATION
-        --------------------------------------------------- */
-
-        const {
-          data: newConsultation,
-          error: consultationError,
-        } = await supabase
+    } else {
+      // No consultation exists — create one
+      const { data: newConsultation, error: consultationError } =
+        await supabase
           .from("consultations")
           .insert({
-            appointment_id:
-              appointment.id,
-            patient_id:
-              appointment.patient_id,
-            doctor_id:
-              appointment.doctor_id,
-            symptoms:
-              symptoms.trim() || null,
-            diagnosis:
-              diagnosis.trim() || null,
-            notes:
-              notes.trim() || null,
-            tests_recommended:
-              testsRecommended.trim() ||
-              null,
-            advice:
-              advice.trim() || null,
-            follow_up_date:
-              followUpDate || null,
+            appointment_id: appointment.id,
+            patient_id: appointment.patient_id,
+            doctor_id: appointment.doctor_id,
+            symptoms: symptoms.trim() || null,
+            diagnosis: diagnosis.trim() || null,
+            notes: notes.trim() || null,
+            tests_recommended: testsRecommended.trim() || null,
+            advice: advice.trim() || null,
+            follow_up_date: followUpDate || null,
           })
           .select("id")
           .single();
 
-        if (consultationError) {
-          throw new Error(
-            consultationError.message
-          );
-        }
-
-        if (!newConsultation) {
-          throw new Error(
-            "Consultation could not be created."
-          );
-        }
-
-        consultationId =
-          newConsultation.id;
+      if (consultationError) {
+        throw new Error(consultationError.message);
       }
 
-      /* -----------------------------------------------------
-         3. FIND EXISTING PRESCRIPTION
-      ----------------------------------------------------- */
-
-      const {
-        data: existingPrescription,
-        error: existingPrescriptionError,
-      } = await supabase
-        .from("prescriptions")
-        .select("id")
-        .eq(
-          "consultation_id",
-          consultationId
-        )
-        .maybeSingle();
-
-      if (existingPrescriptionError) {
-        throw new Error(
-          existingPrescriptionError.message
-        );
+      if (!newConsultation) {
+        throw new Error("Consultation could not be created.");
       }
 
-      /* -----------------------------------------------------
-         UPDATE EXISTING PRESCRIPTION
-      ----------------------------------------------------- */
-
-      if (existingPrescription) {
-        const {
-          error: updatePrescriptionError,
-        } = await supabase
-          .from("prescriptions")
-          .update({
-            patient_id:
-              appointment.patient_id,
-            doctor_id:
-              appointment.doctor_id,
-            medicine_name:
-              medicineName.trim(),
-            dosage:
-              dosage.trim() || null,
-            frequency:
-              frequency.trim() || null,
-            duration:
-              duration.trim() || null,
-            instructions:
-              instructions.trim() ||
-              null,
-          })
-          .eq(
-            "id",
-            existingPrescription.id
-          );
-
-        if (updatePrescriptionError) {
-          throw new Error(
-            updatePrescriptionError.message
-          );
-        }
-      } else {
-        /* ---------------------------------------------------
-           CREATE NEW PRESCRIPTION
-        --------------------------------------------------- */
-
-        const {
-          error: prescriptionError,
-        } = await supabase
-          .from("prescriptions")
-          .insert({
-            consultation_id:
-              consultationId,
-            patient_id:
-              appointment.patient_id,
-            doctor_id:
-              appointment.doctor_id,
-            medicine_name:
-              medicineName.trim(),
-            dosage:
-              dosage.trim() || null,
-            frequency:
-              frequency.trim() || null,
-            duration:
-              duration.trim() || null,
-            instructions:
-              instructions.trim() ||
-              null,
-          });
-
-        if (prescriptionError) {
-          throw new Error(
-            prescriptionError.message
-          );
-        }
-      }
-
-      /* -----------------------------------------------------
-         SUCCESS
-      ----------------------------------------------------- */
-
-      setMessage(
-        `Consultation for Token #${currentPatient.token_number} saved successfully.`
-      );
-
-      /* Clear form */
-      setSymptoms("");
-      setDiagnosis("");
-      setNotes("");
-      setTestsRecommended("");
-      setAdvice("");
-      setFollowUpDate("");
-
-      setMedicineName("");
-      setDosage("");
-      setFrequency("");
-      setDuration("");
-      setInstructions("");
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error
-          ? err.message
-          : "Failed to save consultation.";
-
-      setError(errorMessage);
-    } finally {
-      setSavingConsultation(false);
+      consultationId = newConsultation.id;
     }
-  }
 
-  /* =========================================================
-     INITIAL LOAD
-  ========================================================= */
+    // ------------------------------------------------------------
+    // 3. Create prescription record
+    // ------------------------------------------------------------
+    // ------------------------------------------------------------
+    // 3. Find existing prescription or create a new one
+    // ------------------------------------------------------------
+
+    const {
+      data: existingPrescription,
+      error: existingPrescriptionError,
+    } = await supabase
+      .from("prescriptions")
+      .select("id")
+      .eq("consultation_id", consultationId)
+      .maybeSingle();
+
+    if (existingPrescriptionError) {
+      throw new Error(existingPrescriptionError.message);
+    }
+
+    if (existingPrescription) {
+      // Prescription already exists — update it
+      const { error: updatePrescriptionError } = await supabase
+        .from("prescriptions")
+        .update({
+          patient_id: appointment.patient_id,
+          doctor_id: appointment.doctor_id,
+          medicine_name: medicineName.trim(),
+          dosage: dosage.trim() || null,
+          frequency: frequency.trim() || null,
+          duration: duration.trim() || null,
+          instructions: instructions.trim() || null,
+        })
+        .eq("id", existingPrescription.id);
+
+      if (updatePrescriptionError) {
+        throw new Error(updatePrescriptionError.message);
+      }
+    } else {
+      // No prescription exists — create one
+      const { error: prescriptionError } = await supabase
+        .from("prescriptions")
+        .insert({
+          consultation_id: consultationId,
+          patient_id: appointment.patient_id,
+          doctor_id: appointment.doctor_id,
+          medicine_name: medicineName.trim(),
+          dosage: dosage.trim() || null,
+          frequency: frequency.trim() || null,
+          duration: duration.trim() || null,
+          instructions: instructions.trim() || null,
+        });
+
+      if (prescriptionError) {
+        throw new Error(prescriptionError.message);
+      }
+    }
+
+    
+
+    // ------------------------------------------------------------
+    // 4. Success
+    // ------------------------------------------------------------
+
+    setMessage(
+      `Consultation for Token #${currentPatient.token_number} saved successfully.`
+    );
+
+    // Clear the form
+    setSymptoms("");
+    setDiagnosis("");
+    setNotes("");
+    setTestsRecommended("");
+    setAdvice("");
+    setFollowUpDate("");
+
+    setMedicineName("");
+    setDosage("");
+    setFrequency("");
+    setDuration("");
+    setInstructions("");
+
+  } catch (err) {
+    const errorMessage =
+      err instanceof Error
+        ? err.message
+        : "Failed to save consultation.";
+
+    setError(errorMessage);
+  } finally {
+    setSavingConsultation(false);
+  }
+}
 
   useEffect(() => {
     loadDashboard();
   }, []);
 
-  /* =========================================================
-     LOADING
-  ========================================================= */
-
   if (loading) {
     return (
-      <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <main className="min-h-screen bg-slate-50 px-6 py-12">
 
-        <div className="mx-auto max-w-7xl px-5 py-10 sm:px-6">
+        <div className="mx-auto max-w-5xl text-center">
 
-          <div className="animate-pulse">
-
-            <div className="h-4 w-32 rounded bg-[var(--surface-soft)]" />
-
-            <div className="mt-4 h-10 w-80 rounded bg-[var(--surface-soft)]" />
-
-            <div className="mt-3 h-5 w-96 max-w-full rounded bg-[var(--surface-soft)]" />
-
-            <div className="mt-8 grid gap-5 md:grid-cols-4">
-
-              <div className="h-32 rounded-3xl bg-[var(--surface-soft)]" />
-              <div className="h-32 rounded-3xl bg-[var(--surface-soft)]" />
-              <div className="h-32 rounded-3xl bg-[var(--surface-soft)]" />
-              <div className="h-32 rounded-3xl bg-[var(--surface-soft)]" />
-
-            </div>
-
-            <div className="mt-8 h-80 rounded-3xl bg-[var(--surface-soft)]" />
-
-          </div>
+          <p className="text-slate-600">
+            Loading doctor dashboard...
+          </p>
 
         </div>
 
@@ -651,45 +493,29 @@ export default function DoctorDashboardPage() {
     );
   }
 
-  /* =========================================================
-     ERROR
-  ========================================================= */
-
-  if (error && !doctor) {
+  if (error) {
     return (
-      <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <main className="min-h-screen bg-slate-50 px-6 py-12">
 
-        <div className="mx-auto max-w-5xl px-5 py-12 sm:px-6">
+        <div className="mx-auto max-w-5xl">
 
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--primary)]">
-            MediFlow
+          <p className="font-semibold text-blue-600">
+            MEDIFLOW
           </p>
 
-          <h1 className="mt-3 text-3xl font-bold">
+          <h1 className="mt-2 text-4xl font-bold text-slate-900">
             Doctor Dashboard
           </h1>
 
-          <div className="mt-8 rounded-3xl border border-[var(--danger)]/25 bg-[var(--danger-soft)] p-6">
+          <div className="mt-8 rounded-2xl border border-red-200 bg-red-50 p-6">
 
-            <div className="flex gap-3">
+            <h2 className="text-xl font-bold text-red-700">
+              Dashboard Error
+            </h2>
 
-              <span className="text-xl">
-                ⚠️
-              </span>
-
-              <div>
-
-                <h2 className="font-bold text-[var(--danger)]">
-                  Dashboard Error
-                </h2>
-
-                <p className="mt-2 text-sm leading-6 text-[var(--danger)]">
-                  {error}
-                </p>
-
-              </div>
-
-            </div>
+            <p className="mt-2 text-red-600">
+              {error}
+            </p>
 
           </div>
 
@@ -699,13 +525,8 @@ export default function DoctorDashboardPage() {
     );
   }
 
-  /* =========================================================
-     CURRENT PATIENT
-  ========================================================= */
-
   const currentPatient = queue.find(
-    (item) =>
-      item.status === "in_consultation"
+    (item) => item.status === "in_consultation"
   );
 
   const waitingPatients = queue.filter(
@@ -716,929 +537,598 @@ export default function DoctorDashboardPage() {
   );
 
   const completedPatients = queue.filter(
-    (item) =>
-      item.status === "completed"
+    (item) => item.status === "completed"
   );
-
-  const cancelledPatients = queue.filter(
-    (item) =>
-      item.status === "cancelled"
-  );
-
-  /* =========================================================
-     STATUS STYLING
-  ========================================================= */
-
-  function getStatusStyles(status: string) {
-    const normalized = status
-      .toLowerCase()
-      .replaceAll("_", " ");
-
-    if (normalized === "completed") {
-      return {
-        badge:
-          "border-[var(--success)]/20 bg-[var(--success-soft)] text-[var(--success)]",
-        dot: "bg-[var(--success)]",
-      };
-    }
-
-    if (normalized === "waiting") {
-      return {
-        badge:
-          "border-[var(--warning)]/20 bg-[var(--warning-soft)] text-[var(--warning)]",
-        dot: "bg-[var(--warning)]",
-      };
-    }
-
-    if (normalized === "in consultation") {
-      return {
-        badge:
-          "border-[var(--primary)]/20 bg-[var(--primary-soft)] text-[var(--primary)]",
-        dot: "bg-[var(--primary)]",
-      };
-    }
-
-    if (normalized === "cancelled") {
-      return {
-        badge:
-          "border-[var(--danger)]/20 bg-[var(--danger-soft)] text-[var(--danger)]",
-        dot: "bg-[var(--danger)]",
-      };
-    }
-
-    return {
-      badge:
-        "border-[var(--border)] bg-[var(--surface-soft)] text-[var(--foreground-secondary)]",
-      dot: "bg-[var(--foreground-muted)]",
-    };
-  }
-
-  function formatTime(time: string) {
-    const [hoursString, minutes] =
-      time.slice(0, 5).split(":");
-
-    const hours = Number(hoursString);
-
-    const period =
-      hours >= 12 ? "PM" : "AM";
-
-    const displayHour =
-      hours % 12 === 0
-        ? 12
-        : hours % 12;
-
-    return `${displayHour}:${minutes} ${period}`;
-  }
-
-  function formatStatus(status: string) {
-    return status
-      .replaceAll("_", " ")
-      .replace(/\b\w/g, (letter) =>
-        letter.toUpperCase()
-      );
-  }
-
-  const doctorInitials =
-    doctor?.name
-      ? doctor.name
-          .split(" ")
-          .map(
-            (part: string) =>
-              part.charAt(0)
-          )
-          .join("")
-          .slice(0, 2)
-          .toUpperCase()
-      : "DR";
 
   return (
-    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <main className="min-h-screen bg-slate-50 px-6 py-12">
 
-      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 lg:py-10">
+      <div className="mx-auto max-w-5xl">
 
-        {/* =================================================
-            HEADER
-        ================================================== */}
+        {/* ----------------------------------- */}
+        {/* HEADER */}
+        {/* ----------------------------------- */}
 
-        <section className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm sm:p-8">
+        <div>
 
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <p className="font-semibold text-blue-600">
+            MEDIFLOW
+          </p>
 
-            <div>
+          <h1 className="mt-2 text-4xl font-bold text-slate-900">
+            Doctor Dashboard
+          </h1>
 
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--primary)]">
-                Doctor workspace
+          <p className="mt-3 text-slate-600">
+            Manage today's OPD queue.
+          </p>
+
+        </div>
+
+
+        {/* ----------------------------------- */}
+        {/* DOCTOR PROFILE */}
+        {/* ----------------------------------- */}
+
+        {doctor && (
+          <div className="mt-8 rounded-2xl bg-white p-6 shadow-sm">
+
+            <p className="text-sm font-semibold text-blue-600">
+              Doctor Profile
+            </p>
+
+            <h2 className="mt-2 text-3xl font-bold text-slate-900">
+              {doctor.name}
+            </h2>
+
+            <p className="mt-2 text-lg text-slate-600">
+              {doctor.specialization}
+            </p>
+
+            {doctor.qualification && (
+              <p className="mt-2 text-slate-500">
+                {doctor.qualification}
               </p>
+            )}
 
-              <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-                Good day, {doctor?.name || "Doctor"}
-              </h1>
-
-              <p className="mt-3 max-w-2xl leading-7 text-[var(--foreground-secondary)]">
-                Manage today's OPD queue, review patient information and
-                record consultations from one workspace.
+            {doctor.experience_years !== null && (
+              <p className="mt-2 text-slate-500">
+                {doctor.experience_years} years of experience
               </p>
-
-            </div>
-
-
-            {/* Doctor identity */}
-            <div className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface-soft)] px-4 py-3">
-
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
-                {doctorInitials}
-              </div>
-
-              <div>
-
-                <p className="font-bold">
-                  {doctor?.name}
-                </p>
-
-                <p className="text-sm text-[var(--foreground-muted)]">
-                  {doctor?.specialization}
-                </p>
-
-              </div>
-
-            </div>
+            )}
 
           </div>
+        )}
 
-        </section>
 
-
-        {/* =================================================
-            ALERTS
-        ================================================== */}
+        {/* ----------------------------------- */}
+        {/* MESSAGES */}
+        {/* ----------------------------------- */}
 
         {message && (
-          <div className="mt-6 rounded-2xl border border-[var(--success)]/20 bg-[var(--success-soft)] p-4">
-
-            <div className="flex items-start gap-3">
-
-              <span className="text-lg">
-                ✓
-              </span>
-
-              <p className="text-sm font-semibold text-[var(--success)]">
-                {message}
-              </p>
-
-            </div>
-
-          </div>
-        )}
-
-        {error && (
-          <div className="mt-6 rounded-2xl border border-[var(--danger)]/25 bg-[var(--danger-soft)] p-4">
-
-            <div className="flex items-start gap-3">
-
-              <span className="text-lg">
-                ⚠️
-              </span>
-
-              <p className="text-sm font-semibold text-[var(--danger)]">
-                {error}
-              </p>
-
-            </div>
-
+          <div className="mt-6 rounded-xl border border-green-200 bg-green-50 p-4 text-green-700">
+            {message}
           </div>
         )}
 
 
-        {/* =================================================
-            STATS
-        ================================================== */}
+        {/* ----------------------------------- */}
+        {/* CURRENT PATIENT */}
+        {/* ----------------------------------- */}
 
-        <section className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-6 rounded-3xl bg-blue-600 p-8 text-center text-white">
 
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm">
+          <p className="text-sm font-medium text-blue-100">
+            CURRENTLY IN CONSULTATION
+          </p>
 
-            <div className="flex items-center justify-between">
+          <p className="mt-2 text-6xl font-bold">
+            #{currentPatient?.token_number ?? "-"}
+          </p>
 
-              <div>
+          <p className="mt-4 text-blue-100">
+            {currentPatient
+              ? "Consultation in progress"
+              : "No patient currently in consultation"}
+          </p>
 
-                <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                  Total today
-                </p>
+        </div>
 
-                <p className="mt-2 text-3xl font-bold">
-                  {queue.length}
-                </p>
 
-              </div>
+        {/* ----------------------------------- */}
+        {/* STATISTICS */}
+        {/* ----------------------------------- */}
 
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--primary-soft)] text-lg">
-                📅
-              </div>
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
 
-            </div>
+          <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
 
-            <p className="mt-3 text-sm text-[var(--foreground-muted)]">
-              Scheduled OPD appointments
+            <p className="text-sm text-slate-500">
+              Total Appointments
+            </p>
+
+            <p className="mt-2 text-4xl font-bold text-slate-900">
+              {queue.length}
             </p>
 
           </div>
 
 
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm">
+          <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
 
-            <div className="flex items-center justify-between">
+            <p className="text-sm text-slate-500">
+              Waiting Patients
+            </p>
 
-              <div>
-
-                <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                  Waiting
-                </p>
-
-                <p className="mt-2 text-3xl font-bold">
-                  {waitingPatients.length}
-                </p>
-
-              </div>
-
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--warning-soft)] text-lg">
-                ⏳
-              </div>
-
-            </div>
-
-            <p className="mt-3 text-sm text-[var(--foreground-muted)]">
-              Patients ready to be called
+            <p className="mt-2 text-4xl font-bold text-slate-900">
+              {waitingPatients.length}
             </p>
 
           </div>
 
 
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm">
+          <div className="rounded-2xl bg-white p-6 text-center shadow-sm">
 
-            <div className="flex items-center justify-between">
+            <p className="text-sm text-slate-500">
+              Completed
+            </p>
 
-              <div>
-
-                <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                  Completed
-                </p>
-
-                <p className="mt-2 text-3xl font-bold">
-                  {completedPatients.length}
-                </p>
-
-              </div>
-
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--success-soft)] text-lg">
-                ✓
-              </div>
-
-            </div>
-
-            <p className="mt-3 text-sm text-[var(--foreground-muted)]">
-              Consultations completed
+            <p className="mt-2 text-4xl font-bold text-slate-900">
+              {completedPatients.length}
             </p>
 
           </div>
 
+        </div>
 
-          <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm">
 
-            <div className="flex items-center justify-between">
+        {/* ----------------------------------- */}
+        {/* QUEUE CONTROL */}
+        {/* ----------------------------------- */}
 
-              <div>
+        <div className="mt-6 rounded-2xl bg-white p-8 shadow-sm">
 
-                <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                  Cancelled
-                </p>
+  <h2 className="text-2xl font-bold text-slate-900">
+    Queue Control
+  </h2>
 
-                <p className="mt-2 text-3xl font-bold">
-                  {cancelledPatients.length}
-                </p>
+  <p className="mt-2 text-slate-600">
+    Manage the current OPD patient.
+  </p>
 
-              </div>
+  {!currentPatient && (
+    <button
+      type="button"
+      onClick={callNextPatient}
+      disabled={
+        calling || waitingPatients.length === 0
+      }
+      className="mt-6 w-full rounded-xl bg-blue-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+    >
+      {calling
+        ? "Calling Patient..."
+        : waitingPatients.length === 0
+        ? "No Waiting Patients"
+        : "📢 Call Next Patient"}
+    </button>
+  )}
 
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--danger-soft)] text-lg">
-                ×
-              </div>
+  {currentPatient && (
+    <div className="mt-6">
+
+      <div className="rounded-xl bg-blue-50 p-5 text-center">
+
+        <p className="text-sm font-medium text-blue-700">
+          Currently Consulting
+        </p>
+
+        <p className="mt-2 text-4xl font-bold text-blue-700">
+          #{currentPatient.token_number}
+        </p>
+
+      </div>
+
+      {patientDetails && (
+  <div className="mt-4 rounded-xl bg-slate-50 p-5">
+    <h3 className="text-lg font-bold text-slate-900">
+      Patient Details
+    </h3>
+
+    <div className="mt-4 grid gap-3 sm:grid-cols-2">
+      <div>
+        <p className="text-sm text-slate-500">Name</p>
+        <p className="font-semibold text-slate-900">
+          {patientDetails.full_name}
+        </p>
+      </div>
+
+      <div>
+        <p className="text-sm text-slate-500">Phone</p>
+        <p className="font-semibold text-slate-900">
+          {patientDetails.phone || "Not provided"}
+        </p>
+      </div>
+
+      
+
+      <div>
+        <p className="text-sm text-slate-500">Gender</p>
+        <p className="font-semibold text-slate-900">
+          {patientDetails.gender || "Not provided"}
+        </p>
+      </div>
+
+      <div>
+        <p className="text-sm text-slate-500">Date of Birth</p>
+        <p className="font-semibold text-slate-900">
+          {patientDetails.date_of_birth || "Not provided"}
+        </p>
+      </div>
+    </div>
+  </div>
+)}
+
+{patientHistory.length > 0 && (
+  <div className="mt-4 rounded-xl bg-white border border-slate-200 p-5">
+    <h3 className="text-lg font-bold text-slate-900">
+      Previous Medical History
+    </h3>
+
+    <div className="mt-4 space-y-4">
+      {patientHistory.map((history) => (
+        <div
+          key={history.id}
+          className="rounded-xl bg-slate-50 p-4"
+        >
+          <p className="text-sm text-slate-500">
+            {new Date(history.created_at).toLocaleDateString()}
+          </p>
+
+          {history.symptoms && (
+            <div className="mt-3">
+              <p className="font-semibold text-slate-900">
+                Symptoms
+              </p>
+              <p className="mt-1 text-slate-600">
+                {history.symptoms}
+              </p>
+            </div>
+          )}
+
+          {history.diagnosis && (
+            <div className="mt-3">
+              <p className="font-semibold text-slate-900">
+                Diagnosis
+              </p>
+              <p className="mt-1 text-slate-600">
+                {history.diagnosis}
+              </p>
+            </div>
+          )}
+
+          {history.notes && (
+            <div className="mt-3">
+              <p className="font-semibold text-slate-900">
+                Consultation Notes
+              </p>
+              <p className="mt-1 text-slate-600">
+                {history.notes}
+              </p>
+            </div>
+          )}
+
+          {history.tests_recommended && (
+            <div className="mt-3">
+              <p className="font-semibold text-slate-900">
+                Tests Recommended
+              </p>
+              <p className="mt-1 text-slate-600">
+                {history.tests_recommended}
+              </p>
+            </div>
+          )}
+
+          {history.advice && (
+            <div className="mt-3">
+              <p className="font-semibold text-slate-900">
+                Advice
+              </p>
+              <p className="mt-1 text-slate-600">
+                {history.advice}
+              </p>
+            </div>
+          )}
+
+          {history.follow_up_date && (
+            <div className="mt-3">
+              <p className="font-semibold text-slate-900">
+                Follow-up Date
+              </p>
+              <p className="mt-1 text-slate-600">
+                {history.follow_up_date}
+              </p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+      <button
+        type="button"
+        onClick={completeConsultation}
+        
+        disabled={completing}
+        className="mt-4 w-full rounded-xl bg-green-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {completing
+          ? "Completing Consultation..."
+          : "✅ Complete Consultation"}
+      </button>
+
+    </div>
+  )}
+
+</div>
+
+
+        {/* ----------------------------------- */}
+        {/* TODAY'S QUEUE */}
+        {/* ----------------------------------- */}
+
+        <div className="mt-6 rounded-2xl bg-white p-6 shadow-sm">
+
+          <h2 className="text-xl font-bold text-slate-900">
+            Today's Queue
+          </h2>
+
+          {queue.length === 0 ? (
+
+            <div className="mt-6 rounded-xl bg-slate-50 p-6 text-center">
+
+              <p className="text-slate-500">
+                No appointments scheduled for today.
+              </p>
 
             </div>
 
-            <p className="mt-3 text-sm text-[var(--foreground-muted)]">
-              Cancelled appointments
-            </p>
+          ) : (
 
-          </div>
+            <div className="mt-5 space-y-3">
 
-        </section>
+              {queue.map((item) => (
 
-
-        {/* =================================================
-            CURRENT CONSULTATION
-        ================================================== */}
-
-        <section className="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-
-          {/* -------------------------------------------------
-              LEFT: QUEUE
-          -------------------------------------------------- */}
-
-          <div className="space-y-6">
-
-            {/* Current patient */}
-            <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-sm">
-
-              <div className="border-b border-[var(--border)] p-6 sm:p-7">
-
-                <div className="flex items-center justify-between gap-4">
+                <div
+                  key={item.id}
+                  className="flex items-center justify-between rounded-xl border border-slate-200 p-4"
+                >
 
                   <div>
 
-                    <p className="text-xs font-bold uppercase tracking-[0.15em] text-[var(--primary)]">
-                      Current consultation
+                    <p className="text-lg font-bold text-slate-900">
+                      Token #{item.token_number}
                     </p>
 
-                    <h2 className="mt-2 text-2xl font-bold">
-                      {currentPatient
-                        ? `Token #${currentPatient.token_number}`
-                        : "No patient selected"}
-                    </h2>
-
-                  </div>
-
-                  <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-                      currentPatient
-                        ? "bg-[var(--primary-soft)]"
-                        : "bg-[var(--surface-soft)]"
-                    }`}
-                  >
-                    🩺
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div className="p-6 sm:p-7">
-
-                {!currentPatient ? (
-
-                  <div>
-
-                    <div className="rounded-2xl bg-[var(--surface-soft)] p-5">
-
-                      <p className="font-bold">
-                        Ready for the next patient?
-                      </p>
-
-                      <p className="mt-2 text-sm leading-6 text-[var(--foreground-secondary)]">
-                        Call the next patient from today's waiting queue
-                        to begin the consultation.
-                      </p>
-
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={callNextPatient}
-                      disabled={
-                        calling ||
-                        waitingPatients.length === 0
-                      }
-                      className="mt-5 w-full rounded-2xl bg-[var(--foreground)] px-5 py-4 font-bold text-[var(--background)] hover:-translate-y-0.5 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      {calling
-                        ? "Calling Patient..."
-                        : waitingPatients.length === 0
-                        ? "No Waiting Patients"
-                        : "📢 Call Next Patient"}
-                    </button>
-
-                  </div>
-
-                ) : (
-
-                  <div>
-
-                    {/* Token */}
-                    <div className="rounded-2xl bg-[var(--primary-soft)] p-6 text-center">
-
-                      <p className="text-xs font-bold uppercase tracking-widest text-[var(--primary)]">
-                        Currently consulting
-                      </p>
-
-                      <p className="mt-2 text-5xl font-bold text-[var(--primary)]">
-                        #{currentPatient.token_number}
-                      </p>
-
-                      <p className="mt-2 text-sm text-[var(--foreground-secondary)]">
-                        Appointment at{" "}
-                        {formatTime(
-                          currentPatient.appointment_time
-                        )}
-                      </p>
-
-                    </div>
-
-
-                    {/* Patient details */}
-                    {patientDetails && (
-                      <div className="mt-5 rounded-2xl border border-[var(--border)] p-5">
-
-                        <div className="flex items-center gap-4">
-
-                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--success-soft)] text-lg">
-                            👤
-                          </div>
-
-                          <div>
-
-                            <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                              Patient
-                            </p>
-
-                            <h3 className="mt-1 text-xl font-bold">
-                              {patientDetails.full_name}
-                            </h3>
-
-                          </div>
-
-                        </div>
-
-
-                        <div className="mt-5 grid gap-3 sm:grid-cols-2">
-
-                          <div className="rounded-2xl bg-[var(--surface-soft)] p-4">
-
-                            <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                              Phone
-                            </p>
-
-                            <p className="mt-2 text-sm font-semibold">
-                              {patientDetails.phone ||
-                                "Not provided"}
-                            </p>
-
-                          </div>
-
-                          <div className="rounded-2xl bg-[var(--surface-soft)] p-4">
-
-                            <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                              Gender
-                            </p>
-
-                            <p className="mt-2 text-sm font-semibold capitalize">
-                              {patientDetails.gender ||
-                                "Not provided"}
-                            </p>
-
-                          </div>
-
-                          <div className="rounded-2xl bg-[var(--surface-soft)] p-4">
-
-                            <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                              Date of Birth
-                            </p>
-
-                            <p className="mt-2 text-sm font-semibold">
-                              {patientDetails.date_of_birth ||
-                                "Not provided"}
-                            </p>
-
-                          </div>
-
-                          <div className="rounded-2xl bg-[var(--surface-soft)] p-4">
-
-                            <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                              Token
-                            </p>
-
-                            <p className="mt-2 text-sm font-semibold">
-                              #{currentPatient.token_number}
-                            </p>
-
-                          </div>
-
-                        </div>
-
-                      </div>
-                    )}
-
-
-                    {/* Previous history */}
-                    {patientHistory.length > 0 && (
-                      <div className="mt-5 rounded-2xl border border-[var(--border)] p-5">
-
-                        <div>
-
-                          <p className="text-xs font-bold uppercase tracking-wider text-[var(--primary)]">
-                            Patient history
-                          </p>
-
-                          <h3 className="mt-2 text-xl font-bold">
-                            Previous consultations
-                          </h3>
-
-                        </div>
-
-
-                        <div className="mt-5 space-y-3">
-
-                          {patientHistory.map(
-                            (history) => (
-                              <div
-                                key={history.id}
-                                className="rounded-2xl bg-[var(--surface-soft)] p-4"
-                              >
-
-                                <div className="flex items-center justify-between gap-3">
-
-                                  <p className="text-xs font-bold text-[var(--foreground-muted)]">
-                                    {new Date(
-                                      history.created_at
-                                    ).toLocaleDateString(
-                                      "en-IN",
-                                      {
-                                        day: "numeric",
-                                        month: "short",
-                                        year: "numeric",
-                                      }
-                                    )}
-                                  </p>
-
-                                </div>
-
-
-                                {history.symptoms && (
-                                  <div className="mt-3">
-
-                                    <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                                      Symptoms
-                                    </p>
-
-                                    <p className="mt-1 text-sm leading-6 text-[var(--foreground-secondary)]">
-                                      {history.symptoms}
-                                    </p>
-
-                                  </div>
-                                )}
-
-
-                                {history.diagnosis && (
-                                  <div className="mt-3">
-
-                                    <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                                      Diagnosis
-                                    </p>
-
-                                    <p className="mt-1 text-sm leading-6 text-[var(--foreground-secondary)]">
-                                      {history.diagnosis}
-                                    </p>
-
-                                  </div>
-                                )}
-
-
-                                {history.advice && (
-                                  <div className="mt-3">
-
-                                    <p className="text-xs font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
-                                      Advice
-                                    </p>
-
-                                    <p className="mt-1 text-sm leading-6 text-[var(--foreground-secondary)]">
-                                      {history.advice}
-                                    </p>
-
-                                  </div>
-                                )}
-
-                              </div>
-                            )
-                          )}
-
-                        </div>
-
-                      </div>
-                    )}
-
-
-                    {/* Complete consultation */}
-                    <button
-                      type="button"
-                      onClick={completeConsultation}
-                      disabled={completing}
-                      className="mt-5 w-full rounded-2xl bg-[var(--success)] px-5 py-4 font-bold text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      {completing
-                        ? "Completing Consultation..."
-                        : "✅ Complete Consultation"}
-                    </button>
-
-                  </div>
-
-                )}
-
-              </div>
-
-            </div>
-
-
-            {/* Today's queue */}
-            <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-sm">
-
-              <div className="border-b border-[var(--border)] p-6">
-
-                <div className="flex items-end justify-between gap-4">
-
-                  <div>
-
-                    <p className="text-xs font-bold uppercase tracking-[0.15em] text-[var(--primary)]">
-                      Today's OPD
+                    <p className="text-sm text-slate-500">
+                      Appointment: {item.appointment_time}
                     </p>
 
-                    <h2 className="mt-2 text-2xl font-bold">
-                      Patient queue
-                    </h2>
-
                   </div>
 
-                  <span className="rounded-full bg-[var(--surface-soft)] px-3 py-1.5 text-xs font-bold">
-                    {queue.length} total
+
+                  <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold capitalize text-slate-700">
+                    {item.status.replaceAll("_", " ")}
                   </span>
 
                 </div>
 
-              </div>
-
-
-              <div className="p-5">
-
-                {queue.length === 0 ? (
-
-                  <div className="rounded-2xl bg-[var(--surface-soft)] p-6 text-center">
-
-                    <div className="text-2xl">
-                      📭
-                    </div>
-
-                    <p className="mt-3 font-bold">
-                      No appointments today
-                    </p>
-
-                    <p className="mt-1 text-sm text-[var(--foreground-muted)]">
-                      Today's OPD queue is currently empty.
-                    </p>
-
-                  </div>
-
-                ) : (
-
-                  <div className="space-y-3">
-
-                    {queue.map((item) => {
-                      const statusStyles =
-                        getStatusStyles(
-                          item.status
-                        );
-
-                      return (
-                        <div
-                          key={item.id}
-                          className={`rounded-2xl border p-4 ${
-                            item.status ===
-                            "in_consultation"
-                              ? "border-[var(--primary)]/40 bg-[var(--primary-soft)]"
-                              : "border-[var(--border)] bg-[var(--surface-soft)]"
-                          }`}
-                        >
-
-                          <div className="flex items-center justify-between gap-4">
-
-                            <div>
-
-                              <p className="text-lg font-bold">
-                                Token #
-                                {item.token_number}
-                              </p>
-
-                              <p className="mt-1 text-sm text-[var(--foreground-muted)]">
-                                {formatTime(
-                                  item.appointment_time
-                                )}
-                              </p>
-
-                            </div>
-
-
-                            <span
-                              className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold ${statusStyles.badge}`}
-                            >
-                              <span
-                                className={`h-2 w-2 rounded-full ${statusStyles.dot}`}
-                              />
-
-                              {formatStatus(
-                                item.status
-                              )}
-                            </span>
-
-                          </div>
-
-                        </div>
-                      );
-                    })}
-
-                  </div>
-
-                )}
-
-              </div>
+              ))}
 
             </div>
 
-          </div>
+          )}
 
+        </div>
 
-          {/* -------------------------------------------------
-              RIGHT: CONSULTATION FORM
-          -------------------------------------------------- */}
+      </div>
 
-          <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-sm">
+      {/* ============================================================
+    CONSULTATION & MEDICAL RECORD
+============================================================ */}
 
-            <div className="border-b border-[var(--border)] p-6 sm:p-7">
+<div className="mt-6 rounded-2xl bg-white p-8 shadow-sm">
 
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-[var(--primary)]">
-                Medical record
-              </p>
+  <h2 className="text-2xl font-bold text-slate-900">
+    Consultation & Medical Record
+  </h2>
 
-              <h2 className="mt-2 text-2xl font-bold">
-                Consultation & prescription
-              </h2>
+  <p className="mt-2 text-slate-600">
+    Enter the patient's consultation details and prescription.
+  </p>
 
-              <p className="mt-2 leading-6 text-[var(--foreground-secondary)]">
-                Record today's consultation details and prescription for
-                the current patient.
-              </p>
+  <div className="mt-6 grid gap-6">
 
-            </div>
+    {/* Symptoms */}
+    <div>
+      <label className="block text-sm font-semibold text-slate-700">
+        Symptoms
+      </label>
 
+      <textarea
+  value={symptoms}
+  onChange={(e) => setSymptoms(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  rows={4}
+  placeholder="Enter patient's symptoms..."
+/>
+    </div>
 
-            <div className="p-6 sm:p-7">
+    {/* Diagnosis */}
+    <div>
+      <label className="block text-sm font-semibold text-slate-700">
+        Diagnosis
+      </label>
 
-              {!currentPatient ? (
+      <textarea
+  value={diagnosis}
+  onChange={(e) => setDiagnosis(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  rows={4}
+  placeholder="Enter diagnosis..."
+/>
+    </div>
 
-                <div className="rounded-2xl border border-dashed border-[var(--border-strong)] bg-[var(--surface-soft)] p-7 text-center">
+    {/* Notes */}
+    <div>
+      <label className="block text-sm font-semibold text-slate-700">
+        Consultation Notes
+      </label>
 
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--primary-soft)] text-xl">
-                    🩺
-                  </div>
+      <textarea
+  value={notes}
+  onChange={(e) => setNotes(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  rows={4}
+  placeholder="Enter consultation notes..."
+/>
+    </div>
 
-                  <h3 className="mt-5 text-lg font-bold">
-                    No active consultation
-                  </h3>
+    {/* Tests */}
+    <div>
+      <label className="block text-sm font-semibold text-slate-700">
+        Tests Recommended
+      </label>
 
-                  <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-[var(--foreground-secondary)]">
-                    Call the next patient from the queue before entering
-                    consultation information.
-                  </p>
+      <textarea
+  value={testsRecommended}
+  onChange={(e) => setTestsRecommended(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  rows={3}
+  placeholder="Example: CBC, X-ray, MRI..."
+/>
+    </div>
 
-                </div>
+    {/* Advice */}
+    <div>
+      <label className="block text-sm font-semibold text-slate-700">
+        Advice
+      </label>
 
-              ) : (
+      <textarea
+  value={advice}
+  onChange={(e) => setAdvice(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  rows={3}
+  placeholder="Enter advice for the patient..."
+/>
+    </div>
 
-                <div className="space-y-6">
+    {/* Follow-up */}
+    <div>
+      <label className="block text-sm font-semibold text-slate-700">
+        Follow-up Date
+      </label>
 
-                  {/* Current patient banner */}
-                  <div className="rounded-2xl bg-[var(--primary-soft)] p-4">
+      <input
+  type="date"
+  value={followUpDate}
+  onChange={(e) => setFollowUpDate(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+/>
+    </div>
 
-                    <div className="flex items-center justify-between gap-4">
+    {/* Prescription */}
+    <div className="border-t border-slate-200 pt-6">
 
-                      <div>
+      <h3 className="text-xl font-bold text-slate-900">
+        Prescription
+      </h3>
 
-                        <p className="text-xs font-bold uppercase tracking-wider text-[var(--primary)]">
-                          Current patient
-                        </p>
+      <div className="mt-4 grid gap-4">
 
-                        <p className="mt-1 font-bold">
-                          {patientDetails?.full_name ||
-                            `Token #${currentPatient.token_number}`}
-                        </p>
+        <div>
+          <label className="block text-sm font-semibold text-slate-700">
+            Medicine Name
+          </label>
 
-                      </div>
+          <input
+  type="text"
+  value={medicineName}
+  onChange={(e) => setMedicineName(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  placeholder="Example: Paracetamol 500mg"
+/>
+        </div>
 
-                      <span className="rounded-full bg-[var(--surface)] px-3 py-1.5 text-xs font-bold text-[var(--primary)]">
-                        #{currentPatient.token_number}
-                      </span>
+        <div>
+          <label className="block text-sm font-semibold text-slate-700">
+            Dosage
+          </label>
 
-                    </div>
+          <input
+  type="text"
+  value={dosage}
+  onChange={(e) => setDosage(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  placeholder="Example: 1 tablet"
+/>
+        </div>
 
-                  </div>
+        <div>
+          <label className="block text-sm font-semibold text-slate-700">
+            Frequency
+          </label>
 
+          <input
+  type="text"
+  value={frequency}
+  onChange={(e) => setFrequency(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  placeholder="Example: Twice daily"
+/>
+        </div>
 
-                  {/* =========================================
-                      CLINICAL INFORMATION
-                  ========================================== */}
+        <div>
+          <label className="block text-sm font-semibold text-slate-700">
+            Duration
+          </label>
 
-                  <div>
+          <input
+            type="text"
+            className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+            placeholder="Example: 5 days"
+          />
+        </div>
 
-                    <div className="mb-5">
+        <div>
+          <label className="block text-sm font-semibold text-slate-700">
+            Instructions
+          </label>
 
-                      <p className="text-xs font-bold uppercase tracking-[0.15em] text-[var(--primary)]">
-                        Clinical information
-                      </p>
+          <textarea
+  value={instructions}
+  onChange={(e) => setInstructions(e.target.value)}
+  className="mt-2 w-full rounded-xl border border-slate-300 p-4 outline-none focus:border-blue-500"
+  rows={3}
+  placeholder="Example: Take after food..."
+/>
+        </div>
 
-                      <h3 className="mt-2 text-xl font-bold">
-                        Patient assessment
-                      </h3>
+      </div>
+    </div>
 
-                    </div>
+    <button
+      type="button"
+      onClick={saveConsultation}
+      disabled={savingConsultation}
+      className="w-full rounded-xl bg-blue-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-blue-700"
+    >
+      💾 Save Consultation
+    </button>
 
+  </div>
+</div>
 
-                    {/* Symptoms */}
-                    <div>
-
-                      <label className="text-sm font-bold">
-                        Symptoms
-                      </label>
-
-                      <textarea
-                        value={symptoms}
-                        onChange={(event) =>
-                          setSymptoms(
-                            event.target.value
-                          )
-                        }
-                        rows={4}
-                        placeholder="Describe the patient's symptoms..."
-                        className="mt-2 w-full rounded-2xl border border-[var(--border-strong)] bg-[var(--surface)] px-4 py-3.5 text-sm leading-6 outline-none focus:border-[var(--primary)]"
-                      />
-
-                    </div>
-
-
-                    {/* Diagnosis */}
-                    <div className="mt-5">
-
-                      <label className="text-sm font-bold">
-                        Diagnosis
-                      </label>
-
-                      <textarea
-                        value={diagnosis}
-                        onChange={(event) =>
-                          setDiagnosis(
-                            event.target.value
-                          )
-                        }
-                        rows={4}
-                        placeholder="Enter the diagnosis..."
-                        className="mt-2 w-full rounded-2xl border border-[var(--border-strong)] bg-[var(--surface)] px-4 py-3.5 text-sm leading-6 outline-none focus:border-[var(--primary)]"
-                      />
-
-                    </div>
-
-
-                    {/* Notes */}
-                    <div className="mt-5">
-
-                      <label className="text-sm font-bold">
-                        Consultation Notes
-                      </label>
-
-                      <textarea
-                        value={notes}
-                        onChange={(event) =>
-                          setNotes(
-                            event.target.value
-                          )
-                        }
-                        rows={4}
-                        placeholder="Record important consultation notes..."
-                        className="mt-2 w-full rounded-2xl border border-[var(--border-strong)] bg-[var(--surface)] px-4 py-3.5 text-sm leading-6 outline-none focus:border-[var(--primary)]"
-                      />
-
-                    </div>
-
-
-                    {/* Tests */}
-                    <div className="mt-5">
-
-                      <label className="text-sm font-bold">
-                        Tests Recommended
-                      </label>
-
-                      <textarea
-                        value={
-                          testsRecommended
-                        }
-                        onChange={(event) =>
-                          setTestsRecommended(
-                            event.target.value
-                          )
-                        }
-                        rows={3}
-                        placeholder="Example: CBC, X-ray, MRI..."
-                        className="mt-2 w-full rounded-
+    </main>
+  );
+}
