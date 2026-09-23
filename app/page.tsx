@@ -544,7 +544,7 @@ export default function Home() {
 
             <a
               href="/register"
-              
+              className="mf-btn mf-btn-aurora"
             >
               Create Account
             </a>
