@@ -551,7 +551,7 @@ export default function Home() {
 
             <a
               href="/book-opd"
-              className="rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] px-6 py-3.5 text-sm font-bold text-[var(--foreground)] hover:border-[var(--primary)]"
+              className="mf-btn mf-btn-secondary"
             >
               Book OPD
             </a>
@@ -687,8 +687,3 @@ export default function Home() {
 
         </div>
 
-      </footer>
-
-    </main>
-  );
-}
