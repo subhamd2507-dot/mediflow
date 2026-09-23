@@ -571,7 +571,7 @@ export default function Home() {
                 Start with the patient's story.
               </h2>
 
-              <p className="mt-4 max-w-2xl leading-7 opacity-75">
+              <p className="mt-4 max-w-2xl leading-7 text-[var(--foreground-secondary)]">
                 MediFlow is designed to evolve from appointment management
                 into a patient-first case-taking experience where information
                 is prepared before consultation.
