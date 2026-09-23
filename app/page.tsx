@@ -18,7 +18,7 @@ export default function Home() {
 
         <div className="pointer-events-none absolute right-[-120px] top-[80px] h-[500px] w-[500px] rounded-full bg-[var(--accent-soft)] opacity-20 blur-[130px]" />
 
-        <div className="relative mx-auto grid min-h-[640px] max-w-7xl items-center gap-10 px-5 py-14 sm:px-6 sm:py-16 lg:grid-cols-[0.95fr_1.05fr] lg:gap-6 lg:px-8 lg:py-20">
+        <div className="relative mx-auto grid min-h-[570px] max-w-7xl items-center gap-10 px-5 py-14 sm:px-6 sm:py-16 lg:grid-cols-[0.95fr_1.05fr] lg:gap-6 lg:px-8 lg:py-20">
 
           {/* =====================================================
               LEFT — HERO CONTENT
