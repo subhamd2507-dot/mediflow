@@ -32,7 +32,7 @@ export default function Home() {
               Healthcare that starts before the consultation
             </div>
 
-            <h1 className="max-w-2xl text-4xl font-bold leading-[1.03] tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="max-w-3xl text-4xl font-bold leading-[1.03] tracking-tight sm:text-5xl lg:text-5xl">
 
               Prepare your care.
 
