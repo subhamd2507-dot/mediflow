@@ -437,7 +437,7 @@ export default function Home() {
 
               <a
                 href="/register"
-                className="mf-btn mf-btn-aurora mt-7"
+                
               >
                 Create Patient Account
                 <span className="ml-2">→</span>
