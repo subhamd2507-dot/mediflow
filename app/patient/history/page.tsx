@@ -655,8 +655,8 @@ export default function MedicalHistoryPage() {
                                 </p>
 
                                 <h4 className="mt-1 text-xl font-bold">
-                                  Dr. {consultation.doctor.name}
-                                </h4>
+  {consultation.doctor.name}
+</h4>
 
                                 <p className="mt-1 text-sm text-[var(--foreground-secondary)]">
                                   {consultation.doctor.specialization}
