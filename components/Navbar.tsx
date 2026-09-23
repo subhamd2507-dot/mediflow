@@ -295,7 +295,7 @@ const isPublicPage =
         {/* =====================================================
             RIGHT SIDE — PROFILE BUTTON
         ====================================================== */}
-
+        {!(isPublicPage && !profile) && (
         <div
           className="relative"
           ref={menuRef}
@@ -574,6 +574,7 @@ const isPublicPage =
           )}
 
         </div>
+         )}
 
       </div>
 
