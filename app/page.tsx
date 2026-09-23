@@ -100,7 +100,7 @@ export default function Home() {
           {/* =====================================================
               RIGHT — 3D HEALTHCARE VISUAL
           ====================================================== */}
-          <div className="relative min-h-[500px] lg:min-h-[560px]">
+          <div className="group relative min-h-[500px] lg:min-h-[560px]">
 
             {/* Main orb zone */}
             <div className="pointer-events-none absolute inset-0">
