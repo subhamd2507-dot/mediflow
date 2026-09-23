@@ -96,7 +96,7 @@ export default function Home() {
           <div className="relative min-h-[560px] lg:min-h-[620px]">
 
             {/* Interactive 3D healthcare orb */}
-            <div className="pointer-events-none absolute -inset-20 z-0 opacity-95">
+           <div className="pointer-events-none absolute -inset-20 z-0 translate-x-16 opacity-75">
               <HealthcareOrb />
             </div>
 
