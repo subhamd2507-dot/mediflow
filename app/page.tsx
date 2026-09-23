@@ -507,7 +507,7 @@ export default function Home() {
 
             <a
               href="/register"
-              className="inline-flex items-center justify-center rounded-xl bg-[var(--background)] px-6 py-3.5 text-sm font-bold text-[var(--foreground)] hover:opacity-90"
+              
             >
               Get Started
               <span className="ml-2">→</span>
