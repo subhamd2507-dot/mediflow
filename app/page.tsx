@@ -52,7 +52,7 @@ export default function Home() {
 
               <a
                 href="/register"
-                
+                className="mf-btn mf-btn-secondary"
               >
                 Start Your Journey
               </a>
