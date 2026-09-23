@@ -507,7 +507,7 @@ export default function Home() {
 
             <a
               href="/register"
-              
+              className="mf-btn mf-btn-aurora"
             >
               Get Started
               <span className="ml-2">→</span>
