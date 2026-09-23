@@ -437,7 +437,7 @@ export default function Home() {
 
               <a
                 href="/register"
-                className="mt-7 inline-flex items-center rounded-xl bg-[var(--foreground)] px-5 py-3 text-sm font-bold text-[var(--background)] hover:opacity-90"
+                className="mf-btn mf-btn-aurora mt-7"
               >
                 Create Patient Account
                 <span className="ml-2">→</span>
