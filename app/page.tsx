@@ -1,4 +1,5 @@
 import HealthcareOrb from "@/components/HealthcareOrb";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
@@ -88,133 +89,173 @@ export default function Home() {
           </div>
 
 
-          {/* Hero visual */}
-          <div className="relative">
+          {/* =====================================================
+              HERO VISUAL
+              3D FUTURISTIC HEALTHCARE ORB + PATIENT WORKSPACE
+          ====================================================== */}
+          <div className="relative min-h-[560px] lg:min-h-[620px]">
 
-            <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-xl sm:p-5">
-
-              {/* Fake application header */}
-              <div className="flex items-center justify-between border-b border-[var(--border)] pb-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground-muted)]">
-                    Patient workspace
-                  </p>
-
-                  <p className="mt-1 text-sm font-bold text-[var(--foreground)]">
-                    Your care at a glance
-                  </p>
-                </div>
-
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-soft)]">
-                  👤
-                </div>
-              </div>
-
-              {/* Case card */}
-              <div className="mt-4 rounded-2xl bg-[var(--surface-soft)] p-5">
-                <div className="flex items-start justify-between gap-4">
-
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[var(--primary)]">
-                      Case status
-                    </p>
-
-                    <h3 className="mt-2 text-lg font-bold">
-                      Ready for consultation
-                    </h3>
-
-                    <p className="mt-1 text-sm text-[var(--foreground-muted)]">
-                      Your information is organized for the next step.
-                    </p>
-                  </div>
-
-                  <div className="rounded-full bg-[var(--success-soft)] px-3 py-1 text-xs font-bold text-[var(--success)]">
-                    Ready
-                  </div>
-
-                </div>
-
-                {/* Progress */}
-                <div className="mt-5">
-                  <div className="mb-2 flex justify-between text-xs">
-                    <span className="text-[var(--foreground-muted)]">
-                      Journey progress
-                    </span>
-
-                    <span className="font-semibold text-[var(--foreground-secondary)]">
-                      4 / 5
-                    </span>
-                  </div>
-
-                  <div className="h-2 overflow-hidden rounded-full bg-[var(--border)]">
-                    <div className="h-full w-4/5 rounded-full bg-[var(--primary)]" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Mini cards */}
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-
-                <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-soft)]">
-                      🎫
-                    </div>
-
-                    <div>
-                      <p className="text-xs text-[var(--foreground-muted)]">
-                        Appointment
-                      </p>
-
-                      <p className="font-bold">
-                        Token #08
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary-soft)]">
-                      📋
-                    </div>
-
-                    <div>
-                      <p className="text-xs text-[var(--foreground-muted)]">
-                        Medical history
-                      </p>
-
-                      <p className="font-bold">
-                        Organized
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Bottom message */}
-              <div className="mt-4 flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--warning-soft)]">
-                  💡
-                </div>
-
-                <p className="text-sm leading-6 text-[var(--foreground-secondary)]">
-                  Keep your information ready before you meet your doctor.
-                </p>
-              </div>
-
+            {/* Interactive 3D healthcare orb */}
+            <div className="pointer-events-none absolute -inset-20 z-0 opacity-95">
+              <HealthcareOrb />
             </div>
 
-            {/* Floating accent */}
-            <div className="absolute -bottom-5 -left-5 hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-lg sm:block">
-              <p className="text-xs text-[var(--foreground-muted)]">
-                Designed for
-              </p>
+            {/* Aurora glow */}
+            <div className="pointer-events-none absolute right-0 top-1/2 z-0 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[var(--primary-glow)] blur-[100px]" />
 
-              <p className="mt-1 font-bold text-[var(--primary)]">
-                Patients + Doctors
-              </p>
+            <div className="pointer-events-none absolute right-10 top-16 z-0 h-40 w-40 rounded-full bg-[var(--accent-glow)] blur-[70px]" />
+
+            {/* Current Patient Workspace */}
+            <div className="relative z-10 pt-8 lg:pt-10">
+
+              <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-xl sm:p-5">
+
+                {/* Fake application header */}
+                <div className="flex items-center justify-between border-b border-[var(--border)] pb-4">
+
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground-muted)]">
+                      Patient workspace
+                    </p>
+
+                    <p className="mt-1 text-sm font-bold text-[var(--foreground)]">
+                      Your care at a glance
+                    </p>
+                  </div>
+
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-soft)]">
+                    👤
+                  </div>
+
+                </div>
+
+                {/* Case card */}
+                <div className="mt-4 rounded-2xl bg-[var(--surface-soft)] p-5">
+
+                  <div className="flex items-start justify-between gap-4">
+
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--primary)]">
+                        Case status
+                      </p>
+
+                      <h3 className="mt-2 text-lg font-bold">
+                        Ready for consultation
+                      </h3>
+
+                      <p className="mt-1 text-sm text-[var(--foreground-muted)]">
+                        Your information is organized for the next step.
+                      </p>
+                    </div>
+
+                    <div className="rounded-full bg-[var(--success-soft)] px-3 py-1 text-xs font-bold text-[var(--success)]">
+                      Ready
+                    </div>
+
+                  </div>
+
+                  {/* Progress */}
+                  <div className="mt-5">
+
+                    <div className="mb-2 flex justify-between text-xs">
+
+                      <span className="text-[var(--foreground-muted)]">
+                        Journey progress
+                      </span>
+
+                      <span className="font-semibold text-[var(--foreground-secondary)]">
+                        4 / 5
+                      </span>
+
+                    </div>
+
+                    <div className="h-2 overflow-hidden rounded-full bg-[var(--border)]">
+                      <div className="h-full w-4/5 rounded-full bg-[var(--primary)]" />
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Mini cards */}
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+
+                  <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+
+                    <div className="flex items-center gap-3">
+
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-soft)]">
+                        🎫
+                      </div>
+
+                      <div>
+                        <p className="text-xs text-[var(--foreground-muted)]">
+                          Appointment
+                        </p>
+
+                        <p className="font-bold">
+                          Token #08
+                        </p>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+
+                    <div className="flex items-center gap-3">
+
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary-soft)]">
+                        📋
+                      </div>
+
+                      <div>
+                        <p className="text-xs text-[var(--foreground-muted)]">
+                          Medical history
+                        </p>
+
+                        <p className="font-bold">
+                          Organized
+                        </p>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Bottom message */}
+                <div className="mt-4 flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--warning-soft)]">
+                    💡
+                  </div>
+
+                  <p className="text-sm leading-6 text-[var(--foreground-secondary)]">
+                    Keep your information ready before you meet your doctor.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* Floating accent */}
+              <div className="absolute -bottom-5 -left-5 hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-lg sm:block">
+
+                <p className="text-xs text-[var(--foreground-muted)]">
+                  Designed for
+                </p>
+
+                <p className="mt-1 font-bold text-[var(--primary)]">
+                  Patients + Doctors
+                </p>
+
+              </div>
+
             </div>
 
           </div>
@@ -230,9 +271,11 @@ export default function Home() {
         id="features"
         className="border-y border-[var(--border)] bg-[var(--surface)]"
       >
+
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
 
           <div className="max-w-2xl">
+
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--primary)]">
               Why MediFlow
             </p>
@@ -245,6 +288,7 @@ export default function Home() {
               Instead of making patients jump between disconnected steps,
               MediFlow brings the important parts of the OPD journey together.
             </p>
+
           </div>
 
 
@@ -319,6 +363,7 @@ export default function Home() {
             </div>
 
           </div>
+
         </div>
       </section>
 
@@ -378,6 +423,7 @@ export default function Home() {
               text: "Keep the visit available for future reference.",
             },
           ].map((step) => (
+
             <div key={step.number} className="relative">
 
               <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
@@ -397,6 +443,7 @@ export default function Home() {
               </div>
 
             </div>
+
           ))}
 
         </div>
@@ -411,6 +458,7 @@ export default function Home() {
         id="for-users"
         className="border-y border-[var(--border)] bg-[var(--surface)]"
       >
+
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:py-20">
 
           <div className="grid gap-6 lg:grid-cols-2">
@@ -474,6 +522,7 @@ export default function Home() {
             </div>
 
           </div>
+
         </div>
       </section>
 
