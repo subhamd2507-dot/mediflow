@@ -73,8 +73,18 @@ function OrbScene() {
         0.025
       );
 
-      orbGroup.current.position.y =
-        Math.sin(state.clock.elapsedTime * 0.7) * 0.04;
+      orbGroup.current.position.x = THREE.MathUtils.lerp(
+  orbGroup.current.position.x,
+  mouse.current.x * 0.10,
+  0.025
+);
+
+orbGroup.current.position.y = THREE.MathUtils.lerp(
+  orbGroup.current.position.y,
+  Math.sin(state.clock.elapsedTime * 0.7) * 0.04 -
+    mouse.current.y * 0.08,
+  0.025
+);
     }
 
     if (ringsGroup.current) {
