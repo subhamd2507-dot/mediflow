@@ -23,105 +23,96 @@ export default function Navbar() {
 
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const pathname = usePathname();
+
+  const isPublicPage =
+    pathname === "/" ||
+    pathname === "/login" ||
+    pathname === "/register";
+
   /* =========================================================
      LOAD LOGGED-IN USER
   ========================================================= */
 
-  /* =========================================================
-   LOAD LOGGED-IN USER + LISTEN FOR AUTH CHANGES
-========================================================= */
+  useEffect(() => {
+    async function loadUser(userId: string) {
+      setLoading(true);
 
-useEffect(() => {
-  async function loadUser(userId: string) {
-    setLoading(true);
+      /* Check doctor */
+      const { data: doctor, error: doctorError } = await supabase
+        .from("doctors")
+        .select("name")
+        .eq("auth_user_id", userId)
+        .maybeSingle();
 
-    /* Check whether the authenticated account is a doctor */
-    const { data: doctor, error: doctorError } = await supabase
-      .from("doctors")
-      .select("name")
-      .eq("auth_user_id", userId)
-      .maybeSingle();
+      if (doctorError) {
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
 
-    if (doctorError) {
-      setProfile(null);
+      if (doctor) {
+        setProfile({
+          name: doctor.name,
+          role: "doctor",
+        });
+
+        setLoading(false);
+        return;
+      }
+
+      /* Check patient */
+      const { data: patient, error: patientError } = await supabase
+        .from("patients")
+        .select("full_name")
+        .eq("id", userId)
+        .maybeSingle();
+
+      if (patientError) {
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
+
+      if (patient) {
+        setProfile({
+          name: patient.full_name || "Patient",
+          role: "patient",
+        });
+      } else {
+        setProfile(null);
+      }
+
       setLoading(false);
-      return;
     }
 
-    if (doctor) {
-      setProfile({
-        name: doctor.name,
-        role: "doctor",
-      });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session?.user) {
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
 
-      setLoading(false);
-      return;
-    }
+      setTimeout(() => {
+        void loadUser(session.user.id);
+      }, 0);
+    });
 
-    /* Otherwise check whether the account is a patient */
-    const { data: patient, error: patientError } = await supabase
-      .from("patients")
-      .select("full_name")
-      .eq("id", userId)
-      .maybeSingle();
-
-    if (patientError) {
-      setProfile(null);
-      setLoading(false);
-      return;
-    }
-
-    if (patient) {
-      setProfile({
-        name: patient.full_name || "Patient",
-        role: "patient",
-      });
-    } else {
-      setProfile(null);
-    }
-
-    setLoading(false);
-  }
-
-  /*
-    Listen for login/logout/session changes.
-
-    Supabase sends an event when:
-    - the page first loads
-    - a user logs in
-    - a user logs out
-    - the session changes
-  */
-
-  const {
-    data: { subscription },
-  } = supabase.auth.onAuthStateChange((_event, session) => {
-    if (!session?.user) {
-      setProfile(null);
-      setLoading(false);
-      return;
-    }
-
-    /*
-      Delay the database query slightly so we do not perform
-      Supabase database operations directly inside the auth callback.
-    */
-    setTimeout(() => {
-      void loadUser(session.user.id);
-    }, 0);
-  });
-
-  return () => {
-    subscription.unsubscribe();
-  };
-}, []);
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [supabase]);
 
   /* =========================================================
      LOAD SAVED THEME
   ========================================================= */
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("mediflow-theme") as Theme | null;
+    const savedTheme = localStorage.getItem(
+      "mediflow-theme"
+    ) as Theme | null;
 
     if (savedTheme === "light" || savedTheme === "dark") {
       setTheme(savedTheme);
@@ -224,348 +215,509 @@ useEffect(() => {
       ? getInitials(profile.name)
       : "G";
 
-      const pathname = usePathname();
-
-const isPublicPage =
-  pathname === "/" ||
-  pathname === "/login" ||
-  pathname === "/register";
-
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--surface)]/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--background)_82%,transparent)] backdrop-blur-xl">
 
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 sm:px-6">
+      <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5 sm:px-6">
 
         {/* =====================================================
-            LEFT SIDE — LOGO
+            LOGO
         ====================================================== */}
 
         <Link
           href="/"
-          className="flex items-center gap-3"
+          className="group flex items-center gap-3"
         >
 
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary-soft)] text-lg">
-            🩺
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--primary-soft)] text-lg shadow-sm transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[var(--shadow-primary)]">
+            <span className="transition-transform duration-300 group-hover:scale-110">
+              🩺
+            </span>
           </div>
 
           <div className="hidden sm:block">
-            <h1 className="text-lg font-bold leading-tight text-[var(--foreground)]">
+
+            <h1 className="text-lg font-bold leading-tight tracking-tight text-[var(--foreground)]">
               MediFlow
             </h1>
 
-            <p className="text-[11px] text-[var(--foreground-muted)]">
+            <p className="text-[11px] font-medium text-[var(--foreground-muted)]">
               Digital Healthcare Platform
             </p>
+
           </div>
 
         </Link>
 
 
         {/* =====================================================
-            CENTER — NAVIGATION
+            CENTER NAVIGATION
         ====================================================== */}
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-2 md:flex">
 
           <a
             href="/#features"
-            className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--primary)]"
+            className="group relative rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-300 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
           >
             Features
+
+            <span className="absolute bottom-1 left-4 right-4 h-0.5 origin-left scale-x-0 rounded-full bg-[var(--primary)] transition-transform duration-300 group-hover:scale-x-100" />
           </a>
 
           <a
             href="/#how-it-works"
-            className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--primary)]"
+            className="group relative rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-300 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
           >
             How It Works
+
+            <span className="absolute bottom-1 left-4 right-4 h-0.5 origin-left scale-x-0 rounded-full bg-[var(--primary)] transition-transform duration-300 group-hover:scale-x-100" />
           </a>
 
           <a
             href="/#for-users"
-            className="text-sm font-medium text-[var(--foreground-secondary)] hover:text-[var(--primary)]"
+            className="group relative rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-300 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
           >
             Patients & Doctors
+
+            <span className="absolute bottom-1 left-4 right-4 h-0.5 origin-left scale-x-0 rounded-full bg-[var(--primary)] transition-transform duration-300 group-hover:scale-x-100" />
           </a>
 
         </nav>
 
 
         {/* =====================================================
-            RIGHT SIDE — PROFILE BUTTON
+            RIGHT SIDE
         ====================================================== */}
-        {!(isPublicPage && !profile) && (
-        <div
-          className="relative"
-          ref={menuRef}
-        >
 
-          <button
-            type="button"
-            onClick={() => {
-              setMenuOpen((value) => !value);
-              setThemeOpen(false);
-            }}
-            className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] py-1.5 pl-1.5 pr-3 shadow-sm hover:border-[var(--primary)] hover:shadow-md"
-          >
+        <div className="flex items-center gap-2">
 
-            {/* Circular Avatar */}
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary)] text-xs font-bold text-white">
-              {avatarText}
-            </span>
+          {/* Public buttons */}
+          {isPublicPage && !profile && !loading && (
+            <div className="flex items-center gap-2">
 
-            {/* Name */}
-            <span className="max-w-[120px] truncate text-sm font-semibold text-[var(--foreground)] sm:max-w-[180px]">
-              {displayName}
-            </span>
+              <Link
+                href="/login"
+                className="mf-btn mf-btn-ghost hidden sm:inline-flex"
+              >
+                Login
+              </Link>
 
-            {/* Arrow */}
-            <span className="text-xs text-[var(--foreground-muted)]">
-              ▾
-            </span>
+              <Link
+                href="/register"
+                className="mf-btn mf-btn-primary"
+              >
+                <span className="hidden sm:inline">
+                  Get Started
+                </span>
 
-          </button>
+                <span className="sm:hidden">
+                  Start
+                </span>
 
+                <span>→</span>
+              </Link>
 
-          {/* =================================================
-              DROPDOWN MENU
-          ================================================== */}
-
-          {menuOpen && (
-            <div className="absolute right-0 mt-3 w-72 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-xl">
-
-              {/* Profile Header */}
-              <div className="border-b border-[var(--border)] p-4">
-
-                <div className="flex items-center gap-3">
-
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">
-                    {avatarText}
-                  </div>
-
-                  <div className="min-w-0">
-
-                    <p className="truncate font-bold text-[var(--foreground)]">
-                      {displayName}
-                    </p>
-
-                    <p className="mt-0.5 text-xs capitalize text-[var(--foreground-muted)]">
-                      {profile?.role || "Not signed in"}
-                    </p>
-
-                  </div>
-
-                </div>
-
-              </div>
+            </div>
+          )}
 
 
-              {/* =================================================
-                  GUEST MENU
-              ================================================== */}
+          {/* Profile */}
+          {!(isPublicPage && !profile) && (
+            <div
+              className="relative"
+              ref={menuRef}
+            >
 
-              {!profile && !loading && (
-                <div className="p-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen((value) => !value);
+                  setThemeOpen(false);
+                }}
+                className={`group flex items-center gap-2 rounded-2xl border px-1.5 py-1.5 pr-3 shadow-sm transition-all duration-300 ${
+                  menuOpen
+                    ? "border-[var(--primary)] bg-[var(--primary-soft)] shadow-[var(--shadow-primary)]"
+                    : "border-[var(--border)] bg-[var(--surface)] hover:-translate-y-0.5 hover:border-[var(--primary)] hover:shadow-md"
+                }`}
+              >
 
-                  <Link
-                    href="/login"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">🔐</span>
-                    Login
-                  </Link>
+                {/* Avatar */}
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--gradient-primary)] text-xs font-bold text-white shadow-sm">
+                  {avatarText}
+                </span>
 
-                  <Link
-                    href="/register"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">➕</span>
-                    Create Account
-                  </Link>
+                {/* Name */}
+                <span className="max-w-[100px] truncate text-sm font-semibold text-[var(--foreground)] sm:max-w-[160px]">
+                  {displayName}
+                </span>
 
-                </div>
-              )}
-
-
-              {/* =================================================
-                  PATIENT MENU
-              ================================================== */}
-
-              {profile?.role === "patient" && (
-                <div className="p-2">
-
-                  <Link
-                    href="/patient"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">🏠</span>
-                    Patient Dashboard
-                  </Link>
-
-                  <Link
-                    href="/patient/appointments"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">📅</span>
-                    My Appointments
-                  </Link>
-
-                  <Link
-                    href="/patient/history"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">📋</span>
-                    Medical History
-                  </Link>
-
-                  <Link
-                    href="/book-opd"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">🏥</span>
-                    Book OPD
-                  </Link>
-
-                </div>
-              )}
-
-
-              {/* =================================================
-                  DOCTOR MENU
-              ================================================== */}
-
-              {profile?.role === "doctor" && (
-                <div className="p-2">
-
-                  <Link
-                    href="/doctor"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">🏠</span>
-                    Doctor Dashboard
-                  </Link>
-
-                  <Link
-                    href="/doctor"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">👥</span>
-                    Today's Queue
-                  </Link>
-
-                  <Link
-                    href="/doctor"
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
-                  >
-                    <span className="text-lg">📋</span>
-                    Medical Records
-                  </Link>
-
-                </div>
-              )}
-
-
-              {/* =================================================
-                  APPEARANCE
-              ================================================== */}
-
-              <div className="border-t border-[var(--border)] p-2">
-
-                <button
-                  type="button"
-                  onClick={() => setThemeOpen((value) => !value)}
-                  className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] hover:bg-[var(--surface-soft)]"
+                {/* Arrow */}
+                <span
+                  className={`text-xs text-[var(--foreground-muted)] transition-transform duration-300 ${
+                    menuOpen ? "rotate-180" : ""
+                  }`}
                 >
+                  ▾
+                </span>
 
-                  <span className="flex items-center gap-3">
-                    <span className="text-lg">🎨</span>
-                    Appearance
-                  </span>
-
-                  <span className="text-xs text-[var(--foreground-muted)]">
-                    {theme === "system"
-                      ? "System"
-                      : theme === "light"
-                      ? "Light"
-                      : "Dark"}
-                  </span>
-
-                </button>
-
-
-                {themeOpen && (
-                  <div className="mt-1 rounded-xl bg-[var(--surface-soft)] p-2">
-
-                    <button
-                      type="button"
-                      onClick={() => changeTheme("system")}
-                      className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm ${
-                        theme === "system"
-                          ? "bg-[var(--surface)] font-bold text-[var(--primary)]"
-                          : "text-[var(--foreground-secondary)] hover:bg-[var(--surface)]"
-                      }`}
-                    >
-                      <span>🖥️</span>
-                      System
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => changeTheme("light")}
-                      className={`mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm ${
-                        theme === "light"
-                          ? "bg-[var(--surface)] font-bold text-[var(--primary)]"
-                          : "text-[var(--foreground-secondary)] hover:bg-[var(--surface)]"
-                      }`}
-                    >
-                      <span>☀️</span>
-                      Light
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => changeTheme("dark")}
-                      className={`mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm ${
-                        theme === "dark"
-                          ? "bg-[var(--surface)] font-bold text-[var(--primary)]"
-                          : "text-[var(--foreground-secondary)] hover:bg-[var(--surface)]"
-                      }`}
-                    >
-                      <span>🌙</span>
-                      Dark
-                    </button>
-
-                  </div>
-                )}
-
-              </div>
+              </button>
 
 
               {/* =================================================
-                  LOGOUT
+                  DROPDOWN
               ================================================== */}
 
-              {profile && (
-                <div className="border-t border-[var(--border)] p-2">
+              {menuOpen && (
+                <div className="mf-glass absolute right-0 mt-3 w-[300px] overflow-hidden rounded-3xl border border-[var(--border)] shadow-xl">
 
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-[var(--danger)] hover:bg-[var(--danger-soft)]"
-                  >
-                    <span className="text-lg">🚪</span>
-                    Logout
-                  </button>
+                  {/* Profile header */}
+                  <div className="bg-[var(--gradient-soft)] p-5">
+
+                    <div className="flex items-center gap-3">
+
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--gradient-primary)] text-sm font-bold text-white shadow-md">
+                        {avatarText}
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+
+                        <p className="truncate font-bold text-[var(--foreground)]">
+                          {displayName}
+                        </p>
+
+                        <div className="mt-1">
+
+                          <span className="mf-status mf-status-info">
+                            {profile?.role === "doctor"
+                              ? "Doctor"
+                              : profile?.role === "patient"
+                              ? "Patient"
+                              : "Guest"}
+                          </span>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  {/* Guest menu */}
+                  {!profile && !loading && (
+                    <div className="p-2">
+
+                      <Link
+                        href="/login"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)] transition-transform duration-200 group-hover:scale-105">
+                          🔐
+                        </span>
+
+                        <span>
+                          Login
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+
+                      </Link>
+
+                      <Link
+                        href="/register"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)] transition-transform duration-200 group-hover:scale-105">
+                          ➕
+                        </span>
+
+                        <span>
+                          Create Account
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+
+                      </Link>
+
+                    </div>
+                  )}
+
+
+                  {/* Patient menu */}
+                  {profile?.role === "patient" && (
+                    <div className="p-2">
+
+                      <Link
+                        href="/patient"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)] group-hover:scale-105">
+                          🏠
+                        </span>
+
+                        <span>
+                          Patient Dashboard
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+                      </Link>
+
+
+                      <Link
+                        href="/patient/appointments"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)]">
+                          📅
+                        </span>
+
+                        <span>
+                          My Appointments
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+                      </Link>
+
+
+                      <Link
+                        href="/patient/history"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)]">
+                          📋
+                        </span>
+
+                        <span>
+                          Medical History
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+                      </Link>
+
+
+                      <Link
+                        href="/book-opd"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)]">
+                          🏥
+                        </span>
+
+                        <span>
+                          Book OPD
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+                      </Link>
+
+                    </div>
+                  )}
+
+
+                  {/* Doctor menu */}
+                  {profile?.role === "doctor" && (
+                    <div className="p-2">
+
+                      <Link
+                        href="/doctor"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)]">
+                          🏠
+                        </span>
+
+                        <span>
+                          Doctor Dashboard
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+                      </Link>
+
+
+                      <Link
+                        href="/doctor"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)]">
+                          👥
+                        </span>
+
+                        <span>
+                          Today's Queue
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+                      </Link>
+
+
+                      <Link
+                        href="/doctor"
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                      >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)]">
+                          📋
+                        </span>
+
+                        <span>
+                          Medical Records
+                        </span>
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+                      </Link>
+
+                    </div>
+                  )}
+
+
+                  {/* Appearance */}
+                  <div className="border-t border-[var(--border)] p-2">
+
+                    <button
+                      type="button"
+                      onClick={() => setThemeOpen((value) => !value)}
+                      className="flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--foreground-secondary)] transition-all duration-200 hover:bg-[var(--surface-soft)]"
+                    >
+
+                      <span className="flex items-center gap-3">
+
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-soft)]">
+                          🎨
+                        </span>
+
+                        Appearance
+
+                      </span>
+
+                      <span className="rounded-full border border-[var(--border)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--foreground-muted)]">
+                        {theme}
+                      </span>
+
+                    </button>
+
+
+                    {themeOpen && (
+                      <div className="mt-2 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-soft)] p-2">
+
+                        <button
+                          type="button"
+                          onClick={() => changeTheme("system")}
+                          className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm transition-all ${
+                            theme === "system"
+                              ? "bg-[var(--surface)] font-bold text-[var(--primary)] shadow-sm"
+                              : "text-[var(--foreground-secondary)] hover:bg-[var(--surface)]"
+                          }`}
+                        >
+                          <span>🖥️</span>
+                          System
+
+                          {theme === "system" && (
+                            <span className="ml-auto text-[var(--primary)]">
+                              ✓
+                            </span>
+                          )}
+                        </button>
+
+
+                        <button
+                          type="button"
+                          onClick={() => changeTheme("light")}
+                          className={`mt-1 flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm transition-all ${
+                            theme === "light"
+                              ? "bg-[var(--surface)] font-bold text-[var(--primary)] shadow-sm"
+                              : "text-[var(--foreground-secondary)] hover:bg-[var(--surface)]"
+                          }`}
+                        >
+                          <span>☀️</span>
+                          Light
+
+                          {theme === "light" && (
+                            <span className="ml-auto text-[var(--primary)]">
+                              ✓
+                            </span>
+                          )}
+                        </button>
+
+
+                        <button
+                          type="button"
+                          onClick={() => changeTheme("dark")}
+                          className={`mt-1 flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm transition-all ${
+                            theme === "dark"
+                              ? "bg-[var(--surface)] font-bold text-[var(--primary)] shadow-sm"
+                              : "text-[var(--foreground-secondary)] hover:bg-[var(--surface)]"
+                          }`}
+                        >
+                          <span>🌙</span>
+                          Dark
+
+                          {theme === "dark" && (
+                            <span className="ml-auto text-[var(--primary)]">
+                              ✓
+                            </span>
+                          )}
+                        </button>
+
+                      </div>
+                    )}
+
+                  </div>
+
+
+                  {/* Logout */}
+                  {profile && (
+                    <div className="border-t border-[var(--border)] p-2">
+
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        className="group flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-sm font-semibold text-[var(--danger)] transition-all duration-200 hover:bg-[var(--danger-soft)]"
+                      >
+
+                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--danger-soft)]">
+                          🚪
+                        </span>
+
+                        Logout
+
+                        <span className="ml-auto opacity-0 transition-opacity group-hover:opacity-100">
+                          →
+                        </span>
+
+                      </button>
+
+                    </div>
+                  )}
 
                 </div>
               )}
@@ -574,27 +726,6 @@ const isPublicPage =
           )}
 
         </div>
-         )}
-
-         {isPublicPage && !profile && (
-  <div className="flex items-center gap-2">
-
-    <Link
-      href="/login"
-      className="rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--foreground-secondary)] transition hover:bg-[var(--surface-soft)] hover:text-[var(--foreground)]"
-    >
-      Login
-    </Link>
-
-    <Link
-      href="/register"
-      className="rounded-xl bg-[var(--primary)] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:opacity-95"
-    >
-      Get Started
-    </Link>
-
-  </div>
-)}
 
       </div>
 
