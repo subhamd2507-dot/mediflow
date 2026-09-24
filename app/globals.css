@@ -1458,3 +1458,28 @@ button:active {
   }
 }
 
+/* =====================================================
+   MEDIFLOW WORKFLOW CONNECTING LINE
+===================================================== */
+
+.mediflow-workflow-line {
+  background-size: 200% 100%;
+  animation: mediflowWorkflowLine 3s ease-in-out infinite;
+}
+
+@keyframes mediflowWorkflowLine {
+  0% {
+    background-position: 100% 0;
+    opacity: 0.25;
+  }
+
+  50% {
+    background-position: 0% 0;
+    opacity: 0.8;
+  }
+
+  100% {
+    background-position: 100% 0;
+    opacity: 0.25;
+  }
+}
