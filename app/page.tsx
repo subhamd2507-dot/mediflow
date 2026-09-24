@@ -172,12 +172,14 @@ export default function Home() {
   </span>
 </a>
 
-              <a
-                href="/book-opd"
-                className="rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-center text-sm font-bold text-white/80 backdrop-blur transition hover:border-cyan-300/30 hover:bg-white/10"
-              >
-                Book OPD
-              </a>
+              <div className="mediflow-opd-button">
+  <a
+    href="/book-opd"
+    className="block rounded-full bg-[#081321]/90 px-7 py-3.5 text-center text-sm font-semibold text-white/90 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-[#0b1428]"
+  >
+    Book OPD
+  </a>
+</div>
             </div>
 
             <div className="mt-9 flex flex-wrap gap-3">
