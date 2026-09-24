@@ -294,53 +294,7 @@ export default function Home() {
           PROBLEM
       ====================================================== */}
 
-      <section
-        id="problem"
-        className="relative border-y border-white/10 bg-[#080d1c] py-24"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-500/[0.04] to-transparent" />
-
-        <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="max-w-3xl">
-              <span className="rounded-full border border-pink-400/20 bg-pink-400/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-pink-300">
-                The problem
-              </span>
-
-              <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-5xl">
-                Healthcare information
-                <span className="mediflow-gradient-text"> should not be scattered.</span>
-              </h2>
-
-              <p className="mt-5 max-w-2xl text-base leading-8 text-white/50">
-                A patient&apos;s story can contain important details, but those
-                details are often collected manually, repeated or stored across
-                disconnected documents.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {problems.map((problem, index) => (
-              <Reveal key={problem.title} className={`delay-${index}`}>
-                <div className="mediflow-card-hover group h-full rounded-3xl border border-white/10 bg-white/[0.025] p-6 backdrop-blur-xl">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/15 to-purple-500/15 text-xl ring-1 ring-white/10 transition duration-300 group-hover:scale-110">
-                    {problem.icon}
-                  </div>
-
-                  <h3 className="mt-6 text-lg font-bold">
-                    {problem.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-7 text-white/45">
-                    {problem.text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* =====================================================
           WORKFLOW
