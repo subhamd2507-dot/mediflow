@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import HealthcareOrb from "@/components/HealthcareOrb";
 
 
 function Reveal({
