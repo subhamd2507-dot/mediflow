@@ -1529,3 +1529,48 @@ button:active {
     background-position: 0% 50%;
   }
 }
+
+/* =====================================================
+   MEDIFLOW 3D MEDICAL ENVIRONMENT ENTRANCE
+===================================================== */
+
+.mediflow-orb-enter {
+  opacity: 0;
+  transform: scale(0.92) rotate(-3deg);
+  transform-origin: center center;
+  filter: blur(4px);
+  will-change: opacity, transform, filter;
+  animation: mediflow-orb-entrance 1.8s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    0.15s
+    forwards;
+}
+
+@keyframes mediflow-orb-entrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) rotate(-3deg);
+    filter: blur(4px);
+  }
+
+  45% {
+    opacity: 0.7;
+    transform: scale(0.97) rotate(-1deg);
+    filter: blur(1.5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-orb-enter {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+  }
+}
