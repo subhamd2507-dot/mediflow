@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import HealthcareOrb from "@/components/HealthcareOrb";
+
 
 function Reveal({
   children,
@@ -197,7 +197,7 @@ export default function Home() {
               <div className="absolute h-[430px] w-[430px] rounded-full bg-cyan-500/10 blur-[100px]" />
 
               <div className="mediflow-float absolute h-[480px] w-[480px] opacity-70">
-                <HealthcareOrb />
+                
               </div>
             </div>
 
