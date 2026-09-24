@@ -134,15 +134,19 @@ export default function Home() {
               Smart Patient Case-Taking
             </div>
 
-            <h1 className="mediflow-fade-up mt-7 max-w-4xl text-5xl font-black leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
-              The consultation
-              <br />
-              <span className="mediflow-gradient-text">
-                starts before
-              </span>
-              <br />
-              the doctor.
-            </h1>
+            <h1 className="mediflow-hero-title mt-7 max-w-4xl text-5xl font-black leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
+  <span className="mediflow-hero-line">
+    The consultation
+  </span>
+
+  <span className="mediflow-hero-line mediflow-gradient-text">
+    starts before
+  </span>
+
+  <span className="mediflow-hero-line">
+    the doctor.
+  </span>
+</h1>
 
             <p className="mediflow-fade-up mt-7 max-w-2xl text-base leading-8 text-white/60 sm:text-lg">
               MediFlow turns a patient&apos;s conversation into a structured,
