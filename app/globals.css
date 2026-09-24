@@ -1942,8 +1942,8 @@ button:active {
 /* Stage 03 — Violet */
 .mediflow-workflow-stage:nth-child(3) > div > div:first-child::after {
   box-shadow:
-    0 0 0 1px rgba(167, 139, 250, 0.28),
-    0 0 22px rgba(167, 139, 250, 0.14);
+  0 0 0 1px rgba(167, 139, 250, 0.22),
+  0 0 16px rgba(167, 139, 250, 0.09);
   animation-delay: 3s;
 }
 
