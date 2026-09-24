@@ -1158,3 +1158,142 @@ button:active {
     transition-duration: 0.01ms !important;
   }
 }
+/* =========================================================
+   MEDIFLOW MODERN ANIMATION SYSTEM
+   ========================================================= */
+
+@keyframes mediflow-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mediflow-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mediflow-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes mediflow-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes mediflow-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.mediflow-fade-up {
+  animation: mediflow-fade-up 0.8s ease-out both;
+}
+
+.mediflow-fade-in {
+  animation: mediflow-fade-in 0.8s ease-out both;
+}
+
+.mediflow-float {
+  animation: mediflow-float 4s ease-in-out infinite;
+}
+
+.mediflow-pulse {
+  animation: mediflow-pulse 3s ease-in-out infinite;
+}
+
+.mediflow-gradient-text {
+  background: linear-gradient(
+    90deg,
+    #06b6d4,
+    #6366f1,
+    #a855f7,
+    #ec4899,
+    #06b6d4
+  );
+
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  animation: mediflow-gradient 6s ease infinite;
+}
+
+.mediflow-glow {
+  box-shadow:
+    0 0 30px rgba(99, 102, 241, 0.18),
+    0 0 60px rgba(168, 85, 247, 0.10);
+}
+
+.mediflow-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.mediflow-card-hover {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.mediflow-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.12),
+    0 0 30px rgba(99, 102, 241, 0.10);
+}
+
+.mediflow-grid-bg {
+  background-image:
+    linear-gradient(
+      rgba(99, 102, 241, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(99, 102, 241, 0.06) 1px,
+      transparent 1px
+    );
+
+  background-size: 40px 40px;
+}
