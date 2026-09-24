@@ -6,9 +6,11 @@ import HealthcareOrb from "@/components/HealthcareOrb";
 function Reveal({
   children,
   className = "",
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -52,6 +54,7 @@ function Reveal({
         transition:
           "opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease",
         willChange: "opacity, transform, filter",
+...style,
       }}
     >
       {children}
