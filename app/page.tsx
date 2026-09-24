@@ -298,22 +298,25 @@ export default function Home() {
     PROBLEM
 ====================================================== */}
 
+{/* =====================================================
+    PROBLEM
+====================================================== */}
+
 <section
   id="problem"
   className="relative overflow-hidden border-y border-white/10 bg-[#080d1c] py-28"
 >
   <div className="pointer-events-none absolute inset-0">
-    <div className="absolute -left-32 top-20 h-[420px] w-[420px] rounded-full bg-cyan-500/[0.06] blur-[130px]" />
-    <div className="absolute -right-32 bottom-0 h-[500px] w-[500px] rounded-full bg-violet-500/[0.08] blur-[150px]" />
+    <div className="absolute left-[-180px] top-20 h-[420px] w-[420px] rounded-full bg-cyan-500/[0.06] blur-[140px]" />
+    <div className="absolute right-[-180px] bottom-0 h-[500px] w-[500px] rounded-full bg-violet-500/[0.07] blur-[150px]" />
   </div>
 
-  <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+  <div className="relative">
 
-    <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-
-      {/* LEFT — Problem statement */}
+    {/* Section heading */}
+    <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
       <Reveal>
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
 
           <span className="inline-flex rounded-full border border-pink-400/20 bg-pink-400/[0.06] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-pink-300">
             The problem
@@ -327,83 +330,62 @@ export default function Home() {
             </span>
           </h2>
 
-          <p className="mt-6 max-w-xl text-base leading-8 text-white/50 sm:text-lg">
+          <p className="mt-6 max-w-2xl text-base leading-8 text-white/50 sm:text-lg">
             A patient&apos;s story can contain important details, but those
             details are often collected manually, repeated or stored across
             disconnected documents.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <span className="rounded-full border border-cyan-400/15 bg-cyan-400/[0.05] px-4 py-2 text-xs font-semibold text-cyan-200">
-              Patient story
-            </span>
-
-            <span className="rounded-full border border-blue-400/15 bg-blue-400/[0.05] px-4 py-2 text-xs font-semibold text-blue-200">
-              Clinical history
-            </span>
-
-            <span className="rounded-full border border-violet-400/15 bg-violet-400/[0.05] px-4 py-2 text-xs font-semibold text-violet-200">
-              Doctor-ready
-            </span>
-          </div>
-
         </div>
       </Reveal>
+    </div>
 
-      {/* RIGHT — Problem journey */}
-      <div className="relative">
+    {/* Moving problem cards */}
+    <div className="mediflow-problem-marquee mt-14">
 
-        <div className="pointer-events-none absolute left-6 top-6 bottom-6 w-px bg-gradient-to-b from-cyan-400/40 via-blue-500/30 to-violet-500/10" />
+      <div className="mediflow-problem-track">
 
-        <div className="space-y-4">
+        {[...problems, ...problems].map((problem, index) => (
+          <div
+            key={`${problem.title}-${index}`}
+            className="mediflow-problem-card group"
+          >
+            <div className="flex h-full min-h-[230px] flex-col rounded-[28px] border border-white/10 bg-[#0a1120]/90 p-6 backdrop-blur-xl transition duration-500 group-hover:-translate-y-2 group-hover:border-cyan-300/25 group-hover:shadow-[0_20px_60px_rgba(34,211,238,0.10)] sm:p-7">
 
-          {problems.map((problem, index) => (
-            <Reveal key={problem.title} className={`delay-${index}`}>
+              <div className="flex items-center justify-between">
 
-              <div className="group relative ml-0 rounded-[24px] border border-white/10 bg-white/[0.025] p-5 backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-cyan-300/20 hover:bg-white/[0.045] hover:shadow-[0_20px_55px_rgba(34,211,238,0.07)] sm:p-6">
-
-                <div className="flex items-start gap-4">
-
-                  {/* Step number */}
-                  <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-300/15 bg-[#07111f] text-xs font-black tracking-[0.15em] text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.08)] transition duration-300 group-hover:border-violet-300/30 group-hover:text-violet-200">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-
-                  <div className="min-w-0 flex-1">
-
-                    <div className="flex items-start justify-between gap-4">
-
-                      <div>
-                        <h3 className="text-lg font-bold text-white sm:text-xl">
-                          {problem.title}
-                        </h3>
-
-                        <p className="mt-2 max-w-xl text-sm leading-7 text-white/45">
-                          {problem.text}
-                        </p>
-                      </div>
-
-                      <div className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/10 to-violet-500/10 text-lg ring-1 ring-white/10 transition duration-300 group-hover:scale-110 sm:flex">
-                        {problem.icon}
-                      </div>
-
-                    </div>
-
-                    <div className="mt-4 h-px w-full bg-gradient-to-r from-cyan-400/10 via-violet-400/10 to-transparent" />
-
-                  </div>
-
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/15 to-violet-500/15 text-xl ring-1 ring-white/10 transition duration-300 group-hover:scale-110">
+                  {problem.icon}
                 </div>
+
+                <span className="text-xs font-black tracking-[0.2em] text-white/20">
+                  {String((index % problems.length) + 1).padStart(2, "0")}
+                </span>
 
               </div>
 
-            </Reveal>
-          ))}
+              <div className="mt-auto">
 
-        </div>
+                <h3 className="text-lg font-bold text-white sm:text-xl">
+                  {problem.title}
+                </h3>
+
+                <p className="mt-3 max-w-sm text-sm leading-7 text-white/45">
+                  {problem.text}
+                </p>
+
+                <div className="mt-5 h-px w-full bg-gradient-to-r from-cyan-400/20 via-blue-500/10 to-transparent" />
+
+              </div>
+
+            </div>
+          </div>
+        ))}
 
       </div>
+
     </div>
+
   </div>
 </section>
 
