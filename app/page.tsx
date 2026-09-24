@@ -378,7 +378,7 @@ export default function Home() {
   key={item.number}
   className="mediflow-stagger-card"
   style={{
-    transitionDelay: `${index * 250}ms`,
+    transitionDelay: `${index * 150}ms`,
   }}
 >
                 <div className="relative z-10 h-full rounded-[28px] border border-white/10 bg-[#0a1020]/80 p-6 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-cyan-300/20 hover:shadow-[0_20px_60px_rgba(34,211,238,0.08)] animate-card">
