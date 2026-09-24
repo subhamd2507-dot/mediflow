@@ -443,7 +443,159 @@ export default function Home() {
           WORKFLOW
       ====================================================== */}
 
-      
+      {/* =====================================================
+    WORKFLOW
+====================================================== */}
+
+<section
+  id="workflow"
+  className="relative overflow-hidden bg-[#050816] py-24 sm:py-28"
+>
+  <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/[0.07] blur-[150px]" />
+
+  <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+    {/* Heading */}
+    <Reveal className="text-center">
+      <span className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/[0.05] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">
+        One simple journey
+      </span>
+
+      <h2 className="mx-auto mt-6 max-w-4xl text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+        From patient conversation
+        <br />
+        <span className="mediflow-gradient-text">
+          to clinical clarity.
+        </span>
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/50 sm:text-lg">
+        MediFlow prepares the patient&apos;s story before the consultation
+        while keeping the doctor in control.
+      </p>
+    </Reveal>
+
+    {/* Connected journey */}
+    <div className="relative mt-16 lg:mt-20">
+
+      {/* Journey line */}
+      <div className="pointer-events-none absolute left-[9%] right-[9%] top-[42px] hidden h-px lg:block">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-blue-400/35 to-violet-400/10" />
+
+        <div className="mediflow-workflow-pulse absolute left-0 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+      </div>
+
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+
+        {workflow.map((item, index) => (
+          <Reveal
+            key={item.number}
+            className="mediflow-workflow-stage"
+          >
+            <div className="group relative h-full">
+
+              {/* Stage marker */}
+              <div
+                className={[
+                  "relative z-20 flex h-[84px] w-full items-center",
+                  "rounded-full border border-white/[0.08]",
+                  "bg-[#08111f]/90 px-4 backdrop-blur-xl",
+                  "transition duration-500",
+                  "group-hover:-translate-y-1",
+                  "group-hover:border-cyan-300/20",
+                  "group-hover:shadow-[0_18px_45px_rgba(59,130,246,0.08)]",
+                ].join(" ")}
+              >
+
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/[0.04] ring-1 ring-white/10">
+
+                  {index === 0 && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      className="h-5 w-5 text-cyan-300"
+                    >
+                      <rect x="9" y="3" width="6" height="12" rx="3" />
+                      <path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6" />
+                    </svg>
+                  )}
+
+                  {index === 1 && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      className="h-5 w-5 text-blue-300"
+                    >
+                      <circle cx="12" cy="12" r="7" />
+                      <path d="M9 12h6M12 9v6" />
+                      <path d="M5 5l-1-1M19 5l1-1M5 19l-1 1M19 19l1 1" />
+                    </svg>
+                  )}
+
+                  {index === 2 && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      className="h-5 w-5 text-violet-300"
+                    >
+                      <rect x="5" y="4" width="14" height="17" rx="2" />
+                      <path d="M9 4V3h6v1M8 9h8M8 13h8M8 17h5" />
+                    </svg>
+                  )}
+
+                  {index === 3 && (
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      className="h-5 w-5 text-teal-300"
+                    >
+                      <circle cx="12" cy="8" r="3" />
+                      <path d="M5 21a7 7 0 0 1 14 0" />
+                      <path d="M17 4v5M14.5 6.5h5" />
+                    </svg>
+                  )}
+
+                </div>
+
+                <div className="ml-4 min-w-0">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-white/30">
+                    Stage {item.number}
+                  </p>
+
+                  <h3 className="mt-1 truncate text-base font-bold text-white sm:text-lg">
+                    {item.title}
+                  </h3>
+                </div>
+
+                <span className="ml-auto text-xs font-black tracking-[0.2em] text-white/15">
+                  {item.number}
+                </span>
+              </div>
+
+              {/* Description */}
+              <div className="mt-4 px-2">
+                <p className="text-sm leading-7 text-white/45">
+                  {item.text}
+                </p>
+              </div>
+
+            </div>
+          </Reveal>
+        ))}
+
+      </div>
+    </div>
+
+  </div>
+</section>
       {/* =====================================================
           AI CASE ENGINE
       ====================================================== */}
