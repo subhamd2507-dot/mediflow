@@ -1872,41 +1872,6 @@ button:active {
   will-change: left, opacity;
 }
 
-@keyframes mediflow-workflow-travel {
-  0% {
-    left: 0%;
-    opacity: 0;
-  }
-
-  5% {
-    opacity: 1;
-  }
-
-  25% {
-    left: 30%;
-    opacity: 1;
-  }
-
-  50% {
-    left: 55%;
-    opacity: 1;
-  }
-
-  75% {
-    left: 80%;
-    opacity: 1;
-  }
-
-  92% {
-    left: 100%;
-    opacity: 1;
-  }
-
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
-}
 
 /* =====================================================
    PRECISE WORKFLOW STAGE GLOW
