@@ -1772,3 +1772,93 @@ button:active {
     opacity: 0.25;
   }
 }
+
+/* =====================================================
+   MEDIFLOW PROBLEM CARD SEQUENTIAL OUTER GLOW
+===================================================== */
+
+.mediflow-problem-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.mediflow-problem-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 23px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1;
+  animation: mediflow-problem-pulse 3.6s ease-in-out infinite;
+}
+
+/* Card 01 — Cyan */
+.mediflow-problem-card:nth-child(4n + 1)::after {
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.28),
+    0 0 24px rgba(34, 211, 238, 0.16),
+    0 0 50px rgba(34, 211, 238, 0.08);
+  animation-delay: 0s;
+}
+
+/* Card 02 — Blue */
+.mediflow-problem-card:nth-child(4n + 2)::after {
+  box-shadow:
+    0 0 0 1px rgba(96, 165, 250, 0.28),
+    0 0 24px rgba(96, 165, 250, 0.16),
+    0 0 50px rgba(96, 165, 250, 0.08);
+  animation-delay: 0.9s;
+}
+
+/* Card 03 — Violet */
+.mediflow-problem-card:nth-child(4n + 3)::after {
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.28),
+    0 0 24px rgba(167, 139, 250, 0.16),
+    0 0 50px rgba(167, 139, 250, 0.08);
+  animation-delay: 1.8s;
+}
+
+/* Card 04 — Teal */
+.mediflow-problem-card:nth-child(4n + 4)::after {
+  box-shadow:
+    0 0 0 1px rgba(45, 212, 191, 0.28),
+    0 0 24px rgba(45, 212, 191, 0.16),
+    0 0 50px rgba(45, 212, 191, 0.08);
+  animation-delay: 2.7s;
+}
+
+@keyframes mediflow-problem-pulse {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  15% {
+    opacity: 0.12;
+  }
+
+  28% {
+    opacity: 0.75;
+    transform: scale(1.008);
+  }
+
+  42% {
+    opacity: 0.16;
+  }
+
+  58%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-problem-card::after {
+    animation: none;
+    opacity: 0;
+  }
+}
