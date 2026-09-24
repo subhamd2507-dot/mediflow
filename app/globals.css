@@ -1878,26 +1878,26 @@ button:active {
     opacity: 0;
   }
 
-  4% {
+  5% {
     opacity: 1;
   }
 
-  28% {
+  25% {
     left: 30%;
     opacity: 1;
   }
 
-  52% {
+  50% {
     left: 55%;
     opacity: 1;
   }
 
-  76% {
+  75% {
     left: 80%;
     opacity: 1;
   }
 
-  94% {
+  92% {
     left: 100%;
     opacity: 1;
   }
@@ -1907,6 +1907,7 @@ button:active {
     opacity: 0;
   }
 }
+
 /* =====================================================
    PRECISE WORKFLOW STAGE GLOW
 ===================================================== */
