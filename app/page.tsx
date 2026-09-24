@@ -350,7 +350,7 @@ export default function Home() {
             key={`${problem.title}-${index}`}
             className="mediflow-problem-card group"
           >
-            <div className="flex h-full min-h-[230px] flex-col rounded-[28px] border border-white/10 bg-[#0a1120]/90 p-6 backdrop-blur-xl transition duration-500 group-hover:-translate-y-2 group-hover:border-cyan-300/25 group-hover:shadow-[0_20px_60px_rgba(34,211,238,0.10)] sm:p-7">
+            <div className="flex h-full min-h-[190px] flex-col rounded-[22px] border border-white/[0.08] bg-[#0a1120]/75 p-5 backdrop-blur-xl transition duration-500 group-hover:-translate-y-1 group-hover:bg-[#0b1424]/90 group-hover:border-white/15 group-hover:shadow-[0_16px_40px_rgba(59,130,246,0.08)] sm:p-6">
 
               <div className="flex items-center justify-between">
 
