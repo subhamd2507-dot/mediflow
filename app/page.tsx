@@ -162,13 +162,7 @@ export default function Home() {
             </p>
 
             <div className="mediflow-fade-up mt-9 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="/register"
-                className="group rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 px-7 py-3.5 text-center text-sm font-bold shadow-[0_0_35px_rgba(59,130,246,0.3)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_0_45px_rgba(168,85,247,0.4)]"
-              >
-                Start Your Case
-                <span className="ml-2 transition group-hover:ml-3">→</span>
-              </a>
+              
 
               <a
                 href="/book-opd"
