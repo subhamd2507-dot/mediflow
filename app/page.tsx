@@ -199,7 +199,7 @@ export default function Home() {
           <div className="relative min-h-[520px]">
             
 
-            <div className="mediflow-glass mediflow-glow absolute left-1/2 top-1/2 z-20 w-[min(92%,470px)] -translate-x-1/2 -translate-y-1/2 rounded-[28px] border border-white/15 bg-[#09101f]/75 p-5 shadow-2xl">
+            <div className="mediflow-glass mediflow-glow absolute left-1/2 top-1/2 z-20 w-[min(92%,470px)] -translate-x-1/2 -translate-y-1/2 rounded-[30px] border border-cyan-300/20 bg-gradient-to-br from-[#081321]/80 via-[#0b1022]/65 to-[#160d2b]/60 p-5 shadow-[0_25px_90px_rgba(34,211,238,0.10)] backdrop-blur-xl">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-300">
