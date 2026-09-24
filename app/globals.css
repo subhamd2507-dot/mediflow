@@ -1862,3 +1862,128 @@ button:active {
     opacity: 0;
   }
 }
+
+/* =====================================================
+   MEDIFLOW WORKFLOW JOURNEY ANIMATION
+===================================================== */
+
+.mediflow-workflow-pulse {
+  animation: mediflow-workflow-travel 6s linear infinite;
+  will-change: left, opacity;
+}
+
+@keyframes mediflow-workflow-travel {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  25% {
+    left: 30%;
+    opacity: 1;
+  }
+
+  50% {
+    left: 55%;
+    opacity: 1;
+  }
+
+  75% {
+    left: 80%;
+    opacity: 1;
+  }
+
+  92% {
+    left: 100%;
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Small animated halo around each workflow stage */
+
+.mediflow-workflow-stage > div::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.98);
+  animation: mediflow-workflow-stage-pulse 6s ease-in-out infinite;
+}
+
+/* 01 — Cyan */
+.mediflow-workflow-stage:nth-child(2) > div::after {
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.32),
+    0 0 28px rgba(34, 211, 238, 0.16);
+  animation-delay: 0s;
+}
+
+/* 02 — Blue */
+.mediflow-workflow-stage:nth-child(3) > div::after {
+  box-shadow:
+    0 0 0 1px rgba(96, 165, 250, 0.32),
+    0 0 28px rgba(96, 165, 250, 0.16);
+  animation-delay: 1.5s;
+}
+
+/* 03 — Violet */
+.mediflow-workflow-stage:nth-child(4) > div::after {
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.32),
+    0 0 28px rgba(167, 139, 250, 0.16);
+  animation-delay: 3s;
+}
+
+/* 04 — Teal */
+.mediflow-workflow-stage:nth-child(5) > div::after {
+  box-shadow:
+    0 0 0 1px rgba(45, 212, 191, 0.32),
+    0 0 28px rgba(45, 212, 191, 0.16);
+  animation-delay: 4.5s;
+}
+
+@keyframes mediflow-workflow-stage-pulse {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  12% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.7;
+    transform: scale(1.01);
+  }
+
+  30% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+
+  42%,
+  100% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-workflow-pulse,
+  .mediflow-workflow-stage > div::after {
+    animation: none;
+  }
+}
