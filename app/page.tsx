@@ -193,13 +193,7 @@ export default function Home() {
           {/* Hero visual */}
 
           <div className="relative min-h-[520px]">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="absolute h-[430px] w-[430px] rounded-full bg-cyan-500/10 blur-[100px]" />
-
-              <div className="mediflow-float absolute h-[480px] w-[480px] opacity-70">
-                
-              </div>
-            </div>
+            
 
             <div className="mediflow-glass mediflow-glow absolute left-1/2 top-1/2 z-20 w-[min(92%,470px)] -translate-x-1/2 -translate-y-1/2 rounded-[28px] border border-white/15 bg-[#09101f]/75 p-5 shadow-2xl">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
