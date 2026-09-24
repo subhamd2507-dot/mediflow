@@ -443,66 +443,7 @@ export default function Home() {
           WORKFLOW
       ====================================================== */}
 
-      <section
-        id="workflow"
-        className="relative overflow-hidden bg-[#050816] py-24"
-      >
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600/10 blur-[150px]" />
-
-        <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <Reveal className="text-center">
-            <span className="rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">
-              One simple journey
-            </span>
-
-            <h2 className="mx-auto mt-6 max-w-4xl text-4xl font-black tracking-tight sm:text-5xl">
-              From patient conversation
-              <br />
-              <span className="mediflow-gradient-text">
-                to clinical clarity.
-              </span>
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/50">
-              MediFlow prepares the patient&apos;s story before the consultation
-              while keeping the doctor in control.
-            </p>
-          </Reveal>
-
-          <div className="mediflow-workflow-line relative mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div className="pointer-events-none absolute left-[10%] right-[10%] top-20 hidden h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent lg:block" />
-
-            {workflow.map((item, index) => (
-  <Reveal
-  key={item.number}
-  className="mediflow-stagger-card"
-  style={{
-    transitionDelay: `${index * 150}ms`,
-  }}
->
-                <div className="relative z-10 h-full rounded-[28px] border border-white/10 bg-[#0a1020]/80 p-6 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-cyan-300/20 hover:shadow-[0_20px_60px_rgba(34,211,238,0.08)] animate-card">
-                  <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/15 to-purple-500/15 text-xl">
-                      {item.icon}
-                    </div>
-
-                    <span className="text-xs font-black tracking-[0.2em] text-white/20">
-                      {item.number}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-7 text-xl font-bold">{item.title}</h3>
-
-                  <p className="mt-3 text-sm leading-7 text-white/45">
-                    {item.text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
       {/* =====================================================
           AI CASE ENGINE
       ====================================================== */}
