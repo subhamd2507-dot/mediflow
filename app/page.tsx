@@ -22,31 +22,42 @@ function Reveal({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
+        setVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.12,
+        threshold: 0.15,
+        rootMargin: "0px 0px -80px 0px",
       }
     );
 
     observer.observe(element);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <div
       ref={ref}
-      className={`${visible ? "mediflow-reveal-visible" : "mediflow-reveal"} ${className}`}
+      className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible
+          ? "translateY(0px) scale(1)"
+          : "translateY(70px) scale(0.96)",
+        filter: visible
+          ? "blur(0px)"
+          : "blur(6px)",
+        transition:
+          "opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease",
+        willChange: "opacity, transform, filter",
+      }}
     >
       {children}
     </div>
   );
 }
-
 const problems = [
   {
     icon: "📝",
