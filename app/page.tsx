@@ -109,7 +109,7 @@ export default function Home() {
           HERO
       ====================================================== */}
 
-      <section className="relative isolate min-h-[calc(100vh-64px)] overflow-hidden">
+      <section className="mediflow-reveal relative isolate min-h-[calc(100vh-64px)] overflow-hidden">
         <div className="absolute inset-0 mediflow-grid-bg opacity-40" />
 
         <div className="pointer-events-none absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-cyan-500/15 blur-[130px]" />
