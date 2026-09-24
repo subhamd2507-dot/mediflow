@@ -115,7 +115,9 @@ const workflow = [
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
-      
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.28]">
+  <HealthcareOrb />
+</div>
       {/* =====================================================
           NAVIGATION
       ====================================================== */}
