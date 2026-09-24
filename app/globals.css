@@ -1688,3 +1688,87 @@ button:active {
 .mediflow-problem-card:nth-child(4n + 4) {
   border-top-color: rgba(45, 212, 191, 0.22);
 }
+
+/* =====================================================
+   MEDIFLOW PROBLEM CARD PREMIUM LIGHT SWEEP
+===================================================== */
+
+.mediflow-problem-card {
+  position: relative;
+}
+
+.mediflow-problem-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18%;
+  width: 64%;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(34, 211, 238, 0.7),
+    rgba(96, 165, 250, 0.7),
+    rgba(167, 139, 250, 0.7),
+    transparent
+  );
+  opacity: 0.35;
+  filter: blur(0.3px);
+  transform: translateX(-35%);
+  animation: mediflow-card-sweep 4.5s ease-in-out infinite;
+}
+
+.mediflow-problem-card:nth-child(4n + 2)::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(96, 165, 250, 0.8),
+    transparent
+  );
+  animation-delay: 0.7s;
+}
+
+.mediflow-problem-card:nth-child(4n + 3)::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(167, 139, 250, 0.8),
+    transparent
+  );
+  animation-delay: 1.4s;
+}
+
+.mediflow-problem-card:nth-child(4n + 4)::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(45, 212, 191, 0.8),
+    transparent
+  );
+  animation-delay: 2.1s;
+}
+
+@keyframes mediflow-card-sweep {
+  0% {
+    transform: translateX(-35%);
+    opacity: 0.15;
+  }
+
+  50% {
+    transform: translateX(35%);
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: translateX(-35%);
+    opacity: 0.15;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-problem-card::before {
+    animation: none;
+    opacity: 0.25;
+  }
+}
