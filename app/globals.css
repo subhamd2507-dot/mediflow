@@ -1464,7 +1464,7 @@ button:active {
 
 .mediflow-workflow-line {
   background-size: 200% 100%;
-  animation: mediflowWorkflowLine 3s ease-in-out infinite;
+  animation: mediflowWorkflowLine 1.8s ease-in-out 1;
 }
 
 @keyframes mediflowWorkflowLine {
