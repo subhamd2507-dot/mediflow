@@ -354,8 +354,59 @@ export default function Home() {
 
               <div className="flex items-center justify-between">
 
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] text-lg ring-1 ring-white/10 transition duration-300 group-hover:scale-105">
-                </div>
+                <div className="mediflow-problem-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.04] ring-1 ring-white/10 transition duration-300 group-hover:scale-105 group-hover:rotate-3">
+  {index % problems.length === 0 && (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      className="h-5 w-5"
+    >
+      <rect x="4" y="3" width="16" height="18" rx="2" />
+      <path d="M8 8h8M8 12h8M8 16h5" />
+    </svg>
+  )}
+
+  {index % problems.length === 1 && (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      className="h-5 w-5"
+    >
+      <path d="M6 3h9l3 3v15H6z" />
+      <path d="M14 3v4h4M9 11h6M9 15h6M9 19h4" />
+    </svg>
+  )}
+
+  {index % problems.length === 2 && (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      className="h-5 w-5"
+    >
+      <path d="M5 6.5A3.5 3.5 0 0 1 8.5 3h7A3.5 3.5 0 0 1 19 6.5v6A3.5 3.5 0 0 1 15.5 16H12l-4 4v-4.5A3.5 3.5 0 0 1 5 12.5z" />
+      <path d="M9 9h6M9 12h4" />
+    </svg>
+  )}
+
+  {index % problems.length === 3 && (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      className="h-5 w-5"
+    >
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  )}
+</div>
 
                 <span className="text-xs font-black tracking-[0.2em] text-white/20">
                   {String((index % problems.length) + 1).padStart(2, "0")}
