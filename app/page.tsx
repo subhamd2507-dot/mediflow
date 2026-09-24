@@ -371,7 +371,7 @@ export default function Home() {
     key={item.number}
     className="mediflow-stagger-card"
   >
-                <div className="relative z-10 h-full rounded-[28px] border border-white/10 bg-[#0a1020]/80 p-6 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-cyan-300/20 hover:shadow-[0_20px_60px_rgba(34,211,238,0.08)]">
+                <div className="relative z-10 h-full rounded-[28px] border border-white/10 bg-[#0a1020]/80 p-6 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-cyan-300/20 hover:shadow-[0_20px_60px_rgba(34,211,238,0.08)] animate-card">
                   <div className="flex items-center justify-between">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/15 to-purple-500/15 text-xl">
                       {item.icon}
