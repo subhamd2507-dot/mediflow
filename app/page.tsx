@@ -354,8 +354,7 @@ export default function Home() {
 
               <div className="flex items-center justify-between">
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/15 to-violet-500/15 text-xl ring-1 ring-white/10 transition duration-300 group-hover:scale-110">
-                  {problem.icon}
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] text-lg ring-1 ring-white/10 transition duration-300 group-hover:scale-105">
                 </div>
 
                 <span className="text-xs font-black tracking-[0.2em] text-white/20">
