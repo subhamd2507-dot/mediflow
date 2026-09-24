@@ -104,54 +104,7 @@ export default function Home() {
           NAVIGATION
       ====================================================== */}
 
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#050816]/75 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
-          <a href="/" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 text-lg shadow-[0_0_25px_rgba(59,130,246,0.35)]">
-              🩺
-            </div>
-
-            <div>
-              <p className="text-lg font-bold tracking-tight">MediFlow</p>
-              <p className="hidden text-[10px] uppercase tracking-[0.22em] text-cyan-300/70 sm:block">
-                Intelligent Patient Care
-              </p>
-            </div>
-          </a>
-
-          <div className="hidden items-center gap-8 text-sm text-white/65 md:flex">
-            <a href="#problem" className="transition hover:text-white">
-              Problem
-            </a>
-            <a href="#workflow" className="transition hover:text-white">
-              How it works
-            </a>
-            <a href="#doctor" className="transition hover:text-white">
-              Doctor
-            </a>
-            <a href="#features" className="transition hover:text-white">
-              Features
-            </a>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="/login"
-              className="hidden rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/30 hover:bg-white/5 sm:block"
-            >
-              Login
-            </a>
-
-            <a
-              href="/register"
-              className="rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 px-5 py-2.5 text-sm font-bold text-white shadow-[0_0_25px_rgba(59,130,246,0.3)] transition hover:-translate-y-0.5"
-            >
-              Get Started →
-            </a>
-          </div>
-        </div>
-      </nav>
-
+      
       {/* =====================================================
           HERO
       ====================================================== */}
