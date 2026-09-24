@@ -1481,3 +1481,51 @@ button:active {
     opacity: 0.25;
   }
 }
+
+/* =====================================================
+   MEDIFLOW BOOK OPD ANIMATED BORDER
+===================================================== */
+
+.mediflow-opd-button {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  padding: 1px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    #22d3ee,
+    #3b82f6,
+    #8b5cf6,
+    #22d3ee
+  );
+  background-size: 300% 100%;
+  animation: mediflow-opd-border-flow 4s linear infinite;
+  box-shadow:
+    0 0 18px rgba(34, 211, 238, 0.12),
+    0 0 32px rgba(139, 92, 246, 0.10);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.mediflow-opd-button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 0 24px rgba(34, 211, 238, 0.20),
+    0 0 48px rgba(139, 92, 246, 0.18);
+}
+
+@keyframes mediflow-opd-border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
