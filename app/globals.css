@@ -1908,7 +1908,52 @@ button:active {
   }
 }
 
+/* =====================================================
+   PRECISE WORKFLOW STAGE GLOW
+===================================================== */
 
+.mediflow-workflow-stage > div > div:first-child::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.99);
+  animation: mediflow-workflow-stage-pulse 6s ease-in-out infinite;
+}
+
+/* Stage 01 — Cyan */
+.mediflow-workflow-stage:nth-child(1) > div > div:first-child::after {
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.28),
+    0 0 22px rgba(34, 211, 238, 0.14);
+  animation-delay: 0s;
+}
+
+/* Stage 02 — Blue */
+.mediflow-workflow-stage:nth-child(2) > div > div:first-child::after {
+  box-shadow:
+    0 0 0 1px rgba(96, 165, 250, 0.28),
+    0 0 22px rgba(96, 165, 250, 0.14);
+  animation-delay: 1.5s;
+}
+
+/* Stage 03 — Violet */
+.mediflow-workflow-stage:nth-child(3) > div > div:first-child::after {
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.28),
+    0 0 22px rgba(167, 139, 250, 0.14);
+  animation-delay: 3s;
+}
+
+/* Stage 04 — Teal */
+.mediflow-workflow-stage:nth-child(4) > div > div:first-child::after {
+  box-shadow:
+    0 0 0 1px rgba(45, 212, 191, 0.28),
+    0 0 22px rgba(45, 212, 191, 0.14);
+  animation-delay: 4.5s;
+}
 
 @keyframes mediflow-workflow-stage-pulse {
   0%,
