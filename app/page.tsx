@@ -114,7 +114,7 @@ const workflow = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#050816] text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
       {/* =====================================================
           NAVIGATION
       ====================================================== */}
