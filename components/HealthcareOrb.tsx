@@ -524,7 +524,7 @@ function MedicalNetworkScene() {
 export default function HealthcareOrb() {
   return (
     <div
-      className="h-full w-full"
+    className="h-full w-full mediflow-orb-enter"
       aria-hidden="true"
     >
       <Canvas
