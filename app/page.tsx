@@ -370,7 +370,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="relative mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mediflow-workflow-line relative mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             <div className="pointer-events-none absolute left-[10%] right-[10%] top-20 hidden h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent lg:block" />
 
             {workflow.map((item, index) => (
