@@ -1230,9 +1230,7 @@ button:active {
   animation: mediflow-fade-in 0.8s ease-out both;
 }
 
-.mediflow-float {
-  animation: mediflow-float 4s ease-in-out infinite;
-}
+
 
 .mediflow-pulse {
   animation: mediflow-pulse 3s ease-in-out infinite;
