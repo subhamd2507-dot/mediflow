@@ -1379,3 +1379,42 @@ button:active {
     0 20px 60px rgba(59, 130, 246, 0.18),
     0 0 40px rgba(168, 85, 247, 0.12);
 }
+
+/* =========================================
+   MEDIFLOW STAGGERED WORKFLOW ANIMATION
+   ========================================= */
+
+.animate-card {
+  animation: mediflow-card-glow 3s ease-in-out infinite;
+}
+
+.mediflow-stagger-card {
+  transition-delay: 0ms;
+}
+
+.mediflow-stagger-card:nth-child(2) {
+  transition-delay: 150ms;
+}
+
+.mediflow-stagger-card:nth-child(3) {
+  transition-delay: 300ms;
+}
+
+.mediflow-stagger-card:nth-child(4) {
+  transition-delay: 450ms;
+}
+
+@keyframes mediflow-card-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 rgba(59, 130, 246, 0),
+      0 0 0 rgba(168, 85, 247, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 0 35px rgba(59, 130, 246, 0.12),
+      0 0 55px rgba(168, 85, 247, 0.08);
+  }
+}
