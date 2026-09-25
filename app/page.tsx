@@ -637,7 +637,7 @@ export default function Home() {
           {/* Conversation stages */}
           <div className="mt-10 space-y-3">
 
-            <div className="group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition duration-300 hover:border-cyan-300/20 hover:bg-white/[0.04]">
+           <div className="mediflow-case-step group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition duration-300 hover:border-cyan-300/20 hover:bg-white/[0.04]">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.08] text-xs font-black text-cyan-300 ring-1 ring-cyan-300/10">
                 01
               </div>
