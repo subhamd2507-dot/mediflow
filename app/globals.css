@@ -1993,3 +1993,117 @@ button:active {
     animation: none;
   }
 }
+
+/* =====================================================
+   MEDIFLOW AI CASE ENGINE — SUBTLE LIVE ANIMATION
+===================================================== */
+
+/* Main live-case breathing glow */
+.mediflow-live-case {
+  animation: mediflow-live-case-breathe 5s ease-in-out infinite;
+}
+
+@keyframes mediflow-live-case-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.28),
+      0 0 0 rgba(34, 211, 238, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.28),
+      0 0 34px rgba(34, 211, 238, 0.07);
+  }
+}
+
+/* Active case indicator */
+.mediflow-case-status-dot {
+  animation: mediflow-case-status 2s ease-in-out infinite;
+}
+
+@keyframes mediflow-case-status {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: scale(1.22);
+    opacity: 1;
+  }
+}
+
+/* Adaptive-question indicator */
+.mediflow-case-adaptive-dot {
+  animation:
+    mediflow-case-adaptive-ping 2.4s ease-in-out infinite;
+}
+
+@keyframes mediflow-case-adaptive-ping {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: scale(1.35);
+    opacity: 0.5;
+  }
+}
+
+/* Progress bar */
+.mediflow-case-progress {
+  position: relative;
+  overflow: hidden;
+}
+
+.mediflow-case-progress::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -35%;
+  width: 35%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.42),
+    transparent
+  );
+  animation: mediflow-case-progress-shine 3.2s ease-in-out infinite;
+}
+
+@keyframes mediflow-case-progress-shine {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  55% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translateX(390%);
+    opacity: 0;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-live-case,
+  .mediflow-case-status-dot,
+  .mediflow-case-adaptive-dot,
+  .mediflow-case-progress::after {
+    animation: none;
+  }
+}
