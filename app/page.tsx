@@ -820,7 +820,7 @@ export default function Home() {
                 </div>
 
                 <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
-                  
+                  <div className="mediflow-case-progress h-full w-[38%] rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500" />
                 </div>
 
               </div>
