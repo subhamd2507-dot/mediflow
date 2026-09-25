@@ -596,9 +596,247 @@ export default function Home() {
 
   </div>
 </section>
-      {/* ====================================================
-          AI CASE ENGINE
-      ====================================================== */}
+      {/* =====================================================
+    AI CASE ENGINE
+====================================================== */}
+
+<section
+  id="case-engine"
+  className="relative overflow-hidden border-y border-white/10 bg-[#070b18] py-28"
+>
+  {/* Ambient color */}
+  <div className="pointer-events-none absolute left-[-160px] top-20 h-[420px] w-[420px] rounded-full bg-cyan-500/[0.07] blur-[140px]" />
+
+  <div className="pointer-events-none absolute right-[-180px] bottom-0 h-[520px] w-[520px] rounded-full bg-violet-500/[0.08] blur-[150px]" />
+
+  <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+    <div className="grid items-center gap-14 lg:grid-cols-[0.82fr_1.18fr]">
+
+      {/* LEFT */}
+      <Reveal>
+        <div className="max-w-xl">
+
+          <span className="inline-flex rounded-full border border-violet-400/20 bg-violet-400/[0.05] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-violet-300">
+            Adaptive case engine
+          </span>
+
+          <h2 className="mt-7 text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+            Not a static form.
+            <br />
+            <span className="mediflow-gradient-text">
+              A conversation.
+            </span>
+          </h2>
+
+          <p className="mt-6 max-w-xl text-base leading-8 text-white/50 sm:text-lg">
+            MediFlow guides patients through complaint-specific questions
+            instead of presenting a long medical form all at once.
+          </p>
+
+          {/* Conversation stages */}
+          <div className="mt-10 space-y-3">
+
+            <div className="group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition duration-300 hover:border-cyan-300/20 hover:bg-white/[0.04]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.08] text-xs font-black text-cyan-300 ring-1 ring-cyan-300/10">
+                01
+              </div>
+
+              <div>
+                <p className="font-semibold text-white">
+                  Chief complaint
+                </p>
+
+                <p className="mt-1 text-sm text-white/40">
+                  What brings you to the hospital?
+                </p>
+              </div>
+            </div>
+
+            <div className="group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition duration-300 hover:border-blue-300/20 hover:bg-white/[0.04]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-400/[0.08] text-xs font-black text-blue-300 ring-1 ring-blue-300/10">
+                02
+              </div>
+
+              <div>
+                <p className="font-semibold text-white">
+                  History
+                </p>
+
+                <p className="mt-1 text-sm text-white/40">
+                  When did it start? How has it changed?
+                </p>
+              </div>
+            </div>
+
+            <div className="group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition duration-300 hover:border-violet-300/20 hover:bg-white/[0.04]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-400/[0.08] text-xs font-black text-violet-300 ring-1 ring-violet-300/10">
+                03
+              </div>
+
+              <div>
+                <p className="font-semibold text-white">
+                  Relevant details
+                </p>
+
+                <p className="mt-1 text-sm text-white/40">
+                  Questions adapt to previous answers.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Small product capabilities */}
+          <div className="mt-8 flex flex-wrap gap-2">
+            <span className="rounded-full border border-cyan-300/10 bg-cyan-300/[0.04] px-3 py-1.5 text-xs font-semibold text-cyan-200/70">
+              Voice-ready
+            </span>
+
+            <span className="rounded-full border border-blue-300/10 bg-blue-300/[0.04] px-3 py-1.5 text-xs font-semibold text-blue-200/70">
+              Touch-friendly
+            </span>
+
+            <span className="rounded-full border border-violet-300/10 bg-violet-300/[0.04] px-3 py-1.5 text-xs font-semibold text-violet-200/70">
+              Adaptive
+            </span>
+          </div>
+
+        </div>
+      </Reveal>
+
+
+      {/* RIGHT — Live conversation */}
+      <Reveal>
+        <div className="relative">
+
+          {/* Outer glow */}
+          <div className="pointer-events-none absolute -inset-4 rounded-[34px] bg-gradient-to-r from-cyan-400/[0.06] via-blue-500/[0.04] to-violet-500/[0.07] blur-2xl" />
+
+          <div className="relative rounded-[30px] border border-white/[0.10] bg-[#090f1e]/90 p-3 shadow-2xl backdrop-blur-xl sm:p-4">
+
+            <div className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#070c18]">
+
+              {/* Top bar */}
+              <div className="flex items-center justify-between border-b border-white/[0.08] px-5 py-4">
+
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-300">
+                    Live case
+                  </p>
+
+                  <div className="mt-1 flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
+
+                    <p className="font-bold text-white">
+                      Knee pain
+                    </p>
+                  </div>
+                </div>
+
+                <span className="rounded-full border border-emerald-300/15 bg-emerald-300/[0.05] px-3 py-1 text-[10px] font-bold tracking-[0.12em] text-emerald-300">
+                  ACTIVE
+                </span>
+
+              </div>
+
+
+              {/* Conversation */}
+              <div className="space-y-5 p-5 sm:p-6">
+
+                {/* Patient message */}
+                <div className="flex justify-end">
+                  <div className="max-w-[86%] rounded-[20px] rounded-br-md bg-gradient-to-r from-blue-500 to-violet-500 px-5 py-4 text-sm leading-6 text-white shadow-[0_12px_30px_rgba(59,130,246,0.16)]">
+                    My knee has been hurting for three days.
+                  </div>
+                </div>
+
+
+                {/* MediFlow message */}
+                <div className="flex gap-3">
+
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cyan-400/[0.08] text-cyan-300 ring-1 ring-cyan-300/10">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      className="h-4 w-4"
+                    >
+                      <path d="M12 3v18M5 8h14M5 16h14" />
+                      <circle cx="12" cy="12" r="8" />
+                    </svg>
+                  </div>
+
+                  <div className="max-w-[86%] rounded-[20px] rounded-bl-md border border-white/[0.08] bg-white/[0.035] px-5 py-4 text-sm leading-6 text-white/75">
+                    I understand. Did the pain start after an injury,
+                    accident or unusual physical activity?
+                  </div>
+
+                </div>
+
+
+                {/* Answers */}
+                <div className="grid grid-cols-2 gap-3">
+
+                  <button className="rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.04] px-4 py-3 text-sm font-semibold text-cyan-200 transition duration-300 hover:border-cyan-300/30 hover:bg-cyan-300/[0.08]">
+                    Yes
+                  </button>
+
+                  <button className="rounded-2xl border border-blue-300/15 bg-blue-300/[0.04] px-4 py-3 text-sm font-semibold text-blue-200 transition duration-300 hover:border-blue-300/30 hover:bg-blue-300/[0.08]">
+                    No
+                  </button>
+
+                </div>
+
+
+                {/* Adaptive indicator */}
+                <div className="flex items-center gap-3 rounded-2xl border border-violet-300/10 bg-violet-300/[0.035] p-4">
+
+                  <span className="relative flex h-3 w-3">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-40" />
+                    <span className="relative inline-flex h-3 w-3 rounded-full bg-violet-400" />
+                  </span>
+
+                  <div>
+                    <p className="text-xs font-semibold text-white/70">
+                      Question adapted from previous answer
+                    </p>
+
+                    <p className="mt-1 text-[11px] text-white/35">
+                      MediFlow keeps the conversation focused.
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* Bottom progress */}
+              <div className="border-t border-white/[0.08] px-5 py-4 sm:px-6">
+
+                <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.16em] text-white/25">
+                  <span>History progress</span>
+                  <span>03 / 08</span>
+                </div>
+
+                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+                  <div className="h-full w-[38%] rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500" />
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </Reveal>
+
+    </div>
+  </div>
+</section>
 
       
 
