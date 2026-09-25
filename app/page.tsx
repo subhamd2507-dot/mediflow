@@ -669,7 +669,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition duration-300 hover:border-violet-300/20 hover:bg-white/[0.04]">
+            <div className="mediflow-case-step group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition duration-300 hover:border-violet-300/20 hover:bg-white/[0.04]">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-400/[0.08] text-xs font-black text-violet-300 ring-1 ring-violet-300/10">
                 03
               </div>
