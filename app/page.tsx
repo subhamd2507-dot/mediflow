@@ -792,7 +792,7 @@ export default function Home() {
                 <div className="flex items-center gap-3 rounded-2xl border border-violet-300/10 bg-violet-300/[0.035] p-4">
 
                   <span className="relative flex h-3 w-3">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-40" />
+                   
                     <span className="relative inline-flex h-3 w-3 rounded-full bg-violet-400" />
                   </span>
 
