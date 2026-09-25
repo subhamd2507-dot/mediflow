@@ -124,7 +124,7 @@ export default function Home() {
     return () => {
       window.clearInterval(interval);
     };
-  }, []);
+  }, []);className="mediflow-case-step group flex items-center gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition duration-300 hover:border-cyan-300/20 hover:bg-white/[0.04]"
 
   const historyProgress = String(3 + caseStep).padStart(2, "0");
   return (
