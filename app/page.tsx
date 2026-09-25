@@ -713,8 +713,7 @@ export default function Home() {
           {/* Outer glow */}
           <div className="pointer-events-none absolute -inset-4 rounded-[34px] bg-gradient-to-r from-cyan-400/[0.06] via-blue-500/[0.04] to-violet-500/[0.07] blur-2xl" />
 
-          <div className="relative rounded-[30px] border border-white/[0.10] bg-[#090f1e]/90 p-3 shadow-2xl backdrop-blur-xl sm:p-4">
-
+          <div className="mediflow-live-case relative rounded-[30px] border border-white/[0.10] bg-[#090f1e]/90 p-3 shadow-2xl backdrop-blur-xl sm:p-4">
             <div className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#070c18]">
 
               {/* Top bar */}
