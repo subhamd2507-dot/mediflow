@@ -816,7 +816,7 @@ export default function Home() {
 
                 <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.16em] text-white/25">
                   <span>History progress</span>
-                  <span>03 / 08</span>
+                  
                 </div>
 
                 <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
