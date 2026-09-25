@@ -725,7 +725,7 @@ export default function Home() {
                   </p>
 
                   <div className="mt-1 flex items-center gap-2">
-                    
+                    <span className="mediflow-case-status-dot h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.7)]" />
                     <p className="font-bold text-white">
                       Knee pain
                     </p>
