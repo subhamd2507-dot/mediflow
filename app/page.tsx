@@ -113,6 +113,20 @@ const workflow = [
 ];
 
 export default function Home() {
+
+    const [caseStep, setCaseStep] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setCaseStep((previousStep) => (previousStep + 1) % 3);
+    }, 2000);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  const historyProgress = String(3 + caseStep).padStart(2, "0");
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.16]">
