@@ -872,7 +872,521 @@ export default function Home() {
           DOCTOR VIEW
       ====================================================== */}
 
-      
+      {/* =====================================================
+    DOCTOR VERIFICATION WORKSTATION
+====================================================== */}
+
+<section
+  id="doctor"
+  className="relative overflow-hidden bg-[#050816] py-28"
+>
+  {/* Ambient clinical glow */}
+  <div className="pointer-events-none absolute left-[-180px] top-24 h-[420px] w-[420px] rounded-full bg-cyan-500/[0.05] blur-[140px]" />
+
+  <div className="pointer-events-none absolute right-[-180px] bottom-0 h-[520px] w-[520px] rounded-full bg-violet-500/[0.06] blur-[150px]" />
+
+  <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+    {/* SECTION HEADING */}
+    <Reveal className="text-center">
+
+      <span className="inline-flex rounded-full border border-emerald-300/20 bg-emerald-300/[0.04] px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-emerald-300">
+        Doctor verification
+      </span>
+
+      <h2 className="mx-auto mt-7 max-w-4xl text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+        AI prepares the case.
+        <br />
+        <span className="mediflow-gradient-text">
+          The doctor stays in control.
+        </span>
+      </h2>
+
+      <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/50 sm:text-lg">
+        MediFlow organizes the patient&apos;s information into a structured
+        draft that the doctor can review, edit and verify.
+      </p>
+
+    </Reveal>
+
+
+    {/* WORKSTATION */}
+    <Reveal className="mt-16">
+
+      <div className="mediflow-doctor-workstation relative overflow-hidden rounded-[32px] border border-white/[0.10] bg-[#090f1f]/90 shadow-2xl backdrop-blur-xl">
+
+        {/* Top gradient line */}
+        <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+
+        {/* TOP BAR */}
+        <div className="flex flex-col gap-4 border-b border-white/[0.08] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-300">
+              Clinical review workstation
+            </p>
+
+            <h3 className="mt-2 text-xl font-bold text-white">
+              Patient case
+            </h3>
+          </div>
+
+          <div className="flex items-center gap-3">
+
+            <span className="mediflow-doctor-draft-status inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/[0.04] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-amber-200">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
+              Draft for review
+            </span>
+
+          </div>
+
+        </div>
+
+
+        {/* CASE FLOW */}
+        <div className="border-b border-white/[0.08] px-5 py-5 sm:px-7">
+
+          <div className="grid gap-3 sm:grid-cols-4">
+
+            <div className="mediflow-doctor-flow-step rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.035] p-4">
+
+              <div className="flex items-center gap-3">
+
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-400/[0.08] text-sm font-black text-cyan-300">
+                  01
+                </div>
+
+                <div>
+                  <p className="text-xs font-bold text-white">
+                    Patient information
+                  </p>
+
+                  <p className="mt-1 text-[10px] text-white/35">
+                    Collected
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div className="mediflow-doctor-flow-step rounded-2xl border border-blue-300/15 bg-blue-300/[0.035] p-4">
+
+              <div className="flex items-center gap-3">
+
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-400/[0.08] text-sm font-black text-blue-300">
+                  02
+                </div>
+
+                <div>
+                  <p className="text-xs font-bold text-white">
+                    Structured history
+                  </p>
+
+                  <p className="mt-1 text-[10px] text-white/35">
+                    Prepared
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div className="mediflow-doctor-flow-step rounded-2xl border border-violet-300/15 bg-violet-300/[0.035] p-4">
+
+              <div className="flex items-center gap-3">
+
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-400/[0.08] text-sm font-black text-violet-300">
+                  03
+                </div>
+
+                <div>
+                  <p className="text-xs font-bold text-white">
+                    Doctor review
+                  </p>
+
+                  <p className="mt-1 text-[10px] text-white/35">
+                    Current step
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div className="mediflow-doctor-flow-step rounded-2xl border border-emerald-300/15 bg-emerald-300/[0.035] p-4">
+
+              <div className="flex items-center gap-3">
+
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-400/[0.08] text-sm font-black text-emerald-300">
+                  04
+                </div>
+
+                <div>
+                  <p className="text-xs font-bold text-white">
+                    Verification
+                  </p>
+
+                  <p className="mt-1 text-[10px] text-white/35">
+                    Doctor approved
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* WORKSPACE */}
+        <div className="grid lg:grid-cols-[0.72fr_1.28fr]">
+
+          {/* PATIENT SNAPSHOT */}
+          <div className="border-b border-white/[0.08] p-5 sm:p-7 lg:border-b-0 lg:border-r">
+
+            <div className="flex items-start justify-between">
+
+              <div>
+
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+                  Patient
+                </p>
+
+                <h3 className="mt-2 text-2xl font-black text-white">
+                  Patient Case
+                </h3>
+
+              </div>
+
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400/[0.10] to-violet-400/[0.10] text-sm ring-1 ring-white/[0.08]">
+                ✦
+              </div>
+
+            </div>
+
+
+            <div className="mt-7 space-y-3">
+
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                  Chief complaint
+                </p>
+
+                <p className="mt-2 text-sm font-semibold text-white/85">
+                  Knee pain
+                </p>
+              </div>
+
+
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+
+                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                    Duration
+                  </p>
+
+                  <p className="mt-2 text-sm font-semibold text-white/75">
+                    3 days
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                    Language
+                  </p>
+
+                  <p className="mt-2 text-sm font-semibold text-white/75">
+                    Hindi
+                  </p>
+                </div>
+
+              </div>
+
+
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
+
+                <div className="flex items-center justify-between gap-3">
+
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                      Documents
+                    </p>
+
+                    <p className="mt-2 text-sm font-semibold text-white/75">
+                      2 uploaded
+                    </p>
+                  </div>
+
+                  <span className="rounded-full border border-blue-300/15 bg-blue-300/[0.04] px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-blue-200">
+                    Document
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div className="mt-7 rounded-2xl border border-cyan-300/10 bg-cyan-300/[0.025] p-4">
+
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-300">
+                Patient source
+              </p>
+
+              <p className="mt-2 text-xs leading-6 text-white/45">
+                Information collected from the patient conversation and
+                uploaded medical documents.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          {/* STRUCTURED SUMMARY */}
+          <div className="p-5 sm:p-7">
+
+            <div className="flex flex-col gap-4 border-b border-white/[0.08] pb-5 sm:flex-row sm:items-center sm:justify-between">
+
+              <div>
+
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-300">
+                  Structured summary
+                </p>
+
+                <h3 className="mt-2 text-2xl font-bold text-white">
+                  Clinical history draft
+                </h3>
+
+              </div>
+
+
+              <div className="flex items-center gap-2 rounded-full border border-amber-300/15 bg-amber-300/[0.035] px-3 py-1.5">
+
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
+
+                <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-amber-200">
+                  Doctor review required
+                </span>
+
+              </div>
+
+            </div>
+
+
+            {/* CASE FIELDS */}
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+
+              <div className="rounded-2xl border border-white/[0.08] bg-[#050a17] p-4">
+
+                <div className="flex items-center justify-between gap-3">
+
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                    Presenting complaint
+                  </p>
+
+                  <span className="text-[9px] font-semibold text-cyan-300/70">
+                    Patient response
+                  </span>
+
+                </div>
+
+                <p className="mt-3 text-sm leading-6 text-white/80">
+                  Knee pain for 3 days
+                </p>
+
+              </div>
+
+
+              <div className="rounded-2xl border border-white/[0.08] bg-[#050a17] p-4">
+
+                <div className="flex items-center justify-between gap-3">
+
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                    History
+                  </p>
+
+                  <span className="text-[9px] font-semibold text-blue-300/70">
+                    Patient response
+                  </span>
+
+                </div>
+
+                <p className="mt-3 text-sm leading-6 text-white/80">
+                  Started after physical activity
+                </p>
+
+              </div>
+
+
+              <div className="rounded-2xl border border-white/[0.08] bg-[#050a17] p-4">
+
+                <div className="flex items-center justify-between gap-3">
+
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                    Past history
+                  </p>
+
+                  <span className="text-[9px] font-semibold text-white/30">
+                    Not provided
+                  </span>
+
+                </div>
+
+                <p className="mt-3 text-sm leading-6 text-white/65">
+                  No information provided
+                </p>
+
+              </div>
+
+
+              <div className="rounded-2xl border border-white/[0.08] bg-[#050a17] p-4">
+
+                <div className="flex items-center justify-between gap-3">
+
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                    Medication
+                  </p>
+
+                  <span className="text-[9px] font-semibold text-white/30">
+                    Patient response
+                  </span>
+
+                </div>
+
+                <p className="mt-3 text-sm leading-6 text-white/65">
+                  No current medication reported
+                </p>
+
+              </div>
+
+
+              <div className="rounded-2xl border border-blue-300/10 bg-blue-300/[0.025] p-4">
+
+                <div className="flex items-center justify-between gap-3">
+
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/30">
+                    Documents
+                  </p>
+
+                  <span className="text-[9px] font-semibold text-blue-300">
+                    Document
+                  </span>
+
+                </div>
+
+                <p className="mt-3 text-sm leading-6 text-white/75">
+                  Previous prescription detected
+                </p>
+
+              </div>
+
+
+              <div className="rounded-2xl border border-amber-300/15 bg-amber-300/[0.035] p-4">
+
+                <div className="flex items-center justify-between gap-3">
+
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-amber-200/80">
+                    Missing information
+                  </p>
+
+                  <span className="text-[9px] font-semibold text-amber-200">
+                    Attention
+                  </span>
+
+                </div>
+
+                <p className="mt-3 text-sm leading-6 text-amber-100/80">
+                  Allergy history
+                </p>
+
+              </div>
+
+            </div>
+
+
+            {/* REVIEW NOTE */}
+            <div className="mt-5 rounded-2xl border border-violet-300/10 bg-violet-300/[0.025] p-4">
+
+              <div className="flex gap-3">
+
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-violet-400/[0.08] text-violet-300 ring-1 ring-violet-300/10">
+                  ✦
+                </div>
+
+                <div>
+
+                  <p className="text-xs font-semibold text-white/75">
+                    Ready for physician review
+                  </p>
+
+                  <p className="mt-1 text-xs leading-6 text-white/40">
+                    MediFlow prepares the draft. The physician can review,
+                    edit or reject information before verification.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            {/* ACTIONS */}
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
+
+              <button
+                type="button"
+                className="rounded-full border border-white/[0.10] bg-white/[0.035] px-6 py-3 text-sm font-semibold text-white/70 transition duration-300 hover:border-blue-300/25 hover:bg-white/[0.06] hover:text-white"
+              >
+                Edit Information
+              </button>
+
+              <button
+                type="button"
+                className="rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-6 py-3 text-sm font-bold text-white shadow-[0_0_30px_rgba(59,130,246,0.20)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(99,102,241,0.30)]"
+              >
+                ✓ Verify Case
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* FOOTER NOTE */}
+        <div className="border-t border-white/[0.08] px-5 py-4 sm:px-7">
+
+          <div className="flex flex-col gap-2 text-xs text-white/30 sm:flex-row sm:items-center sm:justify-between">
+
+            <span>
+              AI-generated draft · Physician verification required
+            </span>
+
+            <span className="text-cyan-300/60">
+              MediFlow keeps the doctor in control
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </Reveal>
+
+  </div>
+</section>
+
       {/* =====================================================
           FEATURES
       ====================================================== */}
