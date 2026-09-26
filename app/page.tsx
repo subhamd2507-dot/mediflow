@@ -127,6 +127,7 @@ export default function Home() {
   }, []);
 
   const historyProgress = String(3 + caseStep).padStart(2, "0");
+  const progressWidth = `${((3 + caseStep) / 8) * 100}%`;
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.16]">
