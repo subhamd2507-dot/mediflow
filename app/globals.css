@@ -2193,3 +2193,8 @@ button:active {
   }
 }
 
+/* Doctor verification workflow cards stay above the connector line */
+.mediflow-doctor-flow-step {
+  position: relative;
+  z-index: 2;
+}
