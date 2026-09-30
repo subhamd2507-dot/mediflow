@@ -946,8 +946,7 @@ export default function Home() {
         {/* CASE FLOW */}
         <div className="border-b border-white/[0.08] px-5 py-5 sm:px-7">
 
-          <div className="grid gap-3 sm:grid-cols-4">
-
+          <div className="relative grid gap-3 sm:grid-cols-4">
             <div className="mediflow-doctor-flow-step rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.035] p-4">
 
               <div className="flex items-center gap-3">
