@@ -2198,3 +2198,57 @@ button:active {
   position: relative;
   z-index: 2;
 }
+
+/* Doctor verification workflow connector */
+.mediflow-doctor-flow-line {
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    rgba(34, 211, 238, 0.14),
+    rgba(96, 165, 250, 0.28),
+    rgba(139, 92, 246, 0.20),
+    rgba(34, 211, 238, 0.14)
+  );
+}
+
+.mediflow-doctor-flow-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 24%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(34, 211, 238, 0.75),
+    rgba(139, 92, 246, 0.65),
+    transparent
+  );
+  animation: mediflow-doctor-flow-line 4.5s ease-in-out infinite;
+}
+
+@keyframes mediflow-doctor-flow-line {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  70% {
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: translateX(520%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-doctor-flow-line::after {
+    animation: none;
+  }
+}
