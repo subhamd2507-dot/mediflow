@@ -216,6 +216,26 @@ export default function Home() {
           {/* Hero visual */}
 
           <div className="relative min-h-[520px]">
+
+            {/* Premium Hero atmosphere */}
+<div className="pointer-events-none absolute inset-0">
+
+  {/* Large ambient light */}
+  <div className="mediflow-premium-aura mediflow-aura-cyan absolute left-1/2 top-1/2 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2" />
+
+  {/* Orbit 01 */}
+  <div className="mediflow-orbit-ring absolute left-1/2 top-1/2 h-[330px] w-[330px] -translate-x-1/2 -translate-y-1/2 sm:h-[400px] sm:w-[400px]" />
+
+  {/* Orbit 02 */}
+  <div className="mediflow-orbit-ring absolute left-1/2 top-1/2 h-[455px] w-[455px] -translate-x-1/2 -translate-y-1/2 opacity-70 sm:h-[540px] sm:w-[540px]" />
+
+  {/* Floating particles */}
+  <span className="mediflow-particle absolute left-[14%] top-[28%]" />
+  <span className="mediflow-particle absolute right-[12%] top-[22%]" />
+  <span className="mediflow-particle absolute bottom-[22%] left-[18%]" />
+  <span className="mediflow-particle absolute bottom-[18%] right-[18%]" />
+
+</div>
             
 
             <div className="mediflow-glass mediflow-glow absolute left-1/2 top-1/2 z-20 w-[min(92%,470px)] -translate-x-1/2 -translate-y-1/2 rounded-[30px] border border-cyan-300/20 bg-gradient-to-br from-[#081321]/80 via-[#0b1022]/65 to-[#160d2b]/60 p-5 shadow-[0_25px_90px_rgba(34,211,238,0.10)] backdrop-blur-xl">
