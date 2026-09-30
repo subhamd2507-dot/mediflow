@@ -1024,9 +1024,9 @@ export default function Home() {
 
               <div className="flex items-center gap-3">
 
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-400/[0.08] text-sm font-black text-emerald-300">
-                  04
-                </div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-400/[0.07] text-sm font-black text-violet-300">
+  04
+</div>
 
                 <div>
                   <p className="text-xs font-bold text-white">
