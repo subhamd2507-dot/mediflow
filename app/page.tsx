@@ -949,7 +949,7 @@ export default function Home() {
           <div className="relative grid gap-3 sm:grid-cols-4">
             <div
   aria-hidden="true"
-  
+  className="mediflow-doctor-flow-line pointer-events-none absolute left-[10%] right-[10%] top-1/2 hidden h-px -translate-y-1/2 sm:block"
 />
             <div className="mediflow-doctor-flow-step rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.035] p-4">
 
