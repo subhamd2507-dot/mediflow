@@ -236,7 +236,18 @@ export default function Home() {
   <span className="mediflow-particle absolute bottom-[18%] right-[18%]" />
 
 </div>
-            
+            <div className="pointer-events-none absolute -right-2 top-16 z-10 hidden rounded-2xl border border-violet-300/15 bg-[#0b1020]/75 px-4 py-3 shadow-[0_15px_45px_rgba(139,92,246,0.14)] backdrop-blur-xl sm:block">
+  <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-violet-300/80">
+    Case engine
+  </p>
+
+  <div className="mt-2 flex items-center gap-2">
+    <span className="h-2 w-2 rounded-full bg-violet-300 shadow-[0_0_12px_rgba(167,139,250,0.75)]" />
+    <span className="text-xs font-semibold text-white/75">
+      Adapting
+    </span>
+  </div>
+</div>
 
             <div className="mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui absolute left-1/2 top-1/2 z-20 w-[min(92%,470px)] -translate-x-1/2 -translate-y-1/2 rounded-[30px] p-5 shadow-[0_30px_100px_rgba(34,211,238,0.12)]">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
