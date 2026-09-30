@@ -2305,3 +2305,322 @@ button:active {
 .mediflow-doctor-flow-step:nth-of-type(4) .text-violet-300 {
   text-shadow: 0 0 18px rgba(139, 92, 246, 0.28);
 }
+
+/* =========================================================
+   MEDIFLOW PREMIUM VISUAL SYSTEM
+   Cyan • Blue • Violet
+========================================================= */
+
+:root {
+  --mf-bg: #050816;
+  --mf-bg-deep: #03050c;
+
+  --mf-cyan: #22d3ee;
+  --mf-blue: #3b82f6;
+  --mf-violet: #8b5cf6;
+
+  --mf-text: #f8fafc;
+  --mf-muted: rgba(255, 255, 255, 0.58);
+  --mf-soft: rgba(255, 255, 255, 0.38);
+
+  --mf-glass: rgba(10, 16, 32, 0.72);
+  --mf-glass-soft: rgba(255, 255, 255, 0.035);
+
+  --mf-border: rgba(255, 255, 255, 0.09);
+  --mf-border-light: rgba(255, 255, 255, 0.13);
+
+  --mf-cyan-glow: rgba(34, 211, 238, 0.16);
+  --mf-blue-glow: rgba(59, 130, 246, 0.14);
+  --mf-violet-glow: rgba(139, 92, 246, 0.16);
+}
+
+
+/* ---------------------------------------------------------
+   GLOBAL PAGE ATMOSPHERE
+--------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 15% 8%,
+      rgba(34, 211, 238, 0.055),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 18%,
+      rgba(139, 92, 246, 0.065),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #050816 0%,
+      #040713 48%,
+      #03050c 100%
+    );
+}
+
+
+/* ---------------------------------------------------------
+   PREMIUM ATMOSPHERIC LIGHT
+--------------------------------------------------------- */
+
+.mediflow-premium-aura {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(110px);
+  opacity: 0.75;
+  transform: translateZ(0);
+}
+
+.mediflow-aura-cyan {
+  background: rgba(34, 211, 238, 0.10);
+}
+
+.mediflow-aura-blue {
+  background: rgba(59, 130, 246, 0.095);
+}
+
+.mediflow-aura-violet {
+  background: rgba(139, 92, 246, 0.11);
+}
+
+
+/* ---------------------------------------------------------
+   PREMIUM GLASS
+--------------------------------------------------------- */
+
+.mediflow-premium-glass {
+  position: relative;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018)
+    );
+  border: 1px solid var(--mf-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+
+/* ---------------------------------------------------------
+   LUMINOUS BORDER
+--------------------------------------------------------- */
+
+.mediflow-luminous-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.mediflow-luminous-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      115deg,
+      rgba(34, 211, 238, 0.30),
+      rgba(59, 130, 246, 0.16),
+      rgba(139, 92, 246, 0.28)
+    );
+  opacity: 0.42;
+  filter: blur(0.2px);
+}
+
+
+/* ---------------------------------------------------------
+   PREMIUM GRADIENT TEXT
+--------------------------------------------------------- */
+
+.mediflow-premium-gradient {
+  background:
+    linear-gradient(
+      90deg,
+      #22d3ee 0%,
+      #3b82f6 48%,
+      #a855f7 100%
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* ---------------------------------------------------------
+   PREMIUM BUTTON
+--------------------------------------------------------- */
+
+.mediflow-premium-button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  background:
+    linear-gradient(
+      100deg,
+      #06b6d4,
+      #3b82f6 48%,
+      #8b5cf6
+    );
+
+  box-shadow:
+    0 12px 35px rgba(59, 130, 246, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    filter 0.35s ease;
+}
+
+.mediflow-premium-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.20) 50%,
+      transparent 80%
+    );
+
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+
+.mediflow-premium-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+
+  box-shadow:
+    0 18px 42px rgba(59, 130, 246, 0.26),
+    0 0 32px rgba(139, 92, 246, 0.12);
+}
+
+.mediflow-premium-button:hover::before {
+  transform: translateX(120%);
+}
+
+
+/* ---------------------------------------------------------
+   SOFT FLOATING UI
+--------------------------------------------------------- */
+
+.mediflow-floating-ui {
+  animation:
+    mediflow-floating-ui 6s ease-in-out infinite;
+}
+
+@keyframes mediflow-floating-ui {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   AMBIENT ORBIT
+--------------------------------------------------------- */
+
+.mediflow-orbit-ring {
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  box-shadow:
+    0 0 40px rgba(34, 211, 238, 0.05);
+  animation:
+    mediflow-orbit-ring 12s linear infinite;
+}
+
+.mediflow-orbit-ring:nth-child(2) {
+  border-color: rgba(139, 92, 246, 0.10);
+  animation-duration: 17s;
+  animation-direction: reverse;
+}
+
+@keyframes mediflow-orbit-ring {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   PREMIUM MICRO DOTS
+--------------------------------------------------------- */
+
+.mediflow-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--mf-cyan),
+      var(--mf-violet)
+    );
+
+  box-shadow:
+    0 0 12px rgba(34, 211, 238, 0.34);
+
+  animation:
+    mediflow-particle 5s ease-in-out infinite;
+}
+
+@keyframes mediflow-particle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0) scale(0.8);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: translateY(-10px) scale(1);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .mediflow-floating-ui,
+  .mediflow-orbit-ring,
+  .mediflow-particle {
+    animation: none;
+  }
+
+  .mediflow-premium-button,
+  .mediflow-premium-button::before {
+    transition: none;
+  }
+}
