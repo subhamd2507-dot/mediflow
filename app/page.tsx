@@ -1031,7 +1031,7 @@ export default function Home() {
                   </p>
 
                   <p className="mt-1 text-[10px] text-white/35">
-                    Doctor approved
+                    Pending approval
                   </p>
                 </div>
 
