@@ -249,26 +249,31 @@ export default function Home() {
   </div>
 </div>
 
-           <div className="mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui mediflow-card-float mediflow-border-shimmer relative z-20 w-[min(92%,470px)] translate-y-10 rounded-[30px] border border-white/[0.10] bg-[#080d1c]/80 p-4 shadow-[0_30px_90px_rgba(34,211,238,0.10)] backdrop-blur-2xl">
+           <div className="mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui mediflow-border-shimmer relative z-20 w-[min(92%,470px)] translate-y-8 rounded-[30px] border border-white/[0.10] bg-[#080d1c]/80 p-4 shadow-[0_30px_90px_rgba(34,211,238,0.10)] backdrop-blur-2xl">
 
-  <div className="pointer-events-none absolute inset-x-10 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-cyan-300/80 to-violet-400/80" />
+  {/* top highlight */}
+  <div className="pointer-events-none absolute inset-x-10 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-cyan-300/70 to-violet-400/70" />
 
-  <div className="pointer-events-none absolute right-[-60px] top-[-60px] h-[170px] w-[170px] rounded-full bg-violet-500/[0.08] blur-[65px]" />
+  {/* soft inner glow */}
+  <div className="pointer-events-none absolute right-[-50px] top-[-50px] h-[150px] w-[150px] rounded-full bg-violet-500/[0.06] blur-[60px]" />
 
   <div className="relative">
 
+    {/* PATIENT CASE HEADER */}
     <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
 
       <div>
         <div className="flex items-center gap-2">
+
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.9)]" />
 
           <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-300">
             Patient Case
           </p>
+
         </div>
 
-        <p className="mt-1.5 text-sm font-bold text-white">
+        <p className="mt-1 text-sm font-bold text-white">
           Preparing your story...
         </p>
       </div>
@@ -279,9 +284,11 @@ export default function Home() {
 
     </div>
 
-    <div className="relative mt-4 overflow-hidden rounded-[20px] border border-cyan-300/[0.10] bg-gradient-to-br from-cyan-400/[0.07] via-blue-500/[0.04] to-violet-500/[0.08] p-3.5">
 
-      <div className="relative flex items-center gap-3">
+    {/* VOICE INTAKE */}
+    <div className="relative mt-3 overflow-hidden rounded-[20px] border border-cyan-300/[0.10] bg-gradient-to-br from-cyan-400/[0.07] via-blue-500/[0.04] to-violet-500/[0.07] p-3.5">
+
+      <div className="flex items-center gap-3">
 
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-300 via-blue-500 to-violet-500 shadow-[0_0_22px_rgba(34,211,238,0.24)]">
           <span className="text-base text-white">
@@ -290,6 +297,7 @@ export default function Home() {
         </div>
 
         <div>
+
           <p className="text-[11px] text-white/40">
             MediFlow is listening
           </p>
@@ -297,10 +305,13 @@ export default function Home() {
           <p className="mt-0.5 text-sm font-semibold text-white">
             Tell us what brings you here.
           </p>
+
         </div>
 
       </div>
 
+
+      {/* WAVEFORM */}
       <div className="mt-3 flex h-9 items-end gap-1">
 
         {[16, 25, 10, 31, 19, 36, 22, 29, 15, 27, 20, 34].map(
@@ -318,6 +329,7 @@ export default function Home() {
 
       </div>
 
+
       <div className="mt-2 flex items-center justify-between">
 
         <span className="text-[8px] font-semibold uppercase tracking-[0.15em] text-cyan-300/65">
@@ -333,8 +345,11 @@ export default function Home() {
 
     </div>
 
+
+    {/* STRUCTURED INFORMATION */}
     <div className="mt-3 grid grid-cols-2 gap-2.5">
 
+      {/* CHIEF COMPLAINT */}
       <div className="rounded-[18px] border border-white/[0.08] bg-white/[0.035] px-3.5 py-3">
 
         <div className="flex items-center justify-between">
@@ -352,11 +367,15 @@ export default function Home() {
         </p>
 
         <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.05]">
+
           <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
+
         </div>
 
       </div>
 
+
+      {/* HISTORY */}
       <div className="rounded-[18px] border border-white/[0.08] bg-white/[0.035] px-3.5 py-3">
 
         <div className="flex items-center justify-between">
@@ -374,15 +393,21 @@ export default function Home() {
         </p>
 
         <div className="mt-2 flex gap-1">
+
           <span className="h-1 flex-1 rounded-full bg-violet-400/70" />
+
           <span className="h-1 flex-1 rounded-full bg-violet-400/40" />
+
           <span className="h-1 flex-1 rounded-full bg-white/[0.06]" />
+
         </div>
 
       </div>
 
     </div>
 
+
+    {/* ADAPTIVE CASE ENGINE */}
     <div className="mt-3 flex items-center gap-3 rounded-[18px] border border-violet-300/[0.08] bg-gradient-to-r from-cyan-400/[0.06] via-blue-500/[0.04] to-violet-500/[0.08] px-3.5 py-3">
 
       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-violet-300/15 bg-violet-400/[0.08]">
@@ -406,6 +431,7 @@ export default function Home() {
     </div>
 
   </div>
+
 </div>
             
 
