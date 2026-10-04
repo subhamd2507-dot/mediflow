@@ -2691,7 +2691,3 @@ body {
   z-index: 0;
 }
 
-.mediflow-border-shimmer > * {
-  position: relative;
-  z-index: 1;
-}
