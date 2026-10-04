@@ -2624,3 +2624,26 @@ body {
     transition: none;
   }
 }
+
+/* ================================
+   MEDIFLOW PREMIUM CARD FLOAT
+================================ */
+
+@keyframes mediflow-card-float {
+  0% {
+    transform: translateY(10px);
+  }
+
+  50% {
+    transform: translateY(2px);
+  }
+
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+.mediflow-card-float {
+  animation: mediflow-card-float 6s ease-in-out infinite;
+  will-change: transform;
+}
