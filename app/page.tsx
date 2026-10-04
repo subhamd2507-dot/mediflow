@@ -337,7 +337,7 @@ export default function Home() {
         </span>
 
         <span className="flex items-center gap-1.5 text-[8px] font-semibold uppercase tracking-[0.15em] text-white/35">
-          <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+          <span className="mediflow-live-pulse h-1.5 w-1.5 rounded-full bg-cyan-300" />
           Live
         </span>
 
