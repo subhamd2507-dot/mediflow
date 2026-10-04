@@ -324,7 +324,18 @@ export default function Home() {
               </div>
             </div>
 
-            
+            <div className="mediflow-glass absolute bottom-6 -left-3 z-30 hidden rounded-2xl border border-cyan-300/15 bg-[#07101f]/85 px-4 py-3 shadow-[0_15px_45px_rgba(34,211,238,0.12)] backdrop-blur-xl sm:block">
+  <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-white/35">
+    Built for
+  </p>
+
+  <div className="mt-1 flex items-center gap-2">
+    <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+    <p className="text-sm font-bold text-cyan-200">
+      Patients + Doctors
+    </p>
+  </div>
+</div>
           </div>
         </div>
       </section>
