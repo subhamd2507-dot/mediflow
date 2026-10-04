@@ -2787,3 +2787,28 @@ body {
       0 0 34px rgba(99, 102, 241, 0.20);
   }
 }
+
+/* History progress micro-animation */
+.mediflow-history-bar {
+  animation: mediflow-history-bar 2.8s ease-in-out infinite;
+}
+
+@keyframes mediflow-history-bar {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scaleX(0.92);
+    transform-origin: left center;
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-history-bar {
+    animation: none;
+  }
+}
