@@ -2760,3 +2760,8 @@ body {
 
   overflow: visible !important;
 }
+
+/* Live voice status indicator */
+.mediflow-live-pulse {
+  animation: mediflow-live-pulse 2s ease-in-out infinite;
+}
