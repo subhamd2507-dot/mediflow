@@ -249,7 +249,7 @@ export default function Home() {
   </div>
 </div>
 
-           <div className="mediflow-case-card mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui mediflow-border-shimmer relative z-20 w-[min(92%,470px)] rounded-[30px] border border-white/[0.10] bg-[#080d1c]/80 p-4 shadow-[0_30px_90px_rgba(34,211,238,0.10)] backdrop-blur-2xl">
+           <div className="mediflow-case-card mediflow-premium-glass mediflow-luminous-border mediflow-border-shimmer absolute left-1/2 top-1/2 z-20 h-fit w-[min(92%,470px)] -translate-x-1/2 -translate-y-1/2 rounded-[30px] border border-white/[0.10] bg-[#080d1c]/80 p-4 shadow-[0_30px_90px_rgba(34,211,238,0.10)] backdrop-blur-2xl">
   {/* top highlight */}
   <div className="pointer-events-none absolute inset-x-10 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-cyan-300/70 to-violet-400/70" />
 
