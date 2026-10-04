@@ -2765,3 +2765,25 @@ body {
 .mediflow-live-pulse {
   animation: mediflow-live-pulse 2s ease-in-out infinite;
 }
+
+/* MediFlow listening indicator */
+.mediflow-listening-pulse {
+  animation: mediflow-listening-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes mediflow-listening-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 0 rgba(34, 211, 238, 0),
+      0 0 22px rgba(34, 211, 238, 0.18);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 18px rgba(34, 211, 238, 0.18),
+      0 0 34px rgba(99, 102, 241, 0.20);
+  }
+}
