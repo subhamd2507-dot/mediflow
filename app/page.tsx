@@ -236,7 +236,7 @@ export default function Home() {
   <span className="mediflow-particle absolute bottom-[18%] right-[18%]" />
 
 </div>
-            <div className="pointer-events-none absolute -right-10 top-24 z-10 hidden rounded-2xl border border-violet-300/15 bg-[#0b1020]/75 px-4 py-3 shadow-[0_15px_45px_rgba(139,92,246,0.14)] backdrop-blur-xl sm:block">
+            <div className="pointer-events-none absolute -right-12 top-1/2 z-30 hidden -translate-y-1/2 rounded-2xl border border-violet-300/15 bg-[#0b1020]/80 px-4 py-3 shadow-[0_15px_45px_rgba(139,92,246,0.14)] backdrop-blur-xl sm:block">
   <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-violet-300/80">
     Case engine
   </p>
