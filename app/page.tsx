@@ -249,7 +249,7 @@ export default function Home() {
   </div>
 </div>
 
-            <div className="mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui relative z-20 w-[min(92%,470px)] rounded-[30px] border border-white/[0.10] bg-[#080d1c]/80 p-5 shadow-[0_35px_110px_rgba(15,23,42,0.55),0_0_70px_rgba(34,211,238,0.08)] backdrop-blur-2xl">
+            <div className="mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui relative z-20 mt-14 w-[min(92%,470px)] rounded-[30px] border border-white/[0.10] bg-[#080d1c]/80 p-5 shadow-[0_35px_110px_rgba(15,23,42,0.55),0_0_70px_rgba(34,211,238,0.08)] backdrop-blur-2xl">
 
   <div className="pointer-events-none absolute inset-x-10 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-cyan-300/80 to-violet-400/80" />
 
