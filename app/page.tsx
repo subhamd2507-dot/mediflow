@@ -405,7 +405,7 @@ export default function Home() {
   </div>
 </div>
 
-            <div className="pointer-events-none absolute bottom-2 left-0 z-30 hidden rounded-2xl border border-cyan-300/15 bg-[#07101f]/85 px-4 py-3 shadow-[0_15px_45px_rgba(34,211,238,0.12)] backdrop-blur-xl sm:block">
+            <div className="pointer-events-none absolute left-[-28px] top-[78%] z-30 hidden rounded-2xl border border-cyan-300/15 bg-[#07101f]/90 px-4 py-3 shadow-[0_15px_45px_rgba(34,211,238,0.12)] backdrop-blur-xl sm:block">
 
   <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-white/35">
     Built for
