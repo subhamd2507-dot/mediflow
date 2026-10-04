@@ -221,7 +221,7 @@ export default function Home() {
 <div className="pointer-events-none absolute inset-0">
 
   {/* Large ambient light */}
-  <div className="mediflow-premium-aura mediflow-aura-cyan absolute left-1/2 top-1/2 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2" />
+  <div className="mediflow-premium-aura mediflow-aura-cyan absolute left-1/2 top-[54%] h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2" />
 
   {/* Orbit 01 */}
   <div className="mediflow-orbit-ring absolute left-1/2 top-1/2 h-[330px] w-[330px] -translate-x-1/2 -translate-y-1/2 sm:h-[400px] sm:w-[400px]" />
