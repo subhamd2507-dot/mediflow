@@ -2697,7 +2697,10 @@ body {
   z-index: 2;
 }
 
-
+.mediflow-border-shimmer > .relative {
+  position: relative;
+  z-index: 3;
+}
 
 /* Voice waveform animation used by the Hero Patient Case card. */
 @keyframes mediflow-wave {
