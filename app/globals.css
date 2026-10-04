@@ -2742,3 +2742,21 @@ body {
     animation: none;
   }
 }
+
+/* =========================================
+   MEDIFLOW PATIENT CASE CARD SIZE FIX
+========================================= */
+
+.mediflow-case-card {
+  height: fit-content !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  align-self: center !important;
+
+  display: block !important;
+
+  flex: 0 0 auto !important;
+
+  overflow: visible !important;
+}
