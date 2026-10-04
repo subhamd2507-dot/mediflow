@@ -366,7 +366,7 @@ export default function Home() {
           Noted
         </p>
 
-        <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.05]">
+        <div className="mediflow-case-progress mt-2 h-1 overflow-hidden rounded-full bg-white/[0.05]">
 
           <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
 
