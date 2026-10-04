@@ -289,7 +289,7 @@ export default function Home() {
 
       <div className="flex items-center gap-3">
 
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-300 via-blue-500 to-violet-500 shadow-[0_0_22px_rgba(34,211,238,0.24)]">
+        <div className="mediflow-listening-pulse flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-300 via-blue-500 to-violet-500 shadow-[0_0_22px_rgba(34,211,238,0.24)]">
           <span className="text-base text-white">
             ✦
           </span>
