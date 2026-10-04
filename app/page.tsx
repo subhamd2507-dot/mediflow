@@ -392,7 +392,11 @@ export default function Home() {
           Building...
         </p>
 
-        
+        <div className="mt-2 flex gap-1">
+  <span className="mediflow-history-bar h-1 flex-1 rounded-full bg-violet-400/70" />
+  <span className="mediflow-history-bar h-1 flex-1 rounded-full bg-violet-400/40 [animation-delay:0.25s]" />
+  <span className="mediflow-history-bar h-1 flex-1 rounded-full bg-white/[0.06] [animation-delay:0.5s]" />
+</div>
 
       </div>
 
