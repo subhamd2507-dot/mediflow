@@ -318,7 +318,11 @@ export default function Home() {
             <div
               key={index}
               className="flex-1 rounded-full bg-gradient-to-t from-cyan-400 via-blue-500 to-violet-400"
-              
+              style={{
+  height: `${height}px`,
+  transformOrigin: "bottom center",
+  animation: `mediflow-wave 0.9s ease-in-out ${index * 0.08}s infinite alternate`,
+}}
             />
           )
         )}
