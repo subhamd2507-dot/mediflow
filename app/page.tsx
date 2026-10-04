@@ -249,7 +249,167 @@ export default function Home() {
   </div>
 </div>
 
-           
+           <div className="mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui relative z-20 mt-14 w-[min(92%,470px)] rounded-[30px] border border-white/[0.10] bg-[#080d1c]/80 p-4 shadow-[0_30px_90px_rgba(34,211,238,0.10)] backdrop-blur-2xl">
+
+  <div className="pointer-events-none absolute inset-x-10 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-cyan-300/80 to-violet-400/80" />
+
+  <div className="pointer-events-none absolute right-[-60px] top-[-60px] h-[170px] w-[170px] rounded-full bg-violet-500/[0.08] blur-[65px]" />
+
+  <div className="relative">
+
+    {/* Header */}
+    <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+
+      <div>
+        <div className="flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.9)]" />
+
+          <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-cyan-300">
+            Patient Case
+          </p>
+        </div>
+
+        <p className="mt-1.5 text-sm font-bold text-white">
+          Preparing your story...
+        </p>
+      </div>
+
+      <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04]">
+        🎙️
+      </div>
+
+    </div>
+
+    {/* Listening panel */}
+    <div className="relative mt-4 overflow-hidden rounded-[20px] border border-cyan-300/[0.10] bg-gradient-to-br from-cyan-400/[0.07] via-blue-500/[0.04] to-violet-500/[0.08] p-3.5">
+
+      <div className="relative flex items-center gap-3">
+
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-300 via-blue-500 to-violet-500 shadow-[0_0_22px_rgba(34,211,238,0.24)]">
+          <span className="text-base text-white">
+            ✦
+          </span>
+        </div>
+
+        <div>
+          <p className="text-[11px] text-white/40">
+            MediFlow is listening
+          </p>
+
+          <p className="mt-0.5 text-sm font-semibold text-white">
+            Tell us what brings you here.
+          </p>
+        </div>
+
+      </div>
+
+      {/* Waveform */}
+      <div className="mt-3 flex h-9 items-end gap-1">
+
+        {[16, 25, 10, 31, 19, 36, 22, 29, 15, 27, 20, 34].map(
+          (height, index) => (
+            <div
+              key={index}
+              className="flex-1 rounded-full bg-gradient-to-t from-cyan-400 via-blue-500 to-violet-400"
+              style={{
+                height: `${height}px`,
+                animation: `mediflow-wave 1.2s ease-in-out ${index * 0.08}s infinite alternate`,
+              }}
+            />
+          )
+        )}
+
+      </div>
+
+      <div className="mt-2 flex items-center justify-between">
+
+        <span className="text-[8px] font-semibold uppercase tracking-[0.15em] text-cyan-300/65">
+          Voice intake
+        </span>
+
+        <span className="flex items-center gap-1.5 text-[8px] font-semibold uppercase tracking-[0.15em] text-white/35">
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+          Live
+        </span>
+
+      </div>
+
+    </div>
+
+    {/* Structured information */}
+    <div className="mt-3 grid grid-cols-2 gap-2.5">
+
+      <div className="rounded-[18px] border border-white/[0.08] bg-white/[0.035] px-3.5 py-3">
+
+        <div className="flex items-center justify-between">
+
+          <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-white/30">
+            Chief complaint
+          </p>
+
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-300/80" />
+
+        </div>
+
+        <p className="mt-1.5 text-sm font-semibold text-cyan-200">
+          Noted
+        </p>
+
+        <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.05]">
+          <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
+        </div>
+
+      </div>
+
+      <div className="rounded-[18px] border border-white/[0.08] bg-white/[0.035] px-3.5 py-3">
+
+        <div className="flex items-center justify-between">
+
+          <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-white/30">
+            History
+          </p>
+
+          <span className="h-1.5 w-1.5 rounded-full bg-violet-300/80" />
+
+        </div>
+
+        <p className="mt-1.5 text-sm font-semibold text-violet-200">
+          Building...
+        </p>
+
+        <div className="mt-2 flex gap-1">
+          <span className="h-1 flex-1 rounded-full bg-violet-400/70" />
+          <span className="h-1 flex-1 rounded-full bg-violet-400/40" />
+          <span className="h-1 flex-1 rounded-full bg-white/[0.06]" />
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* Adaptive engine */}
+    <div className="mt-3 flex items-center gap-3 rounded-[18px] border border-violet-300/[0.08] bg-gradient-to-r from-cyan-400/[0.06] via-blue-500/[0.04] to-violet-500/[0.08] px-3.5 py-3">
+
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-violet-300/15 bg-violet-400/[0.08]">
+        🧠
+      </div>
+
+      <div className="min-w-0">
+        <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-violet-300/70">
+          Adaptive case engine
+        </p>
+
+        <p className="mt-0.5 text-[10px] leading-4 text-white/50">
+          Questions change based on the patient&apos;s answers.
+        </p>
+      </div>
+
+      <span className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-violet-300 shadow-[0_0_10px_rgba(167,139,250,0.75)]" />
+
+    </div>
+
+  </div>
+</div>
             
 
 
