@@ -249,7 +249,7 @@ export default function Home() {
   </div>
 </div>
 
-            <div className="mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui absolute left-1/2 top-[54%] z-20 w-[min(92%,470px)] -translate-x-1/2 -translate-y-1/2 rounded-[30px] p-5 shadow-[0_30px_100px_rgba(34,211,238,0.12)]">
+            <div className="mediflow-premium-glass mediflow-luminous-border mediflow-floating-ui absolute left-1/2 top-[63%] z-20 w-[min(92%,470px)] -translate-x-1/2 -translate-y-1/2 rounded-[30px] p-5 shadow-[0_30px_100px_rgba(34,211,238,0.12)]">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-300">
