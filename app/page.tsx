@@ -215,7 +215,7 @@ export default function Home() {
 
           {/* Hero visual */}
 
-          <div className="relative min-h-[600px] lg:min-h-[560px]">
+          <div className="relative flex min-h-[620px] items-center justify-center lg:min-h-[600px]">
 
             {/* Premium Hero atmosphere */}
 <div className="pointer-events-none absolute inset-0">
