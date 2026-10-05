@@ -422,7 +422,7 @@ export default function Home() {
 
       </div>
 
-      <span className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-violet-300 shadow-[0_0_10px_rgba(167,139,250,0.75)]" />
+      <span className="mediflow-case-adaptive-dot ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-violet-300 shadow-[0_0_10px_rgba(167,139,250,0.75)]" />
 
     </div>
 
