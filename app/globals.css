@@ -2950,3 +2950,75 @@ body {
     0 0 0 2px rgba(34, 211, 238, 0.28),
     0 0 22px rgba(34, 211, 238, 0.08);
 }
+
+/* =========================================================
+   MEDIFLOW NAVBAR ACTIONS
+========================================================= */
+
+.mediflow-nav-login {
+  position: relative;
+  transition:
+    color 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.mediflow-nav-login:hover {
+  transform: translateY(-1px);
+}
+
+.mediflow-nav-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 8px 24px rgba(34, 211, 238, 0.10),
+    0 0 28px rgba(99, 102, 241, 0.08);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease;
+}
+
+.mediflow-nav-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.14) 48%,
+    transparent 76%
+  );
+  transform: translateX(-120%);
+  transition: transform 650ms ease;
+}
+
+.mediflow-nav-cta:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow:
+    0 12px 30px rgba(34, 211, 238, 0.16),
+    0 0 34px rgba(99, 102, 241, 0.12);
+}
+
+.mediflow-nav-cta:hover::before {
+  transform: translateX(120%);
+}
+
+.mediflow-nav-cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-nav-login,
+  .mediflow-nav-cta {
+    transition: none;
+  }
+
+  .mediflow-nav-cta::before {
+    display: none;
+  }
+}
