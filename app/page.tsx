@@ -179,10 +179,14 @@ export default function Home() {
             <div className="mediflow-fade-up mt-9 flex flex-col gap-3 sm:flex-row">
               <a
   href="/register"
-  className="mediflow-primary-cta group relative rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-7 py-3.5 text-center text-sm font-bold text-white transition duration-300 hover:-translate-y-1 hover:scale-[1.02]"
+  aria-label="Start your MediFlow patient case"
+  className="mediflow-primary-cta group relative inline-flex min-w-[190px] items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-7 py-4 text-center text-sm font-bold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.025] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]"
 >
-  Start Your Case
-  <span className="ml-2 transition-all duration-300 group-hover:ml-3">
+  <span className="relative z-10">
+    Start Your Case
+  </span>
+
+  <span className="relative z-10 ml-2 inline-flex transition-transform duration-300 ease-out group-hover:translate-x-1">
     →
   </span>
 </a>
