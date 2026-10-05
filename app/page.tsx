@@ -149,7 +149,10 @@ export default function Home() {
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-10 sm:px-6 lg:min-h-[calc(100vh-64px)] lg:grid-cols-[1fr_0.9fr] lg:px-8">
           <div className="relative z-20">
-            <div className="mediflow-fade-up inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">
+            <div
+  className="mediflow-fade-up inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300"
+  style={{ animationDelay: "0.05s" }}
+>
               <span className="h-2 w-2 animate-pulse rounded-full bg-cyan-300 shadow-[0_0_12px_#22d3ee]" />
               Smart Patient Case-Taking
             </div>
