@@ -191,9 +191,12 @@ export default function Home() {
               <div className="mediflow-opd-button">
   <a
     href="/book-opd"
-    className="block rounded-full bg-[#081321]/90 px-7 py-3.5 text-center text-sm font-semibold text-white/90 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-[#0b1428]"
+    className="group block rounded-full bg-[#081321]/90 px-7 py-3.5 text-center text-sm font-semibold text-white/90 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#0d172b]"
   >
-    Book OPD
+    <span>Book OPD</span>
+    <span className="ml-2 inline-block opacity-50 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
+      →
+    </span>
   </a>
 </div>
             </div>
