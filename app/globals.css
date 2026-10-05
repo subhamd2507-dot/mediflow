@@ -2813,3 +2813,85 @@ body {
   }
 }
 
+/* =====================================================
+   MEDIFLOW PRIMARY HERO CTA
+===================================================== */
+
+.mediflow-primary-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-size: 200% 100%;
+  animation: mediflow-primary-gradient 5s ease-in-out infinite;
+  box-shadow:
+    0 10px 30px rgba(34, 211, 238, 0.14),
+    0 0 34px rgba(99, 102, 241, 0.12);
+}
+
+.mediflow-primary-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -45%;
+  width: 32%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.20),
+    transparent
+  );
+  transform: skewX(-18deg);
+  animation: mediflow-primary-shine 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.mediflow-primary-cta:hover {
+  box-shadow:
+    0 14px 34px rgba(34, 211, 238, 0.20),
+    0 0 48px rgba(139, 92, 246, 0.18);
+}
+
+.mediflow-primary-cta > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes mediflow-primary-gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes mediflow-primary-shine {
+  0% {
+    left: -45%;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.65;
+  }
+
+  35% {
+    left: 120%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediflow-primary-cta,
+  .mediflow-primary-cta::before {
+    animation: none;
+  }
+}
