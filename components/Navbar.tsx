@@ -20,6 +20,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [themeOpen, setThemeOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>("system");
+  const [scrolled, setScrolled] = useState(false);
 
   const menuRef = useRef<HTMLDivElement>(null);
 
