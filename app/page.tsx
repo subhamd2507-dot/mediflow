@@ -194,9 +194,18 @@ export default function Home() {
               <div className="mediflow-opd-button">
   <a
     href="/book-opd"
-    className="block rounded-full bg-[#081321]/90 px-7 py-3.5 text-center text-sm font-semibold text-white/90 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-[#0b1428]"
+    aria-label="Book an OPD appointment"
+    className="group relative inline-flex min-w-[145px] items-center justify-center overflow-hidden rounded-full border border-cyan-300/40 bg-white/[0.035] px-7 py-4 text-center text-sm font-semibold text-white/90 backdrop-blur-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:border-cyan-300/70 hover:bg-cyan-400/[0.08] hover:text-white hover:shadow-[0_12px_35px_rgba(34,211,238,0.14)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]"
   >
-    Book OPD
+    <span className="relative z-10">
+      Book OPD
+    </span>
+
+    <span className="relative z-10 ml-2 inline-flex transition-transform duration-300 ease-out group-hover:translate-x-1">
+      →
+    </span>
+
+    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.10] to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
   </a>
 </div>
             </div>
