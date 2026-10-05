@@ -13,6 +13,19 @@ type UserProfile = {
 type Theme = "system" | "light" | "dark";
 
 export default function Navbar() {
+  useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 24);
+  };
+
+  handleScroll();
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
   const supabase = createClient();
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
