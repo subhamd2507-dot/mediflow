@@ -305,7 +305,7 @@ export default function Navbar() {
 
               <Link
                 href="/register"
-                className="mf-btn mf-btn-primary"
+                className="mf-btn mf-btn-primary mediflow-nav-cta"
               >
                 <span className="hidden sm:inline">
                   Get Started
