@@ -230,7 +230,13 @@ export default function Navbar() {
       : "G";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[color-mix(in_srgb,var(--background)_82%,transparent)] backdrop-blur-xl">
+    <header
+  className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+    scrolled
+      ? "border-white/10 bg-[#050816]/72 shadow-[0_10px_35px_rgba(0,0,0,0.22)] backdrop-blur-xl"
+      : "border-transparent bg-transparent shadow-none backdrop-blur-0"
+  }`}
+>
 
       <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5 sm:px-6">
 
