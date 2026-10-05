@@ -254,7 +254,7 @@ export default function Navbar() {
             CENTER NAVIGATION
         ====================================================== */}
 
-        <nav className="hidden items-center gap-2 md:flex">
+        <nav className="mediflow-nav-links hidden items-center gap-2 md:flex">
 
           <a
             href="/#features"
