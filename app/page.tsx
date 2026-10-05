@@ -179,7 +179,7 @@ export default function Home() {
             <div className="mediflow-fade-up mt-9 flex flex-col gap-3 sm:flex-row">
               <a
   href="/register"
-  className="group rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-7 py-3.5 text-center text-sm font-bold shadow-[0_0_35px_rgba(59,130,246,0.30)] transition duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(139,92,246,0.38)]"
+  className="mediflow-primary-cta group relative rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-7 py-3.5 text-center text-sm font-bold text-white transition duration-300 hover:-translate-y-1 hover:scale-[1.02]"
 >
   Start Your Case
   <span className="ml-2 transition-all duration-300 group-hover:ml-3">
