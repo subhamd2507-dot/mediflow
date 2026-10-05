@@ -202,20 +202,24 @@ export default function Home() {
 </div>
             </div>
 
-            <div className="mt-9 flex flex-wrap gap-3">
-              {[
-                "Voice + Touch",
-                "Structured History",
-                "Doctor Verification",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-semibold text-white/50 backdrop-blur"
-                >
-                  ✓ {item}
-                </div>
-              ))}
-            </div>
+            <div
+  className="mediflow-fade-up mt-9 flex flex-wrap gap-2.5 sm:gap-3"
+  style={{ animationDelay: "1.05s" }}
+>
+  {[
+    "Voice + Touch",
+    "Structured History",
+    "Doctor Verification",
+  ].map((item) => (
+    <div
+      key={item}
+      className="mediflow-feature-chip group inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-2 text-[11px] font-semibold text-white/60 backdrop-blur-xl transition-all duration-300 sm:px-4 sm:text-xs"
+    >
+      <span className="mediflow-feature-dot h-1.5 w-1.5 shrink-0 rounded-full" />
+      <span>{item}</span>
+    </div>
+  ))}
+</div>
           </div>
 
           {/* Hero visual */}
