@@ -348,6 +348,7 @@ function MedicalNetworkScene() {
         );
 
         networkGroup.current.scale.setScalar(1.22);
+        
       networkGroup.current.position.y =
         THREE.MathUtils.lerp(
           networkGroup.current.position.y,
