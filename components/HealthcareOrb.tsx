@@ -19,37 +19,36 @@ type NodeData = {
 
 const NODES: NodeData[] = [
   {
-    position: [2.2, 1.25, 0.2],
+    position: [3.0, 1.45, 0.35],
     color: "#22d3ee",
     type: "hospital",
   },
   {
-    position: [-2.1, 1.0, 0.1],
+    position: [-3.0, 1.15, 0.15],
     color: "#60a5fa",
     type: "doctor",
   },
   {
-    position: [-2.35, -1.15, 0.15],
+    position: [-2.85, -1.45, -0.1],
     color: "#a78bfa",
     type: "patient",
   },
   {
-    position: [2.25, -1.1, 0.1],
+    position: [3.0, -1.35, 0.1],
     color: "#38bdf8",
     type: "record",
   },
   {
-    position: [0.25, 2.25, 0.2],
+    position: [0.15, 2.65, -0.15],
     color: "#67e8f9",
     type: "document",
   },
   {
-    position: [0.2, -2.25, 0.1],
+    position: [0.1, -2.65, 0.2],
     color: "#c084fc",
     type: "ecg",
   },
 ];
-
 function MedicalCross({
   color,
 }: {
@@ -348,7 +347,7 @@ function MedicalNetworkScene() {
         );
 
         networkGroup.current.scale.setScalar(1.22);
-        
+
       networkGroup.current.position.y =
         THREE.MathUtils.lerp(
           networkGroup.current.position.y,
