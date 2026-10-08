@@ -141,6 +141,10 @@ export default function Home() {
       ====================================================== */}
 
       <section className="mediflow-reveal relative isolate min-h-[calc(100vh-64px)] overflow-hidden">
+        {/* 3D healthcare environment */}
+<div className="pointer-events-none absolute inset-0 z-0 opacity-[0.16] sm:opacity-[0.18] lg:opacity-[0.20]">
+  <HealthcareOrb />
+</div>
         <div className="absolute inset-0 mediflow-grid-bg opacity-40" />
 
         <div className="pointer-events-none absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-cyan-500/15 blur-[130px]" />
