@@ -241,7 +241,7 @@ useEffect(() => {
 
   return (
     <header
-  className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+  className={`sticky top-0 z-50 border-b transition-all duration-500 ${
     scrolled
       ? "border-white/10 bg-[#050816]/72 shadow-[0_10px_35px_rgba(0,0,0,0.22)] backdrop-blur-xl"
       : "border-transparent bg-transparent shadow-none backdrop-blur-0"
