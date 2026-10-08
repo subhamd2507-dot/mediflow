@@ -28,6 +28,27 @@ export default function Navbar() {
 
   const pathname = usePathname();
 
+  const isHomePage = pathname === "/";
+
+useEffect(() => {
+  if (!isHomePage) {
+    setScrolled(true);
+    return;
+  }
+
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 24);
+  };
+
+  handleScroll();
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [isHomePage]);
+
   const isPublicPage =
     pathname === "/" ||
     pathname === "/login" ||
