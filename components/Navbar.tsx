@@ -241,9 +241,9 @@ useEffect(() => {
 
   return (
    <header
-  className={`sticky top-0 z-50 transition-all duration-500 ${
+  className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
     isHomePage && !scrolled
-      ? "border-transparent bg-transparent shadow-none backdrop-blur-0"
+      ? "border-transparent bg-transparent shadow-none backdrop-blur-none"
       : "border-b border-white/10 bg-[#050816]/75 shadow-[0_10px_35px_rgba(0,0,0,0.22)] backdrop-blur-xl"
   }`}
 >
