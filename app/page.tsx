@@ -1612,7 +1612,7 @@ export default function Home() {
           FINAL CTA
       ====================================================== */}
 
-      <section className="relative overflow-hidden bg-[#050816] py-24">
+      <section className="relative min-h-screen overflow-hidden pt-[162px]">
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/[0.06] via-purple-500/[0.08] to-pink-500/[0.06]" />
 
         <div className="relative mx-auto max-w-5xl px-5 text-center sm:px-6">
