@@ -97,7 +97,7 @@ export default function RegisterPage() {
             </a>
           </div>
 
-          <div className="relative z-10 my-12">
+         <div className="relative z-10 my-8 xl:my-12">
             <span className="inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-semibold tracking-wider text-cyan-200">
               YOUR HEALTH, SIMPLIFIED
             </span>
