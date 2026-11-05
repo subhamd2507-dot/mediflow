@@ -181,6 +181,10 @@ export default function Home() {
               touch and medical documents.
             </p>
 
+
+
+            
+
             <div className="mediflow-fade-up mt-9 flex flex-col gap-3 sm:flex-row">
               <a
   href="/register"
