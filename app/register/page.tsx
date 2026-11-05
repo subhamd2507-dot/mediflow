@@ -139,7 +139,7 @@ export default function RegisterPage() {
         </section>
 
         {/* RIGHT REGISTRATION PANEL */}
-        <section className="flex items-center justify-center px-4 py-8 sm:px-10 lg:px-12 xl:px-16">
+        <section className="flex items-start justify-center px-5 py-8 sm:px-10 sm:py-12 lg:px-12 xl:px-16">
 
           <div className="w-full max-w-md">
 
