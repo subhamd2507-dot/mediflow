@@ -159,10 +159,6 @@ export default function Home() {
   style={{ animationDelay: "0.05s" }}
 >
              
-
-<div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-10 sm:px-6 lg:min-h-[calc(100vh-64px)] lg:grid-cols-[1fr_0.9fr] lg:px-8"></div>
-
-
               Smart Patient Case-Taking
             </div>
 
