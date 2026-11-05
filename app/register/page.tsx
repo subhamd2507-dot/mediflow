@@ -74,7 +74,7 @@ export default function RegisterPage() {
      <div className="mx-auto grid max-w-7xl grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-xl shadow-blue-900/10 lg:grid-cols-2">
 
         {/* LEFT BRANDING PANEL */}
-        <section className="relative hidden overflow-hidden bg-gradient-to-br from-[#071b3d] via-[#103c78] to-[#087fba] p-12 text-white lg:flex lg:flex-col lg:justify-between">
+        <section className="relative hidden overflow-hidden bg-gradient-to-br from-[#071b3d] via-[#103c78] to-[#087fba] p-8 text-white lg:flex lg:flex-col lg:justify-between xl:p-12">
 
           {/* Background decorations */}
           <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-cyan-400/20 blur-3xl" />
