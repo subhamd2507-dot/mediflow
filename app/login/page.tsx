@@ -214,7 +214,7 @@ export default function LoginPage() {
                       placeholder="you@example.com"
                       autoComplete="email"
                       
-className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-11 pr-4 text-sm font-medium text-slate-900 placeholder:text-slate-400 shadow-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+
 
                     />
                   </div>
