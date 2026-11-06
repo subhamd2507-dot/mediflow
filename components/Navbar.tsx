@@ -240,13 +240,15 @@ useEffect(() => {
       : "G";
 
   return (
-   <header
-  className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${
-  scrolled
-    ? "border-white/10 bg-[#050816]/75 shadow-[0_10px_35px_rgba(0,0,0,0.22)] backdrop-blur-xl"
-    : "border-transparent bg-transparent shadow-none backdrop-blur-0"
-}`}
+   
+<header
+  className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
+    isHomePage && !scrolled
+      ? "border-transparent bg-transparent shadow-none"
+      : "border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-md"
+  }`}
 >
+
 
       <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5 sm:px-6">
 
