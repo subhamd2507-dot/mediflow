@@ -239,7 +239,9 @@ className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-11 pr-4 
                       onChange={(event) => setPassword(event.target.value)}
                       placeholder="Enter your password"
                       autoComplete="current-password"
-                      className="w-full rounded-2xl border border-slate-300 bg-white py-3.5 pl-12 pr-20 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-teal-600 focus:ring-4 focus:ring-teal-600/10"
+                      
+className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-20 text-sm font-medium text-slate-900 placeholder:text-slate-400 shadow-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+
                     />
                     <button
                       type="button"
