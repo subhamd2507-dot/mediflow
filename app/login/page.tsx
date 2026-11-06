@@ -77,7 +77,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-76px)] bg-[var(--background)] text-[var(--foreground)]">
+    <main className="min-h-[calc(100vh-76px)] bg-[#F5F8FC] text-[#142B4A]">
 
       <div className="relative mx-auto flex min-h-[calc(100vh-76px)] max-w-7xl items-center px-5 py-10 sm:px-6 lg:px-8">
 
