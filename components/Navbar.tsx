@@ -271,7 +271,9 @@ useEffect(() => {
 
           <div className="hidden sm:block">
 
-            <h1 className="text-lg font-bold leading-tight tracking-tight text-[var(--foreground)]">
+            <h1 className={`text-lg font-bold leading-tight tracking-tight ${
+  isLightNavbar ? "text-[#142B4A]" : "text-white"
+}`}>
               MediFlow
             </h1>
 
