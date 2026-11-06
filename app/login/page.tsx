@@ -378,6 +378,8 @@ export default function LoginPage() {
                   type="submit"
                   disabled={loading}
                   
+className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0F9F92] px-6 py-4 text-sm font-semibold text-white shadow-md shadow-teal-900/10 transition-all duration-200 hover:bg-[#0D887E] hover:shadow-lg hover:shadow-teal-900/15 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+
                 >
 
                   {loading ? (
