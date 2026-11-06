@@ -219,8 +219,7 @@ export default function LoginPage() {
 
           <section className="w-full">
 
-            <div className="mx-auto max-w-md rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-2xl shadow-black/10 sm:p-8">
-
+           <div className="mx-auto max-w-md rounded-3xl border border-[#DFE8F1] bg-white p-6 shadow-xl shadow-slate-200/60 sm:p-8">
               {/* Card header */}
               <div>
 
