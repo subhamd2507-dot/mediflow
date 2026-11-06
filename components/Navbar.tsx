@@ -247,7 +247,7 @@ useEffect(() => {
     isHomePage && !scrolled
     
       ? "border-transparent bg-transparent shadow-none"
-      : "border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-md"
+      : "border-slate-200 bg-white shadow-sm"
   }`}
 >
 
