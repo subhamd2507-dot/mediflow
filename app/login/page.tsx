@@ -124,7 +124,7 @@ export default function LoginPage() {
 
 
               {/* Description */}
-              <p className="mt-6 max-w-lg text-lg leading-8 text-[var(--foreground-secondary)]">
+              <p className="mt-6 max-w-lg text-lg leading-8 text-slate-600">
 
                 Sign in to manage appointments, follow your OPD
                 journey, review medical information and stay
