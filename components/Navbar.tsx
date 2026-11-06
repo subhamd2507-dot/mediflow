@@ -29,7 +29,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const isHomePage = pathname === "/";
-  
+  const isLightNavbar = !isHomePage || scrolled;
 
 useEffect(() => {
   if (!isHomePage) {
