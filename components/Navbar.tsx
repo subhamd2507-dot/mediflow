@@ -322,7 +322,11 @@ useEffect(() => {
 
           <a
             href="/#for-users"
-           
+           className={`group relative rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 ${
+  isLightNavbar
+    ? "text-slate-600 hover:bg-blue-50 hover:text-blue-600"
+    : "text-white/70 hover:bg-white/10 hover:text-white"
+}`}
           >
             Patients & Doctors
 
