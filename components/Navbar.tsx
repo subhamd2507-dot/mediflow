@@ -29,6 +29,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const isHomePage = pathname === "/";
+  
 
 useEffect(() => {
   if (!isHomePage) {
