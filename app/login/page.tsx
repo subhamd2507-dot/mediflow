@@ -79,7 +79,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-[calc(100vh-76px)] bg-[#F5F8FC] text-[#142B4A]">
 
-      <div className="relative mx-auto flex min-h-[calc(100vh-76px)] max-w-7xl items-center px-5 py-10 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex min-h-[calc(100vh-76px)] max-w-7xl items-start px-5 pb-10 pt-24 sm:px-6 lg:px-8">
 
         {/* Decorative background */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
