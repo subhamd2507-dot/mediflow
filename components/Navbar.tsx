@@ -277,7 +277,9 @@ useEffect(() => {
               MediFlow
             </h1>
 
-            <p className="text-[11px] font-medium text-[var(--foreground-muted)]">
+            <p className={`text-[11px] font-medium ${
+  isLightNavbar ? "text-slate-500" : "text-white/60"
+}`}>
               Digital Healthcare Platform
             </p>
 
