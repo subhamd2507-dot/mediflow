@@ -361,7 +361,7 @@ useEffect(() => {
 
               <Link
   href="/login"
-  className="mf-btn mf-btn-ghost mediflow-nav-login hidden sm:inline-flex"
+  
 >
   Login
 </Link>
