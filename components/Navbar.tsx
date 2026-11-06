@@ -340,7 +340,7 @@ useEffect(() => {
             RIGHT SIDE
         ====================================================== */}
 
-        <div className="flex items-center gap-2">
+        <div className="font-semibold text-blue-600 transition hover:text-blue-700">
 
           {/* Public buttons */}
           {isPublicPage && !profile && !loading && (
