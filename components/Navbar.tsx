@@ -265,7 +265,20 @@ useEffect(() => {
 
           <div className="relative flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--primary-soft)] text-lg shadow-sm transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[var(--shadow-primary)]">
             <span className="transition-transform duration-300 group-hover:scale-110">
-              🩺
+              <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#2563EB"
+  strokeWidth="1.8"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <path d="M12 3v18" />
+  <path d="M3 12h18" />
+</svg>
             </span>
           </div>
 
