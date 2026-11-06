@@ -213,7 +213,7 @@ export default function LoginPage() {
                       onChange={(event) => setEmail(event.target.value)}
                       placeholder="you@example.com"
                       autoComplete="email"
-                      
+                      className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm font-medium text-slate-900 placeholder:text-slate-400 shadow-sm outline-none transition hover:border-slate-300 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15"
 
 
                     />
